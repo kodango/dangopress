@@ -14,7 +14,8 @@
 html,body,div,p,ol,ul,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,form,input,select,button,textarea,iframe,table,th,td,blockquote {
     margin: 0;
     padding: 0;
-    -webkit-text-size-adjust: 100%
+    -webkit-text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
     -ms-text-size-adjust: 100%;
     text-rendering: optimizelegibility;
 }
