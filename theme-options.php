@@ -64,7 +64,8 @@ function dangopress_theme_options()
 
 ?>
 
-<p>注意: 如果以下某个选项设置为空, 则不会启用该功能。</p>
+<p>注意: 如果以下某个选项设置为空, 则不会启用该功能。如果当前用户是管理员账号, 不会加载统计代码。</p>
+
 <form method="POST" action="">
 <table class="form-table">
     <tbody>

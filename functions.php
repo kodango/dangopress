@@ -139,10 +139,10 @@ function dangopress_setup_load()
                       array('jquery'), '1.0', true);
 
     // Thread comments
-    if (get_option('thread_comments') && (is_single() || is_page()))
+	if (is_singular() && comments_open() && get_option('thread_comments'))
         wp_enqueue_script('comment-reply', $in_footer = true);
 }
-add_action('wp_enqueue_scripts','dangopress_setup_load');
+add_action('wp_enqueue_scripts', 'dangopress_setup_load');
 
 /*
  * Wrap the post image in div container
@@ -533,6 +533,10 @@ document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static
  */
 function dangopress_insert_analytics_snippets()
 {
+    /* Do not track administrator */
+    if (current_user_can('manage_options'))
+        return;
+
     $options = get_option('dangopress_options');
 
     if (!empty($options['google_webid'])) {
