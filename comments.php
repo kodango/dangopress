@@ -11,9 +11,7 @@ if (post_password_required() || (!have_comments() && !comments_open() && !pings_
 ?>
 
 <?php
-    $commenter = wp_get_current_commenter();
     $comment_count = get_comments_number();
-
     $comments_by_type = &separate_comments($comments);
 
     $trackbacks = $comments_by_type['pings'];
@@ -36,9 +34,9 @@ if (post_password_required() || (!have_comments() && !comments_open() && !pings_
     <?php
         // custom fields
         $fields = array(
-            'author' => '<input id="author" name="author" type="text" placeholder="昵称*" value="' . esc_attr($commenter['comment_author']) . '" size="30" aria-required="true" /><label for="author">昵称*</label>',
-            'email' => '<input id="email" name="email" type="text" placeholder="邮箱*" value="' . esc_attr($commenter['comment_author_email']) . '" size="30" aria-required="true" /><label for="author">邮箱*</label>',
-            'url' => '<input id="url" name="url" type="text" placeholder="网站" value="' . esc_attr($commenter['comment_author_url']) . '" size="30" /><label for="author">网站*</label>',
+            'author' => '<input id="author" name="author" type="text" placeholder="昵称*" value="' . esc_attr($comment_author) . '" size="30" aria-required="true" /><label for="author">昵称*</label>',
+            'email' => '<input id="email" name="email" type="text" placeholder="邮箱*" value="' . esc_attr($comment_author_email) . '" size="30" aria-required="true" /><label for="author">邮箱*</label>',
+            'url' => '<input id="url" name="url" type="text" placeholder="网站" value="' . esc_attr($comment_author_url) . '" size="30" /><label for="author">网站*</label>',
             'email_notify' => '<input type="checkbox" name="comment_mail_notify" id="comment_mail_notify" value="" checked="checked" /><label for="comment_mail_notify">有人回复时邮件通知我</label>',
         );
 
@@ -53,8 +51,8 @@ if (post_password_required() || (!have_comments() && !comments_open() && !pings_
             'label_submit' => '提交回复',
         );
 
-        if (!is_user_logged_in() && !empty($commenter['comment_author'])) {
-            $welcome_login = '<p id="welcome-login"><span>欢迎回来, <strong>' . $commenter['comment_author'] . '</strong>.</span>';
+        if (!is_user_logged_in() && !empty($comment_author)) {
+            $welcome_login = '<p id="welcome-login"><span>欢迎回来, <strong>' . $comment_author . '</strong>.</span>';
             $welcome_login .=  ' <span id="toggle-author"><u>更改</u> <i class="icon-signout"></i></span></p>';
 
             $comments_args['comment_field'] = '</div>' . $comments_args['comment_field'];
