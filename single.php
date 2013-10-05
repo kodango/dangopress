@@ -28,7 +28,7 @@ get_header();?>
     </div>
 </div>
 
-<?php if (related_posts_exist()): ?>
+<?php if (function_exists('related_posts')): ?>
 <div class="clearfix related-posts">
     <h3><i class="icon-plus-sign-alt"></i> 与<?php the_tags(' ', ', ', ' '); ?>相关的文章</h3>
     <?php related_posts(); ?>
@@ -38,7 +38,7 @@ get_header();?>
 <div class="post-footer clearfix">
 <div id="post-pagination" class="alignleft">
     <div class="post-prev">
-        <span class="icon-arrow-left"></span> 上一篇:
+        <span class="icon-chevron-sign-left"></span> 上一篇:
         <?php
             $prev_post = get_previous_post();
 
@@ -51,7 +51,7 @@ get_header();?>
         ?>
     </div>
     <div class="post-next">
-        <span class="icon-arrow-left"></span> 下一篇:
+        <span class="icon-chevron-sign-right"></span> 下一篇:
         <?php
             $next_post = get_next_post();
 

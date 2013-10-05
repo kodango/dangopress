@@ -52,6 +52,6 @@ get_header(); ?>
     </div>
      <?php endif; ?>
 </div>
-<div id="post-pagenavi"><?php dangopress_pagination(); ?></div>
+<div id="post-pagenavi"><?php dangopress_paginate_links(); ?></div>
 
 <?php get_footer(); ?>

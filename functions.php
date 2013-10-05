@@ -201,29 +201,22 @@ function dangopress_esc_callback($matches)
 add_filter('the_content', 'dangopress_esc_html', 2);
 add_filter('comment_text', 'dangopress_esc_html', 2);
 
-/**
- * Custom pagination function
+/*
+ * Retrieve paginated link for archive post pages
  */
-function dangopress_pagination()
+function dangopress_paginate_links()
 {
     global $wp_query;
 
     $total = $wp_query->max_num_pages;
     $big = 999999999; // need an unlikely integer
 
-    if ( $total > 1)  {
-        if (get_option('permalink_structure')) {
-            $format = 'page/%#%/';
-        } else {
-            $format = '&paged=%#%';
-        }
-
+    if ($total > 1)  {
         echo paginate_links(array(
-            'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
-            'format' => $format,
+            'base' => str_replace($big, '%_%', esc_url(get_pagenum_link($big))),
+            'format' => '%#%',
             'current' => max(1, get_query_var('paged')),
             'total' => $total,
-            'mid_size' => 2,
             'prev_text' => '<i class="icon-circle-arrow-left"></i>',
             'next_text' => '<i class="icon-circle-arrow-right"></i>',
         ));
@@ -309,8 +302,10 @@ function dangopress_get_most_commented($posts_num = 10, $days = 60, $chars = 30)
  */
 function dangopress_add_end_mark($content)
 {
+    $options = get_option('dangopress_options');
+
     if (is_singular()) {
-        return $content . '## End ##';
+        return $content . $options['post_end_mark'];
     } else {
         return $content;
     }

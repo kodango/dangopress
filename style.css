@@ -1,13 +1,15 @@
 /*
  * Theme Name: dangopress
- * Version: 0.4.0
- * Description: kodango's presonal blog theme
+ * Version: 0.4.1
+ * Description: a simple responsive blog theme
  *
  * Author: kodango
  * Author URI: http://kodango.com
  *
  * License: GNU General Public License version 3.0
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
+ *
+ * Tags: white, simple, two-columns, responsive
  */
 html,body,div,p,ol,ul,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,form,input,select,button,textarea,iframe,table,th,td,blockquote {
     margin: 0;
@@ -23,7 +25,7 @@ body {
 }
 
 body, button, input, select, textarea {
-    font: normal 14px/1.8 "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font: normal 14px/28px "Helvetica Neue", "Helvetica", Arial, sans-serif;
 }
 
 images { border: 0 none; }
@@ -53,7 +55,7 @@ textarea, input {
 
 blockquote {
     display: block;
-    padding: 0 20px;
+    padding: 5px 20px;
     margin: 15px 0;
     vertical-align: baseline;
     font-style: normal;
@@ -61,21 +63,22 @@ blockquote {
 }
 
 pre {
-    background-color: #fefefe;
-    font-family: Consolas, "Liberation Mono", Courier, monospace;
+    background-color: #f7f7f9;
+    font-family: monaco, Consolas, monospace;
     font-size: 12px;
-    border: 1px solid #ddd;
+    line-height: 1.6;
+    border: 1px solid #e1e1e8;
     padding: 10px;
     margin: 15px 0;
-    word-break: break-word;
     overflow-x: scroll;
+    word-break: break-word;
 }
 
 code {
     background-color: #eee;
     border: 1px solid #ddd;
     margin: 0 2px;
-    font-family: Consolas, "Liberation Mono", Courier, monospace;
+    font-family: monaco, Consolas, monospace;
     font-size: 12px;
 }
 
@@ -235,7 +238,6 @@ a:hover {
 
 #site-breadcrumbs {
     margin-bottom: 15px;
-    line-height: 1.5;
     padding: 5px 0;
 }
 
@@ -329,20 +331,16 @@ a:hover {
     margin-top: 0;
 }
 
-.single .post {
-    padding-bottom: 20px;
-}
-
 .post-content ul {
     margin: 15px 0;
     list-style: square outside;
-    padding-left: 15px;
+    padding-left: 25px;
 }
 
 .post-content ol {
     margin: 15px 0;
     list-style: decimal outside;
-    padding-left: 20px;
+    padding-left: 25px;
 }
 
 .post-content ul li,
@@ -380,7 +378,8 @@ a:hover {
     border-top: 1px solid #ddd;
 }
 
-.page-numbers {
+.page-numbers,
+.comment-pagenavi a {
     display: inline-block;
     margin: 0 5px 2px 0;
     padding: 0 8px;
@@ -388,9 +387,11 @@ a:hover {
     color: #333;
 }
 
-.page-numbers:hover,.page-numbers.current {
+.page-numbers:hover,.page-numbers.current,
+.comment-pagenavi a:hover {
     background: #f8f8f8;
     border-bottom-color: #5895be;
+    text-decoration: none;
 }
 
 #sidebar {
@@ -411,7 +412,7 @@ a:hover {
 
 .widget h3 {
     color: #333;
-    line-height: 1.5;
+    font-size: 14px;
 }
 
 .widget ul {
@@ -440,9 +441,9 @@ ul.tabnav li {
     text-align: center;
     cursor: pointer;
     background: #fafafa;
-    width: 30%;
-    padding: 4px; 
-    margin-right: -1px;
+    width: 25.3%;
+    padding: 0 5px; 
+    margin: 0 6px;
 }
 
 ul.tabnav li.selected {
@@ -498,8 +499,7 @@ ul.tabnav li.selected, ul.tabnav li:hover {
 }
 
 #footer p {
-    font-size: 12px;
-    line-height: 1.8;
+    font-size: 13px;
 }
 
 .backtop {
@@ -631,6 +631,12 @@ ul.tabnav li.selected, ul.tabnav li:hover {
     padding: 5px;
     margin: 15px 0 0;
     border: 1px solid #ddd;
+}
+
+.comment-pagenavi {
+    margin: 15px 0;
+    padding: 15px 0;
+    border-top: 1px solid #ddd;
 }
 
 .comment-body {
@@ -842,6 +848,10 @@ pre .pln { color: #333; }
 
 .logo {
     float: none;
+}
+
+#header {
+    border-bottom: none;
 }
 
 .header-menu {

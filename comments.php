@@ -32,6 +32,7 @@ if (post_password_required() || (!have_comments() && !comments_open() && !pings_
     </div>
 
     <div id="reviews">
+
     <?php
         // custom fields
         $fields = array(
@@ -70,8 +71,16 @@ if (post_password_required() || (!have_comments() && !comments_open() && !pings_
             <?php wp_list_comments(array('callback' => 'dangopress_comments_callback', 'type' => 'comment', 'max_depth' => 30)); ?>
         </ol>
 
-    <?php endif; ?>
+        <?php if (get_option('page_comments')): ?>
+        <div class="comment-pagenavi clearfix">
+            <div class="alignright">
+                <?php previous_comments_link('<i class="icon-circle-arrow-left"></i> 旧评论'); ?>
+                <?php next_comments_link('新评论 <i class="icon-circle-arrow-right"></i>'); ?>
+            </div>
+        </div>
+        <?php endif; ?>
 
+    <?php endif; ?>
     </div>
 
     <div id="trackbacks">
@@ -80,7 +89,7 @@ if (post_password_required() || (!have_comments() && !comments_open() && !pings_
         <?php foreach ($trackbacks as $comment) : ?>
             <li id="comment-<?php comment_ID( ); ?>" class="trackback">
                 <?php comment_author_link(); ?>
-                <?php comment_time();?>
+                <small><?php comment_time();?></small>
             </li>  
         <?php endforeach; ?>
 

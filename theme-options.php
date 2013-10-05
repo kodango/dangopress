@@ -9,20 +9,16 @@
 function dangopress_get_options()
 {
     $options = get_option('dangopress_options');
+    $defaults = array(
+        'cdn_prefix' => '',
+        'bdshare_uid' => '',
+        'bdtj_siteid' => '',
+        'google_webid' => '',
+        'post_end_mark' => '## End Post ##',
+    );
 
-    /*
-     * Set default option values if first run
-     */
-    if (!is_array($options)) {
-        $options = array(
-            'cdn_prefix' => '',
-            'bdshare_uid' => '',
-            'bdtj_siteid' => '',
-            'google_webid' => '',
-        );
-
-        update_option('dangopress_options', $options);
-    }
+    $options = wp_parse_args($options, $defaults);
+    update_option('dangopress_options', $options);
 
     return $options;
 }
@@ -94,6 +90,12 @@ function dangopress_theme_options()
             <label for="bdtj_siteid">百度统计 Site ID</label> (<a href="http://tongji.baidu.com/open/api/more?p=ref_setAccount">帮助</a>)
         </th>
         <td><input name="bdtj_siteid" id="bdtj_siteid" type="text" value="<?php echo $options['bdtj_siteid']; ?>" class="regular-text code"></td>
+    </tr>
+    <tr>
+        <th>
+            <label for="post_end_mark">文章末尾标记内容</label>
+        </th>
+        <td><input name="post_end_mark" id="post_end_mark" type="text" value="<?php echo $options['post_end_mark']; ?>" class="regular-text code"></td>
     </tr>
     </tbody>
 </table>
