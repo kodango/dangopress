@@ -15,7 +15,6 @@ html,body,div,p,ol,ul,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,form,input,select,button,tex
     margin: 0;
     padding: 0;
     -webkit-text-size-adjust: 100%;
-    -webkit-font-smoothing: antialiased;
     -ms-text-size-adjust: 100%;
     text-rendering: optimizelegibility;
 }
@@ -26,7 +25,7 @@ body {
 }
 
 body, button, input, select, textarea {
-    font: normal 14px/28px "Helvetica Neue", "Helvetica", Arial, sans-serif;
+    font: normal 14px/28px arial, sans-serif;
 }
 
 images { border: 0 none; }
@@ -65,13 +64,12 @@ blockquote {
 
 pre {
     background-color: #f7f7f9;
-    font-family: monaco, Consolas, monospace;
+    font-family: "Lucida Sans Typewriter", Monaco, "Courier New", monospace;
     font-size: 12px;
     line-height: 1.6;
     border: 1px solid #e1e1e8;
     padding: 10px;
     margin: 15px 0;
-    overflow-x: scroll;
     word-break: break-word;
 }
 
