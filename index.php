@@ -29,7 +29,7 @@ get_header(); ?>
                 <span class="post-view"><i class="icon-sun"></i><?php the_user_views(); ?></span>
             <?php endif; ?>
             <span class="post-comment">
-                <i class="icon-comments"></i><?php comments_popup_link('暂无评论', '1 个评论', '% 个评论', 'comments-link' ); ?>
+                <i class="icon-comments"></i><?php comments_popup_link('抢沙发', '1 个评论', '% 个评论', 'comments-link'); ?>
            </span>
         </div>
         <div class="post-content clearfix">
