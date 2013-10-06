@@ -490,11 +490,14 @@ function dangopress_customize_breadcrumb($links)
     $my_links = array();
 
     foreach ($links as $index => $value) {
-        if (isset($value['id'])) // post types
-            continue;
+        if (isset($value['id'])) { // find a single post, end..
+            $my_links[] = array('text' => '当前页面');
+            break;
+        }
 
         $my_links[] = $value;
     }
+
 
     return $my_links;
 }
