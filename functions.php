@@ -191,7 +191,7 @@ add_filter('style_loader_src', 'dangopress_remove_version', 15, 1);
  */
 function dangopress_esc_html($content)
 {
-    $regex = '/(<pre\s+[^>]*?class\s*?=\s*?[",\'].*?prettyprint.*?[",\'].*?>)(.*?)(<\/pre>)/si';
+    $regex = '/(<pre\s+[^>]*?class\s*?=\s*?[",\'].*?prettyprint.*?[",\'].*?>)(.*?)(<\/pre>)/sim';
     return preg_replace_callback($regex, dangopress_esc_callback, $content);
 }
 
@@ -201,7 +201,8 @@ function dangopress_esc_callback($matches)
     $content = $matches[2];
     $tag_close = $matches[3];
 
-    $content = htmlspecialchars($content, ENT_NOQUOTES, get_bloginfo('charset'));
+    //$content = htmlspecialchars($content, ENT_NOQUOTES, get_bloginfo('charset'));
+    $content = esc_html($content);
 
     return $tag_open . $content . $tag_close;
 }

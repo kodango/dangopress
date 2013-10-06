@@ -420,10 +420,7 @@ a:hover {
 
 .widget ul.list {
     padding: 10px 0 10px 15px;
-}
-
-.widget ul.list li {
-    list-style: square;
+    list-style: square outside;
 }
 
 .widget small {
