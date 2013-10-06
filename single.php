@@ -30,7 +30,7 @@ get_header();?>
 
 <?php if (function_exists('related_posts')): ?>
 <div class="clearfix related-posts">
-    <div class="title">
+    <div class="caption">
         <i class="icon-plus-sign-alt"></i> 与<h2><?php the_tags(' ', ', ', ' '); ?></h2>相关的文章
     </div>
     <?php related_posts(); ?>

@@ -183,7 +183,6 @@ a:hover {
     line-height: 32px;
     padding: 5px 10px;
     color: #333;
-    font-size: 14px;
     outline: medium none;
     _white-space: nowrap;
 }
@@ -254,7 +253,7 @@ a:hover {
 
 .post-title {
     padding: 0 0 10px;
-    font-size: 25px;
+    font-size: 18px;
     font-weight: 700;
 }
 
@@ -323,9 +322,14 @@ a:hover {
 }
 
 .post-content h3 {
+    font-size: 16px;
     padding: 5px 0;
     margin: 20px 0;
     border-bottom: 1px solid #ddd;
+}
+
+.post-content h4 {
+    font-size: 14px;
 }
 
 .post-content h3:first-child,
@@ -353,7 +357,7 @@ a:hover {
 
 .related-posts { margin-bottom: 20px; }
 
-.related-posts .title {
+.related-posts .caption {
     padding: 20px 0 5px;
     font-size: 16px;
     font-weight: bold;
