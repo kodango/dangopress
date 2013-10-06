@@ -72,8 +72,19 @@ if (post_password_required() || (!have_comments() && !comments_open() && !pings_
         <?php if (get_option('page_comments')): ?>
         <div class="comment-pagenavi clearfix">
             <div class="alignright">
-                <?php previous_comments_link('<i class="icon-circle-arrow-left"></i> 旧评论'); ?>
-                <?php next_comments_link('新评论 <i class="icon-circle-arrow-right"></i>'); ?>
+                <?php 
+                    // Add rel="nofollow" to comment page link
+                    $prev_link = get_previous_comments_link('<i class="icon-circle-arrow-left"></i> 旧评论');
+                    $next_link = get_next_comments_link('新评论 <i class="icon-circle-arrow-right"></i>');
+
+                    if (!empty($prev_link)) {
+                        echo str_replace('<a', '<a rel="nofollow"', $prev_link);
+                    }
+
+                    if (!empty($next_link)) {
+                        echo str_replace('<a', '<a rel="nofollow"', $next_link);
+                    }
+　　　　　　　　?>
             </div>
         </div>
         <?php endif; ?>
