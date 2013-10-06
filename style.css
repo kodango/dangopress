@@ -51,6 +51,7 @@ textarea, input {
     padding: 3px;
     border: 1px solid #bdc7d8;
     font-size: 12px;
+    line-height: normal;
 }
 
 blockquote {
@@ -182,9 +183,7 @@ a:hover {
 }
 
 .menu li a:hover, .menu li a:active,
-.menu li.current-menu-item a,
-.menu li.current-menu-item a:hover,
-.menu li.current-menu-item a:active {
+.menu li.current-menu-item a {
     border-top: 2px solid #5895be;
     padding-top: 3px;
     font-weight: bold;
@@ -205,7 +204,6 @@ a:hover {
 .search-input {
     width: 212px;
     height: 30px;
-    line-height: 30px;
     padding: 0 5px;
     border: 0;
     outline: 0;
@@ -252,7 +250,6 @@ a:hover {
     padding: 0 0 10px;
     font-size: 25px;
     font-weight: 700;
-    line-height: 1.2;
 }
 
 .post-title a {
@@ -524,7 +521,6 @@ ul.tabnav li.selected, ul.tabnav li:hover {
 
 #comments-tabber a {
     height: 30px;
-    line-height: 30px;
     padding: 0 20px;
     display: block;
     float: left;
@@ -878,14 +874,10 @@ pre .pln { color: #333; }
     padding: 5px 6%;
 }
 
-.menu li a:hover, .menu li a:active {
-    background: #fafafa;
-    color: #666;
-}
-
-.menu li.current-menu-item a,
-.menu li.current-menu-item a:hover,
-.menu li.current-menu-item a:active {
+.menu li a:hover, .menu li a:active,
+.menu li.current-menu-item a {
+    border: none;
+    padding: 5px 6%;
     background: #fafafa;
     color: #666;
 }
