@@ -498,7 +498,6 @@ function dangopress_customize_breadcrumb($links)
         $my_links[] = $value;
     }
 
-
     return $my_links;
 }
 add_filter('wpseo_breadcrumb_links', 'dangopress_customize_breadcrumb', 10, 1);
@@ -632,4 +631,24 @@ function dangopress_category_description()
 
 <?php
 }
+
+/*
+ * Add additional button in the wordpress editor
+ */
+function dangopress_add_quicktags()
+{
+    /* Check whether the quicktags.js is registered */
+    if (!wp_script_is('quicktags'))
+        return;
+?>
+
+    <script type="text/javascript">
+    QTags.addButton('eg_pre', 'pre', '<pre>', '</pre>', '', '', 111);
+    QTags.addButton('eg_prettify', 'prettify', '<pre class="prettypring">', '</pre>', '', '代码高亮', 112);
+    </script>
+
+<?php
+}
+add_action('admin_print_footer_scripts', 'dangopress_add_quicktags');
+
 ?>

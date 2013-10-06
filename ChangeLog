@@ -5,6 +5,7 @@
 * 增加: 在分类页面增加描述信息;
 * 改进: 增加一些 SEO 优化;
 * 修复: breadcrumbs 导航最后一个元素链接显示成文本格式;
+* 增加: 文章编辑框添加 <pre> 和 <pre class="prettyprint"> 按钮;
 
 === version 0.4.1 ===
 
