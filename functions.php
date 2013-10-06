@@ -163,6 +163,15 @@ if (is_admin()) {
 }
 
 /*
+ * Add rel="nofollow" to read more link
+ */
+function dangopress_nofollow_link($link)
+{
+    return str_replace('<a', '<a rel="nofollow"', $link);
+}
+add_filter('the_content_more_link', 'dangopress_nofollow_link', 0);
+
+/*
  * Disable self ping
  */
 function dangopress_disable_self_ping(&$links)
