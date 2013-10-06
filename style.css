@@ -275,6 +275,10 @@ a:hover {
     font-weight: 700;
 }
 
+.home .post-title {
+    padding: 0 0 10px;
+}
+
 .post-title a {
     color: #333;
 }

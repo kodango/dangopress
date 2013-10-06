@@ -10,9 +10,6 @@
 
 <div id="sidebar">
 
-<div class="hide widget widget-info">
-</div>
-
 <div class="widget widget-tabber">
     <div class="tabber-title">
         <ul class="tabnav clearfix">

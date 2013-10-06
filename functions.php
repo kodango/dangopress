@@ -79,6 +79,7 @@ function dangopress_setup_theme()
     // Add theme support
     add_theme_support('automatic-feed-links');
     add_theme_support('custom-background');
+    add_theme_support('post-thumbnails'); 
 
     // Register wordpress menu
     register_nav_menus(array('primary' => 'Primary Navigation'));
