@@ -64,7 +64,7 @@
 <div id="sidebar-follow">
 <?php if (function_exists('get_timespan_most_viewed')): ?>
     <div class="widget widget-popular-posts">
-        <h3> 本月热门文章</h3>
+        <h3>本月热门文章</h3>
         <ul class="list">
             <?php get_timespan_most_viewed('post', 5, 45, true, false, 30);?>
         </ul>

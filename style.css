@@ -141,20 +141,26 @@ a:hover {
     padding: 20px 15px;
 }
 
+#header .caption a {
+    font-size: 25px;
+    font-weight: bold;
+    color: #333;
+}
+
 .logo, .menu, .menu li {
     display: block;
     float: left;
 }
 
 .logo {
-    height:42px;
+    height: 42px;
     padding-right: 15px;
 }
 
 .logo a {
     display:block;
     text-indent: -9999px;
-    width: 121px;
+    width: 140px;
     height: 40px;
     background-position: -2px -2px;
 }
@@ -346,8 +352,18 @@ a:hover {
 }
 
 .related-posts { margin-bottom: 20px; }
-.related-posts h3 { margin: 20px 0; }
-.related-posts h3 a { font-weight: bold; }
+
+.related-posts .title {
+    padding: 20px 0 5px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.related-posts h2 {
+    display: inline;
+    font-size: 16px;
+    font-weight: normal;
+}
 
 .related-posts ul {
     margin: 15px;

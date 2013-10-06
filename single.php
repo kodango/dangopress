@@ -10,7 +10,7 @@ get_header();?>
 <?php if ( have_posts( )) : while ( have_posts() ) : the_post(); ?>
 <div <?php post_class(); ?>>
     <div class="post-header">
-        <h2 class="post-title"><?php the_title(); ?></h2>
+        <h1 class="post-title"><?php the_title(); ?></h1>
     </div>
     <div class="post-meta clearfix">
         <span class="post-time"><i class="icon-calendar"></i><?php the_time('Y/m/d'); ?></span>
@@ -30,7 +30,9 @@ get_header();?>
 
 <?php if (function_exists('related_posts')): ?>
 <div class="clearfix related-posts">
-    <h3><i class="icon-plus-sign-alt"></i> 与<?php the_tags(' ', ', ', ' '); ?>相关的文章</h3>
+    <div class="title">
+        <i class="icon-plus-sign-alt"></i> 与<h2><?php the_tags(' ', ', ', ' '); ?></h2>相关的文章
+    </div>
     <?php related_posts(); ?>
 </div>
 <?php endif; ?>
