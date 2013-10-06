@@ -595,4 +595,37 @@ var _hmt = _hmt || [];
 }
 add_action('wp_head', 'dangopress_insert_analytics_snippets'); 
 
+/*
+ * Show description box in category page
+ */
+function dangopress_category_description()
+{
+    $description = category_description();
+
+    // Don't show the box if description is empty
+    if (empty($description))
+        return;
+
+    $cat_name = single_cat_title('', false);
+    $cat_ID = get_cat_ID($cat_name);
+
+    // List the sub categories if have
+    $sub_cats = wp_list_categories("child_of=$cat_ID&style=none&echo=0&show_option_none=");
+
+    if (!empty($sub_cats)) {
+        $sub_cats = str_replace("<br />", "", $sub_cats);  // strip the <br /> tag
+        $sub_cats = str_replace("\n\t", ", ", $sub_cats);  // separated by comma
+
+        $sub_cats = '<div class="sub-categories">包含子目录: ' . $sub_cats . '</div>';
+    }
+?>
+
+    <div id="category-description" class="">
+        <h2><?php echo $cat_name; ?> 类目</h2>
+        <?php echo $description; ?>
+        <?php echo $sub_cats; ?>
+    </div>
+
+<?php
+}
 ?>

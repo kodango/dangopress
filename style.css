@@ -247,6 +247,24 @@ a:hover {
     padding:0 5px;
 }
 
+#category-description {
+    padding: 15px;
+    margin-bottom: 15px;
+    line-height: 1.6;
+    background-color: #f7f7f9;
+    border: 1px solid #e1e1e8;
+    font-size: 14px;
+}
+
+#category-description h2 {
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+#category-description .sub-categories {
+    margin-top: 15px;
+}
+
 .post {
     padding-bottom: 40px;
 }
