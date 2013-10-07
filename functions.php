@@ -9,6 +9,17 @@ if (is_admin()) {
     require_once('theme-options.php');
 }
 
+/*
+ * Include custom function php file if exists.
+ *
+ * You should put your personal functions in the custom_functinos.php.
+ */
+define('CUSTOM_FUNCTIONS', get_template_directory() . '/custom_functions.php');
+
+if (file_exists(CUSTOM_FUNCTIONS)) {
+    require_once(CUSTOM_FUNCTIONS);
+}
+
 /**
  * Set the content width based on the theme's design and stylesheet.
  */
