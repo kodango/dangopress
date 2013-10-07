@@ -23,8 +23,15 @@
                     $options = get_option('dangopress_options');
                     $sitemap = $options['sitemap_xml'];
 
-                    if (!empty($sitemap))
-                        echo '<a rel="nofollow" href="' . get_bloginfo('url') . '/' . $sitemap . '">站点地图</a>';
+                    if (!empty($sitemap)) {
+                        $link = '<a href="' . get_bloginfo('url') . '/' . $sitemap . '">站点地图</a>';
+
+                        if (!is_home()) {
+                            $link = dangopress_nofollow_link($link);
+                        }
+
+                        echo $link;
+                    }
                 ?>
 
                 <a href="#backtop" title="回到顶部" class="backtop">回到顶部<i class="icon-arrow-up"></i></a>
