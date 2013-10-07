@@ -539,10 +539,12 @@ function dangopress_customize_breadcrumb($link_output, $link)
         $link_output = dangopress_nofollow_link($link_output);
     } else if ((is_archive() || is_search()) && $index == $total_count) {
         // surround <h1> for the last element in archive or search page
-        $link_output = '<h1>' . $link_output . '</h1>';
+        //$link_output = '<h1>' . $link_output . '</h1>';
+        $link_output = preg_replace(array('/<span /', '/<\/span>/'), array('<h1 ', '</h1>'), $link_output);
     } else if (is_single() && $index == ($total_count-1)) {
         // surround <h2> for the post category in single post page
-        $link_output = '<h2>' . $link_output . '</h2>';
+        //$link_output = '<h2>' . $link_output . '</h2>';
+        $link_output = preg_replace(array('/<span /', '/<\/span>/'), array('<h2 ', '</h2>'), $link_output);
     } else if (is_singular() && $index == $total_count) {
         // remove post title from the breadcrumbs
         $link_output = str_replace($link['text'], '当前位置', $link_output);
