@@ -171,7 +171,7 @@ function dangopress_enqueue_comment_reply()
 {
     // Thread comments
 	if (is_singular() && comments_open() && get_option('thread_comments'))
-        wp_enqueue_script('comment-reply', $in_footer = true);
+        wp_enqueue_script('comment-reply');
 }
 add_action('comment_form_before', 'dangopress_enqueue_comment_reply');
 
@@ -300,7 +300,7 @@ function dangopress_recent_comments($admin, $limit)
     $output="";
 
     foreach ($comments as $comment) {
-        $output .= '<li class="clearfix rc_item">' . get_avatar($comment, 32);
+        $output .= '<li class="clearfix rc_item">' . get_avatar($comment, 32, '', "$comment->comment_author's avatar");
         $output .= '<div class="rc_info">';
         $output .= '<a href="' . get_comment_link($comment) . '" title="《' . $comment->post_title . '》上的评论">';
         $output .= '<span class="rc_name">' . strip_tags($comment->comment_author) . '</span></a>';
@@ -381,7 +381,7 @@ function dangopress_comments_callback($comment, $args, $depth) {
             <div class="comment-avatar">
             <?php
                  $avatar_size = $depth == 1 ? '50' : '30';
-                echo get_avatar($comment, $size = $avatar_size);
+                 echo get_avatar($comment, $avatar_size, '', "$comment->comment_author's avatar");
             ?>
             </div>
 
