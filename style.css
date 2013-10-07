@@ -247,6 +247,12 @@ a:hover {
     padding:0 5px;
 }
 
+#site-breadcrumbs h1,
+#site-breadcrumbs h2 {
+    display: inline;
+    font-size: 14px;
+}
+
 #category-description {
     padding: 15px;
     margin-bottom: 15px;

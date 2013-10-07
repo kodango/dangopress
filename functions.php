@@ -482,25 +482,52 @@ function dangopress_breadcrumb()
     yoast_breadcrumb('<div id="site-breadcrumbs">', '</div>');
 }
 
-/* 
- * Customize breadcrumb links
+/*
+ * Number the breadcrumb links
  */
-function dangopress_customize_breadcrumb($links)
+function dangopress_number_breadcrumbs($links)
 {
     $my_links = array();
 
-    foreach ($links as $index => $value) {
-        if (isset($value['id'])) { // find a single post, end..
-            $my_links[] = array('text' => '当前页面');
-            break;
-        }
+    $count = count($links);
+    $index = 1;
+
+    foreach ($links as $key => $value) {
+        $value['my_index'] = $index++;
+        $value['my_total_count'] = $count;
 
         $my_links[] = $value;
     }
 
     return $my_links;
 }
-add_filter('wpseo_breadcrumb_links', 'dangopress_customize_breadcrumb', 10, 1);
+add_filter('wpseo_breadcrumb_links', 'dangopress_number_breadcrumbs', 10, 1);
+
+/* 
+ * Customize breadcrumb links
+ */
+function dangopress_customize_breadcrumb($link_output, $link)
+{
+    $index = $link['my_index'];
+    $total_count = $link['my_total_count'];
+
+    if ($index == 1) {
+        // no follow the home link
+        $link_output = dangopress_nofollow_link($link_output);
+    } else if ((is_archive() || is_search()) && $index == $total_count) {
+        // surround <h1> for the last element in archive or search page
+        $link_output = '<h1>' . $link_output . '</h1>';
+    } else if (is_single() && $index == ($total_count-1)) {
+        // surround <h2> for the post category in single post page
+        $link_output = '<h2>' . $link_output . '</h2>';
+    } else if (is_singular() && $index == $total_count) {
+        // remove post title from the breadcrumbs
+        $link_output = str_replace($link['text'], '当前位置', $link_output);
+    }
+
+    return $link_output;
+}
+add_filter('wpseo_breadcrumb_single_link', 'dangopress_customize_breadcrumb', 10, 2);
 
 /*
  * Place baidu share icons
