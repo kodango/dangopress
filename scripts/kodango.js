@@ -49,8 +49,8 @@ SidebarFollow.prototype = {
 		// 计算父节点的上边到顶部距离
 		var parent = element.parent();
 		var parentToTop = parent.offset().top;
-		var parentBorderTop = parent.css('border-top');
-		var parentPaddingTop = parent.css('padding-top');
+		var parentBorderTop = parseInt(parent.css('border-top-width'), 10);
+		var parentPaddingTop = parseInt(parent.css('padding-top'), 10);
 		_self.cache.parentToTop = parentToTop + parentBorderTop + parentPaddingTop;
 
 		// 滚动屏幕
@@ -71,6 +71,9 @@ SidebarFollow.prototype = {
 		var _self = args._self;
 		var element = args.element;
 		var prevElement = _self.cache.prevElement;
+
+        if (element.is(':hidden'))
+            return;
 
 		// 获得到顶部的距离
 		var toTop = _self.config.distanceToTop;
@@ -106,7 +109,7 @@ SidebarFollow.prototype = {
 			});
 
 		// 否则回到原位
-		} else if(_self.cache.originalToTop > elementToTop || referenceToTop > elementToTop) {
+        } else if(_self.cache.originalToTop > elementToTop || referenceToTop > elementToTop) {
 			// 删除占位节点
 			_self.cache.placeholder.remove();
 			// 修改样式
@@ -156,8 +159,8 @@ jQuery(function($) {
 
     /* Sidebar follow */
     (new SidebarFollow()).init({
-        element: jQuery('#sidebar-follow'),
-        distanceToTop: 10
+        element: '#sidebar-follow',
+        distanceToTop: 15
     });
 
     /* Mobile menu switch */
