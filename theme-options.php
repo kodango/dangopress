@@ -15,6 +15,7 @@ function dangopress_get_options()
         'bdtj_siteid' => '',
         'google_webid' => '',
         'post_end_mark' => '## End Post ##',
+        'sitemap_xml' => ''
     );
 
     $options = wp_parse_args($options, $defaults);
@@ -97,6 +98,12 @@ function dangopress_theme_options()
             <label for="post_end_mark">文章末尾标记内容</label>
         </th>
         <td><input name="post_end_mark" id="post_end_mark" type="text" value="<?php echo $options['post_end_mark']; ?>" class="regular-text code"></td>
+    </tr>
+    <tr>
+        <th>
+            <label for="post_end_mark">站点地图文件名（如: sitemap.xml）</label>
+        </th>
+        <td><input name="sitemap_xml" id="sitemap_xml" type="text" value="<?php echo $options['sitemap_xml']; ?>" class="regular-text code"></td>
     </tr>
     </tbody>
 </table>

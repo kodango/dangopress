@@ -19,7 +19,14 @@
                 <span class="designed-by">Theme designed by <a href="<?php bloginfo('url'); ?>">kodango</a>.</span>
             </p>
             <p>
-                <a href="<?php bloginfo('url'); ?>/sitemap_index.xml">站点地图</a>
+                <?php
+                    $options = get_option('dangopress_option');
+                    $sitemap = $options['sitemap_xml'];
+
+                    if (!empty($sitemap))
+                        echo '<a rel="nofollow" href="' . get_bloginfo('url') . '/' . $sitemap . '">站点地图</a>';
+                ?>
+
                 <a href="#backtop" title="回到顶部" class="backtop">回到顶部<i class="icon-arrow-up"></i></a>
             </p>
             <?php wp_footer(); ?>
