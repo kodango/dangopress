@@ -9,7 +9,7 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" dir="ltr">
 <head profile="http://gmpg.org/xfn/11" >
-<title><?php wp_title('-', true, 'right'); ?></title> 
+<title><?php dangopress_wp_title('-'); ?></title> 
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <meta name="viewport" content="width=device-width" />
 <meta http-equiv="x-dns-prefetch-control" content="on">
