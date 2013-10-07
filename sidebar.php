@@ -13,15 +13,14 @@
 <div class="widget widget-tabber">
     <div class="tabber-title">
         <ul class="tabnav clearfix">
-            <li class="selected"><h3>热评文章</h3></li>
-            <li class=""><h3>最新文章</h3></li>
+            <li class="selected"><h3>最新文章</h3></li>
+            <li class=""><h3>热评文章</h3></li>
             <li class=""><h3>随机文章</h3></li>
        </ul>
     </div>
 
     <div class="tabber-content">
-        <ul class="list"><?php dangopress_get_most_commented(8, 180); ?></ul>
-        <ul class="list hide">
+        <ul class="list">
             <?php $myposts = get_posts('numberposts=8&offset=0');foreach($myposts as $post): ?>
             <li>
                 <a href="<?php the_permalink(); ?>" rel="bookmark" title="详细阅读 <?php the_title_attribute(); ?>">
@@ -30,6 +29,7 @@
             </li>
             <?php endforeach; ?>
         </ul>
+        <ul class="list hide"><?php dangopress_get_most_commented(8, 180); ?></ul>
         <ul class="list hide">
             <?php $myposts = get_posts('numberposts=8&orderby=rand'); foreach($myposts as $post): ?>
             <li>

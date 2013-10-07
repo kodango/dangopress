@@ -1,6 +1,6 @@
 /*
  * Theme Name: dangopress
- * Version: 0.4.1
+ * Version: 0.4.2
  * Description: a simple responsive blog theme
  *
  * Author: kodango
@@ -777,11 +777,11 @@ ul.tabnav li.selected, ul.tabnav li:hover {
      border-left: 1px dotted #e6e6e6;
      list-style: none;
      margin: 0 0 15px 15px;
+     padding: 0 20px;
 }
 
 .post-content .archives-list li {
      clear: both;
-     padding: 0 24px;
      list-style: none;
      margin-bottom: 10px;
 }
