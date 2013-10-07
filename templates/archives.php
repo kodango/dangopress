@@ -11,6 +11,10 @@ $prev_post_ts = null;
 $prev_post_year = null;
 ?>
 
+<div class="post-header">
+    <h1 class="post-title"><?php the_title(); ?></h1>
+</div>
+
 <div <?php post_class(); ?>>
     <div class="clearfix post-content">
 
