@@ -20,7 +20,7 @@
             </p>
             <p>
                 <?php
-                    $options = get_option('dangopress_option');
+                    $options = get_option('dangopress_options');
                     $sitemap = $options['sitemap_xml'];
 
                     if (!empty($sitemap))
