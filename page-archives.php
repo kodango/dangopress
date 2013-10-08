@@ -5,7 +5,7 @@
 
 get_header();
 
-query_posts('posts_per_page=-1');
+query_posts('posts_per_page=-1&ignore_sticky_posts=1');
 
 $prev_post_ts = null;
 $prev_post_year = null;
