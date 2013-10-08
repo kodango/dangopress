@@ -775,8 +775,10 @@ function dangopress_add_quicktags()
 ?>
 
     <script type="text/javascript">
+    QTags.addButton('eg_h3', 'h3', '<h3>', '</h3>', '', '三级标题', 101);
+    QTags.addButton('eg_h4', 'h4', '<h4>', '</h4>', '', '四级标题', 102);
     QTags.addButton('eg_pre', 'pre', '<pre>', '</pre>', '', '', 111);
-    QTags.addButton('eg_prettify', 'prettify', '<pre class="prettypring">', '</pre>', '', '代码高亮', 112);
+    QTags.addButton('eg_prettify', 'prettify', '<pre class="prettyprint">', '</pre>', '', '代码高亮', 112);
     </script>
 
 <?php
