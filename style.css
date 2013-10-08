@@ -154,7 +154,7 @@ a:hover {
 
 .logo {
     height: 42px;
-    padding-right: 15px;
+    margin-right: 15px;
 }
 
 .logo a {
@@ -243,8 +243,10 @@ a:hover {
     padding: 5px 0;
 }
 
-#site-breadcrumbs span span {
-    padding:0 5px;
+#site-breadcrumbs span span,
+#site-breadcrumbs span h2,
+#site-breadcrumbs span h1 {
+    margin: 0 5px;
 }
 
 #site-breadcrumbs h1,
@@ -316,12 +318,12 @@ a:hover {
 }
 
 .post-content p, .comment-content p {
-    margin: 15px 0;
+    padding-top: 15px;
     color: #333;
 }
 
 .post-content table {
-    margin: 15px 0;
+    padding: 15px 0;
 }
 
 .post-content th {

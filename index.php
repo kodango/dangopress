@@ -17,7 +17,12 @@ get_header(); ?>
 <?php if (is_category()) dangopress_category_description(); ?>
 
 <div id="articlelist">
-    <?php query_posts('ignore_sticky_posts=1'); // ignore sticky posts, don't show them in the start ?>
+    <?php 
+        if (is_home()) {
+            // ignore sticky posts, don't show them in the start
+            query_posts('ignore_sticky_posts=1');
+        }
+    ?>
     <?php if ( have_posts( )) : while ( have_posts() ) : the_post(); ?>
     <div <?php post_class(); ?>>
         <div class="post-header">
