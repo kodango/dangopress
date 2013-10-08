@@ -491,6 +491,7 @@ ul.tabnav li {
 ul.tabnav li.selected {
     cursor: default; 
     border-bottom: 1px solid #fff;
+    margin-bottom: -1px;
 }
 
 ul.tabnav li.selected, ul.tabnav li:hover {
