@@ -276,7 +276,7 @@ function dangopress_human_time_diff($gmt_time)
         return date_i18n('Y-m-d G:i:s', $from_timestamp, true);
     } else {
         $diff = human_time_diff($from_timestamp, $to_timestamp);
-        return $diff . '前';
+        return preg_replace('/(\d)/', "$1 ", "{$diff}前");
     }
 }
 
@@ -327,11 +327,12 @@ function dangopress_get_recent_posts($post_num = 10, $chars = 30)
         $permalink = get_permalink($post['ID']);
         $title = $post['post_title'];
         $title_attr = esc_attr(strip_tags($title));
+        $human_time = dangopress_human_time_diff($post['post_date_gmt']);
 
         $link = '<a href="' . $permalink. '" rel="bookmark" title="详细阅读《' . $title_attr . '》">';
         $link .= wp_trim_words($title, $chars) . '</a>'; 
 
-        $output .= '<li>' . $link . '</li>';
+        $output .= '<li>' . $link . '<small>发表于 ' . $human_time . '</small></li>';
     }
 
     echo $output;
@@ -349,11 +350,12 @@ function dangopress_get_rand_posts($post_num = 10, $chars = 30)
         $permalink = get_permalink($post->ID);
         $title = $post->post_title;
         $title_attr = esc_attr(strip_tags($title));
+        $human_time = dangopress_human_time_diff($post->post_date_gmt);
 
         $link = '<a href="' . $permalink. '" rel="bookmark" title="随机阅读《' . $title_attr . '》">';
         $link .= wp_trim_words($title, $chars) . '</a>'; 
 
-        $output .= '<li>' . $link . '</li>';
+        $output .= '<li>' . $link . '<small>发表于 ' . $human_time . '</small></li>';
     }
 
     echo $output;
@@ -377,11 +379,12 @@ function dangopress_get_sticky_posts($post_num = 10, $chars = 30)
         $permalink = get_permalink($post->ID);
         $title = $post->post_title;
         $title_attr = esc_attr(strip_tags($title));
+        $human_time = dangopress_human_time_diff($post->post_date_gmt);
 
         $link = '<a href="' . $permalink. '" rel="bookmark" title="推荐阅读《' . $title_attr . '》">';
         $link .= wp_trim_words($title, $chars) . '</a>'; 
 
-        $output .= '<li>' . $link . '</li>';
+        $output .= '<li>' . $link . '<small>发表于 ' . $human_time . '</small></li>';
     }
 
     echo $output;
@@ -409,10 +412,10 @@ function dangopress_get_most_commented($posts_num = 10, $days = 60, $chars = 30)
         $title_attr = esc_attr(strip_tags($title));
         $comment_num = $post->comment_count;
 
-        $link = '<a href="' . $permalink. '" rel="bookmark" title="' . $title_attr . '(共' . $comment_num . '条评论)">';
+        $link = '<a href="' . $permalink. '" rel="bookmark" title="详细阅读《' . $title_attr . '》">';
         $link .= wp_trim_words($title, $chars) . '</a>'; 
 
-        $output .= '<li>' . $link . '</li>';
+        $output .= '<li>' . $link . '<small>共 ' . $comment_num . ' 条评论</small></li>';
     }
 
     echo $output;

@@ -21,10 +21,10 @@
     </div>
 
     <div class="tabber-content">
-        <ul class="list"><?php dangopress_get_sticky_posts(8, 28); ?></ul>
-        <ul class="list hide"><?php dangopress_get_recent_posts(8, 28); ?></ul>
-        <ul class="list hide"><?php dangopress_get_most_commented(8, 180, 28); ?></ul>
-        <ul class="list hide"><?php dangopress_get_rand_posts(8, 28); ?></ul>
+        <ul class="list"><?php dangopress_get_sticky_posts(6, 28); ?></ul>
+        <ul class="list hide"><?php dangopress_get_recent_posts(6, 28); ?></ul>
+        <ul class="list hide"><?php dangopress_get_most_commented(6, 180, 28); ?></ul>
+        <ul class="list hide"><?php dangopress_get_rand_posts(6, 28); ?></ul>
      </div>
 </div>
 

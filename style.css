@@ -317,9 +317,13 @@ a:hover {
     text-decoration: underline;
 }
 
-.post-content p, .comment-content p {
+.post-content p, .comment-body p {
     padding-bottom: 15px;
     color: #444;
+}
+
+.post-content p:last-child, .comment-body p:last-child {
+    padding-bottom: 0;
 }
 
 .post-content table {
