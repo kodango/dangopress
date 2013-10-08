@@ -399,6 +399,17 @@ a:hover {
     list-style: circle outside;
 }
 
+.related-posts li a {
+    color: #555;
+    border-bottom: 1px dashed #888;
+}
+
+.related-posts li a:hover {
+    color: #5895be;
+    text-decoration: none;
+    border-bottom: 1px solid #5895be;
+}
+
 .post-footer {
     border-bottom: 1px solid #ededed;
     border-top: 1px solid #ededed;
