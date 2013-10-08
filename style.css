@@ -483,9 +483,9 @@ ul.tabnav li {
     text-align: center;
     cursor: pointer;
     background: #fafafa;
-    width: 25.3%;
-    padding: 0 5px; 
-    margin: 0 6px;
+    width: 20%;
+    padding: 0 1.5px; 
+    margin: 0 5px;
 }
 
 ul.tabnav li.selected {

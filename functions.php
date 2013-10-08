@@ -315,6 +315,79 @@ function dangopress_recent_comments($admin, $limit)
 }
 
 /*
+ * Get a list of recent posts
+ */
+
+function dangopress_get_recent_posts($post_num = 10, $chars = 30)
+{
+    $recents = wp_get_recent_posts("numberposts=$post_num&offset=0");
+    $output = '';
+
+    foreach ($recents as $post) {
+        $permalink = get_permalink($post['ID']);
+        $title = $post['post_title'];
+        $title_attr = esc_attr(strip_tags($title));
+
+        $link = '<a href="' . $permalink. '" rel="bookmark" title="详细阅读《' . $title_attr . '》">';
+        $link .= wp_trim_words($title, $chars) . '</a>'; 
+
+        $output .= '<li>' . $link . '</li>';
+    }
+
+    echo $output;
+}
+
+/*
+ * Get a list of random posts
+ */
+function dangopress_get_rand_posts($post_num = 10, $chars = 30)
+{
+    $rands = get_posts("numberposts=$post_num&orderby=rand");
+    $output = '';
+
+    foreach ($rands as $post) {
+        $permalink = get_permalink($post->ID);
+        $title = $post->post_title;
+        $title_attr = esc_attr(strip_tags($title));
+
+        $link = '<a href="' . $permalink. '" rel="bookmark" title="随机阅读《' . $title_attr . '》">';
+        $link .= wp_trim_words($title, $chars) . '</a>'; 
+
+        $output .= '<li>' . $link . '</li>';
+    }
+
+    echo $output;
+}
+
+/*
+ * Get a list of sticky posts
+ */
+function dangopress_get_sticky_posts($post_num = 10, $chars = 30)
+{
+    $args = array(
+        'numberposts' => $posts_num,
+        'post__in' => get_option('sticky_posts'),
+        'orderby' => 'modified'
+    );
+
+    $sticky_posts = get_posts($args);
+    $output = '';
+
+    foreach ($sticky_posts as $post) {
+        $permalink = get_permalink($post->ID);
+        $title = $post->post_title;
+        $title_attr = esc_attr(strip_tags($title));
+
+        $link = '<a href="' . $permalink. '" rel="bookmark" title="推荐阅读《' . $title_attr . '》">';
+        $link .= wp_trim_words($title, $chars) . '</a>'; 
+
+        $output .= '<li>' . $link . '</li>';
+    }
+
+    echo $output;
+}
+
+/*
  * Get the most commented posts
  */
 function dangopress_get_most_commented($posts_num = 10, $days = 60, $chars = 30)
@@ -329,10 +402,17 @@ function dangopress_get_most_commented($posts_num = 10, $days = 60, $chars = 30)
 
     $posts = $wpdb->get_results($sql);
     $output = "";
-
+    
     foreach ($posts as $post) {
-        $output .= '<li><a href="' . get_permalink($post->ID) . '" rel="bookmark" title="' . $post->post_title;
-        $output .= ' (' . $post->comment_count . ' 条评论)" >' . wp_trim_words($post->post_title, $chars) . "</a></li>";
+        $permalink = get_permalink($post->ID);
+        $title = $post->post_title;
+        $title_attr = esc_attr(strip_tags($title));
+        $comment_num = $post->comment_count;
+
+        $link = '<a href="' . $permalink. '" rel="bookmark" title="' . $title_attr . '(共' . $comment_num . '条评论)">';
+        $link .= wp_trim_words($title, $chars) . '</a>'; 
+
+        $output .= '<li>' . $link . '</li>';
     }
 
     echo $output;

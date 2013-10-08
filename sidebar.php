@@ -13,32 +13,18 @@
 <div class="widget widget-tabber">
     <div class="tabber-title">
         <ul class="tabnav clearfix">
-            <li class="selected"><h3>最新文章</h3></li>
-            <li class=""><h3>热评文章</h3></li>
-            <li class=""><h3>随机文章</h3></li>
+            <li class="selected""><h3>置顶</h3></li>
+            <li class=""><h3>最新</h3></li>
+            <li class=""><h3>热评</h3></li>
+            <li class=""><h3>随机</h3></li>
        </ul>
     </div>
 
     <div class="tabber-content">
-        <ul class="list">
-            <?php $myposts = get_posts('numberposts=8&offset=0');foreach($myposts as $post): ?>
-            <li>
-                <a href="<?php the_permalink(); ?>" rel="bookmark" title="详细阅读 <?php the_title_attribute(); ?>">
-                    <?php echo wp_trim_words($post->post_title, 30); ?>
-                </a>
-            </li>
-            <?php endforeach; ?>
-        </ul>
-        <ul class="list hide"><?php dangopress_get_most_commented(8, 180); ?></ul>
-        <ul class="list hide">
-            <?php $myposts = get_posts('numberposts=8&orderby=rand'); foreach($myposts as $post): ?>
-            <li>
-                <a href="<?php the_permalink(); ?>" rel="bookmark" title="详细阅读 <?php the_title_attribute(); ?>">
-                    <?php echo wp_trim_words($post->post_title, 30); ?>
-                </a>
-            </li>
-            <?php endforeach; ?>
-        </ul>
+        <ul class="list"><?php dangopress_get_sticky_posts(8, 30); ?></ul>
+        <ul class="list hide"><?php dangopress_get_recent_posts(8, 30); ?></ul>
+        <ul class="list hide"><?php dangopress_get_most_commented(8, 180, 30); ?></ul>
+        <ul class="list hide"><?php dangopress_get_rand_posts(8, 30); ?></ul>
      </div>
 </div>
 
