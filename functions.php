@@ -170,7 +170,7 @@ add_action('wp_enqueue_scripts', 'dangopress_setup_load');
 function dangopress_enqueue_comment_reply()
 {
     // Thread comments
-	if (is_singular() && comments_open() && get_option('thread_comments'))
+	if (is_singular() && comments_open()) // && get_option('thread_comments'))
         wp_enqueue_script('comment-reply');
 }
 add_action('comment_form_before', 'dangopress_enqueue_comment_reply');
@@ -463,7 +463,7 @@ function dangopress_comments_callback($comment, $args, $depth) {
             <div class="comment-floor">
 
             <?php
-                comment_reply_link(array_merge($args, array('reply_text' => ' 回复', 'depth' => $depth, 'max_depth' => $args['max_depth'])));
+                comment_reply_link(array_merge($args, array('reply_text' => '回复', 'depth' => $depth, 'max_depth' => $args['max_depth'])));
 
                 if ($depth == 1) { // Show the floor number
                      printf(' #%1$s 楼', ++$commentcount);
