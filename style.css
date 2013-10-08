@@ -57,7 +57,7 @@ textarea, input {
 blockquote {
     display: block;
     padding: 5px 20px;
-    margin: 15px 0;
+    margin: 0 0 15px;
     vertical-align: baseline;
     font-style: normal;
     font-size: 12px;
@@ -70,14 +70,14 @@ pre {
     line-height: 1.6;
     border: 1px solid #e1e1e8;
     padding: 10px;
-    margin: 15px 0;
+    margin: 0 0 15px;
     word-break: break-word;
 }
 
 code {
     background-color: #eee;
     border: 1px solid #ddd;
-    margin: 0 2px;
+    margin: 0 3px;
     font-family: monaco, Consolas, monospace;
     font-size: 12px;
 }
@@ -240,7 +240,7 @@ a:hover {
 
 #site-breadcrumbs {
     margin-bottom: 15px;
-    padding: 5px 0;
+    padding: 1.5px 0;
 }
 
 #site-breadcrumbs span span,
@@ -258,7 +258,7 @@ a:hover {
 
 #category-description {
     padding: 15px;
-    margin-bottom: 15px;
+    margin-bottom: 10px;
     line-height: 1.6;
     background-color: #f7f7f9;
     border: 1px solid #e1e1e8;
@@ -303,11 +303,11 @@ a:hover {
 }
 
 .post-meta>span {
-    padding-right: 10px;
+    margin-right: 10px;
 }
 
 .post-meta i {
-    padding-right: 5px;
+    margin-right: 5px;
 }
 
 .post-title a:hover,
@@ -318,12 +318,12 @@ a:hover {
 }
 
 .post-content p, .comment-content p {
-    padding-top: 15px;
+    padding-bottom: 15px;
     color: #333;
 }
 
 .post-content table {
-    padding: 15px 0;
+    margin-bottom: 15px;
 }
 
 .post-content th {
@@ -343,8 +343,7 @@ a:hover {
 }
 
 .post-image {
-    margin-bottom: 15px;
-    padding: 5px;
+    padding-bottom: 15px;
 }
 
 .post-content img {
@@ -355,29 +354,23 @@ a:hover {
 .post-content h3 {
     font-size: 16px;
     padding: 5px 0;
-    margin: 20px 0;
+    margin-bottom: 15px;
     border-bottom: 1px solid #ddd;
 }
 
 .post-content h4 {
     font-size: 14px;
-}
-
-.post-content h3:first-child,
-.page h3:first-child {
-    margin-top: 0;
+    padding-bottom: 5px;
 }
 
 .post-content ul {
-    margin: 15px 0;
     list-style: square outside;
-    padding-left: 25px;
+    padding: 0 0 15px 25px;
 }
 
 .post-content ol {
-    margin: 15px 0;
     list-style: decimal outside;
-    padding-left: 25px;
+    padding: 0 0 15px 25px;
 }
 
 .post-content ul li,
@@ -386,10 +379,11 @@ a:hover {
     line-height: 1.8;
 }
 
-.related-posts { margin-bottom: 20px; }
+.related-posts { 
+    padding: 15px 0;
+}
 
 .related-posts .caption {
-    padding: 20px 0 5px;
     font-size: 16px;
     font-weight: bold;
 }
@@ -401,8 +395,8 @@ a:hover {
 }
 
 .related-posts ul {
-    margin: 15px;
-    list-style: circle inside;
+    padding: 15px 0 0 25px;
+    list-style: circle outside;
 }
 
 .post-footer {
@@ -475,7 +469,6 @@ a:hover {
     display: block;
 }
 
-.widget .tabber-title { margin: 0 0 15px; }
 .widget ul.tabnav { border-bottom: 1px solid #ddd; padding: 0; }
 
 ul.tabnav li { 
@@ -561,12 +554,12 @@ ul.tabnav li.selected, ul.tabnav li:hover {
 }
 
 #comments {
-    margin-top: 20px;
+    padding-top: 20px;
     clear: both;
 }
 
 #comments-tabber {
-    padding: 10px 0 0 15px;
+    padding: 0 0 0 15px;
     border-bottom: 1px solid #ddd;
     margin-bottom: 15px;
 }
@@ -683,15 +676,16 @@ ul.tabnav li.selected, ul.tabnav li:hover {
 }
 
 .comment-body {
+    padding-left: 60px;
     padding-right: 30px;
-    padding-left: 70px;
     min-height: 55px;
     position: relative;
+    line-height: 1.5;
 }
 
 .comment-avatar {
     position: absolute;
-    top: 4px;
+    top: 2px;
     left: 0;
 }
 
@@ -704,6 +698,10 @@ ul.tabnav li.selected, ul.tabnav li:hover {
     color: #888;
 }
 
+.comment-meta {
+    padding-bottom: 15px;
+}
+
 .comment-meta span {
     color: #888;
     font-size: 13px;
@@ -714,13 +712,7 @@ ul.tabnav li.selected, ul.tabnav li:hover {
 }
 
 .comment-text {
-    padding: 5px 0 10px;
-}
-
-.comment-reply {
-    padding-bottom: 10px;
-    font-size: 13px;
-    color: #888;
+    padding: 0 0 20px;
 }
 
 .comment-reply-link {
@@ -734,31 +726,30 @@ ul.tabnav li.selected, ul.tabnav li:hover {
 }
 
 .comment {
-    padding: 20px 0 0;
     border-top: 1px solid #ddd;
 }
 
+.comment-container {
+    padding: 20px 0 0;
+}
+
 .comment.depth-1>.children {
-    margin-left: 70px;
-    padding: 10px 0px;
     position: relative;
 }
 
-.children .comment-body {
-    padding-left: 50px;
-    padding-bottom: 20px;
+p.comment-author {
+    font-size: 13px;
+    padding-bottom: 5px;
 }
 
 #trackbacks {
     display:none;
-    margin-top:15px;
-    padding:0 20px;
+    padding: 0 20px;
 }
 
 .trackback {
     list-style: disc;
-    margin-top:15px;
-    color:#888;
+    color: #888;
 }
 
 .trackback a {
@@ -1000,19 +991,6 @@ pre .pln { color: #333; }
 .post-meta .post-view, .designed-by,
 .comment-date, .comments-num {
     display: none;
-}
-
-.comment.depth-1>.children {
-    margin-left: 0;
-}
-
-.comment-avatar img {
-    width: 30px;
-    height: 30px;
-}
-
-.comment-body {
-    padding-left: 50px;
 }
 
 .post-content .archives-list {

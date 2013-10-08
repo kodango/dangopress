@@ -44,6 +44,7 @@ if (post_password_required() || (!have_comments() && !comments_open() && !pings_
         $comments_args = array(
             'fields' => $fields,
             'title_reply'=> '',
+            'title_reply_to' => '',
             'cancel_reply_link' => '取消回复',
             'comment_notes_before' => '',
             'comment_notes_after' => '',

@@ -272,7 +272,7 @@ function dangopress_human_time_diff($gmt_time)
     $from_timestamp = strtotime("$gmt_time" . ' UTC');
     $to_timestamp = current_time('timestamp', 1);
 
-    if ($to_timestamp - $from_timestamp > 604800) { // One week ago
+    if ($to_timestamp - $from_timestamp > 2592000) { // One month ago
         return date_i18n('Y-m-d G:i:s', $from_timestamp, true);
     } else {
         $diff = human_time_diff($from_timestamp, $to_timestamp);
@@ -457,56 +457,44 @@ function dangopress_comments_callback($comment, $args, $depth) {
     $comment_id = $comment->comment_ID; ?>
 
     <li <?php comment_class(); ?> id="li-comment-<?php echo $comment_id; ?>">
+    <div class="comment-container">
         <div id="comment-<?php echo $comment_id; ?>" class="comment-body <?php if ($comment->comment_approved == '0') echo 'pending-comment'; ?>">
-            <div class="comment-avatar">
-            <?php
-                 $avatar_size = $depth == 1 ? '50' : '30';
-                 echo get_avatar($comment, $avatar_size, '', "$comment->comment_author's avatar");
-            ?>
-            </div>
-
+            <div class="comment-avatar"><?php echo get_avatar($comment, 42, '', "$comment->comment_author's avatar"); ?></div>
             <div class="comment-floor">
 
-            <?php // Show the floor number
-                if ($depth == 1) {
-                     printf('#%1$s 楼', ++$commentcount);
-                } else { /* Show reply linkn */
-                    comment_reply_link(array_merge($args, array('reply_text' => ' 回复', 'depth' => $depth, 'max_depth' => $args['max_depth'])));
+            <?php
+                comment_reply_link(array_merge($args, array('reply_text' => ' 回复', 'depth' => $depth, 'max_depth' => $args['max_depth'])));
+
+                if ($depth == 1) { // Show the floor number
+                     printf(' #%1$s 楼', ++$commentcount);
                 }
             ?>
 
             </div>
 
             <div class="comment-meta">
-                <span class="comment-author"><?php printf('<cite class="author">%s</cite>', get_comment_author_link()); ?></span>
-
-            <?php if ($comment->comment_parent) { // Show reply to somebody
-                $comment_parent_href = htmlspecialchars(get_comment_link($comment->comment_parent));
-                $comment_parent = get_comment($comment->comment_parent);   
-
-                $comment_title = mb_strimwidth(strip_tags($comment_parent->comment_content), 0, 100, '...');
-            ?>
-                <span class="comment-to">回复</span>   
-                <span class="comment-author">
-                    <cite class="author">
-                        <a href="<?php echo $comment_parent_href;?>" title="<?php echo $comment_title; ?>"><?php echo $comment_parent->comment_author;?></a>
-                    </cite>
-                </span>
-
-            <?php }?>  
-
+                <span class="comment-author"><?php comment_author_link(); ?></span>
                 <span class="comment-date"><?php echo dangopress_human_time_diff($comment->comment_date_gmt); ?></span>
             </div>
 
-            <div class="comment-text"><?php comment_text() ?></div>
-            
-            <?php if ($depth == 1) { ?>
-            <div class="comment-reply">
-                 <span class="icon-reply"></span>
-                 <?php comment_reply_link(array_merge($args, array('reply_text' => ' 回复', 'depth' => $depth, 'max_depth' => $args['max_depth']))); ?>
+            <div class="comment-text">
+
+            <?php
+                if ($comment->comment_parent) { // Show reply to somebody
+                    $parent = get_comment($comment->comment_parent);   
+                    $parent_href = htmlspecialchars(get_comment_link($comment->comment_parent));
+
+                    $parent_author = $parent->comment_author;
+                    $parent_title = mb_strimwidth(strip_tags($parent->comment_content), 0, 100, '...');
+
+                    $parent_link = "<a href=\"$parent_href\" title=\"$parent_title\">@$parent_author</a>";
+                    echo '<p class="comment-author">' . $parent_link . '</p>';
+                }
+
+                comment_text() ?>
             </div>
-            <?php } ?>
         </div>
+    </div>
 <?php
 }
 
@@ -517,7 +505,7 @@ function dangopress_email_nodify($comment_id)
 {
     global $wpdb;
 
-    $admin_email = get_bloginfo ('admin_email');
+    $admin_email = get_bloginfo('admin_email');
 
     $comment = get_comment($comment_id);
     $comment_author_email = trim($comment->comment_author_email);
