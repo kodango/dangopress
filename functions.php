@@ -434,9 +434,9 @@ function dangopress_add_end_mark($content)
         return $content;
     }
 }
-
 add_filter('the_content', 'dangopress_add_end_mark');
 
+/*
 /*
  * Display comment lists
  */
@@ -500,6 +500,15 @@ function dangopress_comments_callback($comment, $args, $depth) {
     </div>
 <?php
 }
+
+/*
+ * Open the link in the new tab
+ */
+function dangopress_new_tab($link)
+{
+    return str_replace('<a', '<a target="_blank"', $link);
+}
+add_filter('get_comment_author_link', 'dangopress_new_tab');
 
 /*
  * Send an email when recieved a reply

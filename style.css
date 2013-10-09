@@ -28,7 +28,7 @@ body, button, input, select, textarea {
     font: normal 14px/28px arial, sans-serif;
 }
 
-images { border: none; }
+img { border: none; }
 
 ol, ul {
     list-style: none;
@@ -274,7 +274,7 @@ a:hover {
     margin-top: 15px;
 }
 
-.post {
+.post, .page {
     padding-bottom: 40px;
 }
 
@@ -649,7 +649,7 @@ ul.tabnav li.selected, ul.tabnav li:hover {
     display: block;
     margin: 10px 0;
     max-width: 100%;
-    padding: 4px 8px;
+    padding: 6px 8px;
 }
 
 #comments input[type="submit"] {
