@@ -276,7 +276,7 @@ function dangopress_human_time_diff($gmt_time)
         return date_i18n('Y-m-d G:i:s', $from_timestamp, true);
     } else {
         $diff = human_time_diff($from_timestamp, $to_timestamp);
-        return preg_replace('/(\d)/', "$1 ", "{$diff}前");
+        return preg_replace('/(\d+)/', "$1 ", "{$diff}前");
     }
 }
 
