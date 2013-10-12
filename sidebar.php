@@ -30,7 +30,7 @@
 
 <div class="widget recent-comments">
     <h3>最新评论</h3>
-    <ul><?php dangopress_recent_comments($admin='kodango', $limit=5); ?></ul>
+    <ul><?php dangopress_recent_comments($admin='kodango', $limit=8); ?></ul>
 </div>
 
 <?php dynamic_sidebar('sidebar'); ?>

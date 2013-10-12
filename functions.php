@@ -16,6 +16,11 @@ if (is_admin()) {
  */
 define('CUSTOM_FUNCTIONS', get_template_directory() . '/custom_functions.php');
 
+/*
+ * Check whether the user is visiting in mobile device
+ */
+define('IS_MOBILE', wp_is_mobile());
+
 if (file_exists(CUSTOM_FUNCTIONS)) {
     require_once(CUSTOM_FUNCTIONS);
 }

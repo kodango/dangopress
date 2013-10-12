@@ -53,7 +53,8 @@ if (post_password_required() || (!have_comments() && !comments_open() && !pings_
         );
 
         if (!is_user_logged_in() && !empty($comment_author)) {
-            $welcome_login = '<p id="welcome-login"><span>欢迎回来, <strong>' . $comment_author . '</strong>.</span>';
+            $welcome_login = '<p id="welcome-login">' . get_avatar($comment_author_email, 24, '', "$comment_author's avatar");
+            $welcome_login .= '<span><strong>' . $comment_author . '</strong>, 欢迎回来.</span>';
             $welcome_login .=  ' <span id="toggle-author"><u>更改</u> <i class="icon-signout"></i></span></p>';
 
             $comments_args['comment_field'] = '</div>' . $comments_args['comment_field'];

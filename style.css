@@ -511,7 +511,7 @@ ul.tabnav li.selected, ul.tabnav li:hover {
 
 .recent-comments li {
     line-height: 1.5;
-    padding: 5px 0;
+    padding: 2px 0;
 }
 
 .recent-comments .avatar {
@@ -771,6 +771,15 @@ p.comment-author {
 
 .trackback a {
     display:block;
+}
+
+#welcome-login img {
+    vertical-align: middle;
+    margin-right: 15px;
+}
+
+#welcome-login, #cancel-comment-reply-link {
+    line-height: 24px;
 }
 
 #toggle-author {

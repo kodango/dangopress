@@ -30,7 +30,7 @@ get_header(); ?>
         </div>
         <div class="post-meta clearfix">
             <span class="post-time"><i class="icon-calendar"></i><?php the_time('Y/m/d'); ?></span>
-            <span class="post-cat"><i class="icon-folder-close"></i><?php the_category(' ') ?></span>
+            <span class="post-cat"><i class="icon-folder-close"></i><?php the_category(' '); ?></span>
             <?php if (function_exists('the_user_views')): ?>
                 <span class="post-view"><i class="icon-sun"></i><?php the_user_views(); ?></span>
             <?php endif; ?>
@@ -48,14 +48,14 @@ get_header(); ?>
             <h2 class="post-title">没有找到相关的文章, 也许你对以下文章感兴趣</h2>
         </div>
         <div class="post-content clearfix">
-            <ul> 
+            <ul>
                 <?php
                     $rand_posts = get_posts('numberposts=15&orderby=rand');
                     foreach( $rand_posts as $post ) :
                 ?>   
                 <li><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></li>
                 <?php endforeach; ?>
-            </ul>                        
+            </ul>
         </div>
     </div>
      <?php endif; ?>
