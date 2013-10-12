@@ -746,6 +746,10 @@ ul.tabnav li.selected, ul.tabnav li:hover {
     border-top: 1px solid #ddd;
 }
 
+#wp-temp-form-div+.commentlist .comment {
+    border-top: none;
+}
+
 .comment-container {
     padding: 20px 0 0;
 }
