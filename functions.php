@@ -248,6 +248,20 @@ add_filter('the_content', 'dangopress_esc_html', 2);
 add_filter('comment_text', 'dangopress_esc_html', 2);
 
 /*
+ * Alter the main loop
+ */
+function dangopress_alter_main_loop($query)
+{
+    /* Only for main loop in home page */
+    if (!$query->is_home() || !$query->is_main_query())
+        return;
+
+    // ignore sticky posts, don't show them in the start
+    $query->set('ignore_sticky_posts', 1);
+}
+add_action('pre_get_posts', 'dangopress_alter_main_loop');
+
+/*
  * Retrieve paginated link for archive post pages
  */
 function dangopress_paginate_links()
@@ -257,16 +271,19 @@ function dangopress_paginate_links()
     $total = $wp_query->max_num_pages;
     $big = 999999999; // need an unlikely integer
 
-    if ($total > 1)  {
-        echo paginate_links(array(
-            'base' => str_replace($big, '%_%', esc_url(get_pagenum_link($big))),
-            'format' => '%#%',
-            'current' => max(1, get_query_var('paged')),
-            'total' => $total,
-            'prev_text' => '<i class="icon-circle-arrow-left"></i>',
-            'next_text' => '<i class="icon-circle-arrow-right"></i>',
-        ));
-    }
+    if ($total < 2)
+        return;
+
+    $output = paginate_links(array(
+        'base' => str_replace($big, '%#%', esc_url(get_pagenum_link($big))),
+        'format' => '%#%',
+        'current' => max(1, get_query_var('paged')),
+        'total' => $total,
+        'prev_text' => '<i class="icon-circle-arrow-left"></i>',
+        'next_text' => '<i class="icon-circle-arrow-right"></i>',
+    ));
+
+    echo '<div id="post-pagenavi">' . $output . '</div>';
 }
 
 /*

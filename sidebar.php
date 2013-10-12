@@ -13,10 +13,10 @@
 <div class="widget widget-tabber">
     <div class="tabber-title">
         <ul class="tabnav clearfix">
-            <li class="selected""><h3>置顶</h3></li>
-            <li class=""><h3>最新</h3></li>
-            <li class=""><h3>热评</h3></li>
-            <li class=""><h3>随机</h3></li>
+            <li class="four selected""><h3>置顶</h3></li>
+            <li class="four"><h3>最新</h3></li>
+            <li class="four"><h3>热评</h3></li>
+            <li class="four"><h3>随机</h3></li>
        </ul>
     </div>
 

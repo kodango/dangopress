@@ -494,6 +494,9 @@ ul.tabnav li {
     text-align: center;
     cursor: pointer;
     background: #fafafa;
+}
+
+ul.tabnav li.four {
     width: 20%;
     padding: 0 1.5px; 
     margin: 0 5px;

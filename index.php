@@ -17,12 +17,6 @@ get_header(); ?>
 <?php if (is_category()) dangopress_category_description(); ?>
 
 <div id="articlelist">
-    <?php 
-        if (is_home()) {
-            // ignore sticky posts, don't show them in the start
-            query_posts('ignore_sticky_posts=1');
-        }
-    ?>
     <?php if ( have_posts( )) : while ( have_posts() ) : the_post(); ?>
     <div <?php post_class(); ?>>
         <div class="post-header">
@@ -60,6 +54,6 @@ get_header(); ?>
     </div>
      <?php endif; ?>
 </div>
-<div id="post-pagenavi"><?php dangopress_paginate_links(); ?></div>
+<?php dangopress_paginate_links(); ?>
 
 <?php get_footer(); ?>
