@@ -746,7 +746,7 @@ ul.tabnav li.selected, ul.tabnav li:hover {
     border-top: 1px solid #ddd;
 }
 
-#wp-temp-form-div+.commentlist .comment:first-child {
+#wp-temp-form-div+.commentlist>.comment:first-child {
     border-top: none;
 }
 
