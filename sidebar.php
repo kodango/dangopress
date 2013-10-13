@@ -13,7 +13,7 @@
 <div class="widget widget-tabber">
     <div class="tabber-title">
         <ul class="tabnav clearfix">
-            <li class="four selected""><h3>置顶</h3></li>
+            <li class="four selected"><h3>置顶</h3></li>
             <li class="four"><h3>最新</h3></li>
             <li class="four"><h3>热评</h3></li>
             <li class="four"><h3>随机</h3></li>
@@ -39,7 +39,7 @@
 
 <div class="widget clearfix friend-links">
     <h3>友情链接</h3>
-    <ul><?php wp_list_bookmarks('title_li=&categorize=0'); ?><ul>
+    <ul><?php wp_list_bookmarks('title_li=&categorize=0'); ?></ul>
 </div>
 
 <?php endif; ?>

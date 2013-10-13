@@ -488,8 +488,6 @@ function dangopress_comments_callback($comment, $args, $depth) {
             <div class="comment-floor">
 
             <?php
-                comment_reply_link(array_merge($args, array('reply_text' => '回复', 'depth' => $depth, 'max_depth' => $args['max_depth'])));
-
                 if ($depth == 1) { // Show the floor number
                      printf(' #%1$s 楼', ++$commentcount);
                 }
@@ -500,6 +498,15 @@ function dangopress_comments_callback($comment, $args, $depth) {
             <div class="comment-meta">
                 <span class="comment-author"><?php comment_author_link(); ?></span>
                 <span class="comment-date"><?php echo dangopress_human_time_diff($comment->comment_date_gmt); ?></span>
+                <span> | 
+                <?php
+                    comment_reply_link(array_merge($args, array(
+                        'reply_text' => '回复',
+                        'depth' => $depth,
+                        'max_depth' => $args['max_depth']
+                    )));
+                ?>
+                </span>
             </div>
 
             <div class="comment-text">

@@ -89,12 +89,13 @@ small {
 
 a {
     outline: 0;
-    color: #5895be;
+    color: #2C63A9;
     text-decoration: none;
 }
 
 a:hover {
     text-decoration: none;
+    color: #2C63A9;
 }
 
 .clearfix:after {
@@ -291,16 +292,12 @@ a:hover {
 .post-title a:hover,
 .post-meta a:hover,
 .comments-link a:hover {
-    color: #5895be;
+    color: #2C63A9;
 }
 
 .post-content p, .comment-body p {
     padding-bottom: 15px;
     color: #444;
-}
-
-.post-content p:last-child, .comment-body p:last-child {
-    padding-bottom: 0;
 }
 
 .post-content table {
@@ -380,14 +377,6 @@ a:hover {
     list-style: circle outside;
 }
 
-.related-posts li a {
-    border-bottom: 1px dashed #5895be;
-}
-
-.related-posts li a:hover {
-    border-bottom: 1px solid #5895be;
-}
-
 .post-footer {
     border-bottom: 1px solid #ededed;
     border-top: 1px solid #ededed;
@@ -396,10 +385,6 @@ a:hover {
 
 #post-pagination a {
     margin-left: 10px;
-}
-
-#post-pagination a:hover {
-    color: #888;
 }
 
 #post-pagenavi {
@@ -509,6 +494,7 @@ ul.tabnav li.selected, ul.tabnav li:hover {
 
 .recent-comments .rc_name {
     font-weight: bold;
+    color: #444;
 }
 
 .recent-comments .rc_com {
@@ -669,6 +655,10 @@ ul.tabnav li.selected, ul.tabnav li:hover {
     line-height: 1.6;
 }
 
+.comment-body p:last-child {
+    padding: 0;
+}
+
 .comment-avatar {
     position: absolute;
     top: 2px;
@@ -703,11 +693,6 @@ ul.tabnav li.selected, ul.tabnav li:hover {
 
 .comment-reply-link {
     color: #888;
-    margin-left: 5px;
-}
-
-.comment-reply-link:hover {
-    color: #5895be;
 }
 
 .comment {
@@ -724,6 +709,12 @@ ul.tabnav li.selected, ul.tabnav li:hover {
 
 .comment.depth-1>.children {
     position: relative;
+}
+
+span.comment-author,
+span.comment-author a {
+    color: #444;
+    font-weight: bold;
 }
 
 p.comment-author {
