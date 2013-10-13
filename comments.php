@@ -32,12 +32,16 @@ if (post_password_required() || (!have_comments() && !comments_open() && !pings_
     <div id="reviews">
 
     <?php
+        global $post;
+        $nonce = wp_create_nonce($post->ID);
+
         // custom fields
         $fields = array(
             'author' => '<input id="author" name="author" type="text" placeholder="昵称*" value="' . esc_attr($comment_author) . '" size="30" aria-required="true" /><label for="author">昵称*</label>',
             'email' => '<input id="email" name="email" type="text" placeholder="邮箱*" value="' . esc_attr($comment_author_email) . '" size="30" aria-required="true" /><label for="author">邮箱*</label>',
             'url' => '<input id="url" name="url" type="text" placeholder="网站" value="' . esc_attr($comment_author_url) . '" size="30" /><label for="author">网站*</label>',
             'email_notify' => '<input type="checkbox" name="comment_mail_notify" id="comment_mail_notify" value="" checked="checked" /><label for="comment_mail_notify">有人回复时邮件通知我</label>',
+            'comment_nonce' => '<input type="hidden" name="comment_nonce" value="' . $nonce . '" />',
         );
 
         // custom comment args

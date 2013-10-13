@@ -531,6 +531,118 @@ function dangopress_comments_callback($comment, $args, $depth) {
 }
 
 /*
+ * Check whether a gravatar exists for a given user email
+ *
+ * Taken from gist: https://gist.github.com/justinph/5197810
+ */
+function dangopress_validate_gravatar($email)
+{
+    if (empty($email))
+        return false;
+
+    $hashkey = md5(strtolower(trim($email)));
+    $uri = 'http://www.gravatar.com/avatar/' . $hashkey . '?d=404';
+ 
+    $data = wp_cache_get($hashkey);
+
+    if ($data === false) {
+        $response = wp_remote_head($uri);
+
+        if (is_wp_error($response)) {
+            $data = 'not200';
+        } else {
+            $data = $response['response']['code'];
+        }
+
+        wp_cache_set($hashkey, $data, $group = '', $expire = 60*60*24);
+    }       
+
+    if ($data == '200') {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+/*
+ * Get rid of spam comments
+ */
+function dangopress_getridof_spam($commentdata)
+{
+    extract($commentdata, EXTR_SKIP);
+    $nonce = wp_create_nonce($comment_post_ID);
+
+    /* Check whether the user is in the blacklist */
+    if (wp_blacklist_check($comment_author, $comment_author_email, $comment_author_url,
+            $comment_content, $comment_author_IP, $comment_agent)) {
+        $msg = '您发表的评论中包含被禁止的关键字, 请检查后再评论';
+        $msg .= ', 点击<a href="' . $_SERVER['HTTP_REFERER'] . '">此处</a>返回';
+
+        wp_die($msg);
+    }
+
+    /* Check whether the comment is pingback or trackback */
+    $is_ping = in_array($comment_type, array('pingback', 'trackback'));
+
+    if (!is_ping) {
+        /* Check the rand nonce strings */
+        if (!isset($_POST['comment_nonce']) || $_POST['comment_nonce'] != $nonce) {
+            wp_die('请勿以非正常的方式进行评论');
+        }
+    }
+
+    /* Check whether the comment text contains the japanese chars */
+    if (preg_match('/[ぁ-ん]+|[ァ-ヴ]+/u', $comment_content)) {
+        wp_die('请勿恶意评论');
+    }
+
+    return $commentdata;
+}
+add_action('preprocess_comment', 'dangopress_getridof_spam');
+
+/*
+ * Tag spam comments
+ */
+function dangopress_tag_spam($approved, $commentdata)
+{
+    extract($commentdata, EXTR_SKIP);
+
+    /* Check whether the comment is pingback or trackback */
+    $is_ping = in_array($comment_type, array('pingback', 'trackback'));
+
+    if ($is_ping) {
+        return $approved;
+    }
+
+    /* Comment author url string is too long  */
+    if (strlen($comment_author_url) > 30) {
+        $approved = 'spam';
+    }
+
+    /* Check whether there is any chinese words exists */
+    $has_chinese = preg_match('/[\x{4e00}-\x{9fa5}]+/u', $comment_content);
+
+    /* Check whether the gravatar exists */
+    $has_gravatar = dangopress_validate_gravatar($comment_author_email);
+
+    /* Check the comment chars length */
+    $comment_chars = strlen(trim($comment_content));
+
+    if (!$has_gravatar) { // If no gravatar found, more strict
+        if (!$has_chinese || $comment_chars > 140) {
+            $approved = 'spam';
+        }
+    } else {
+        if (!$has_chinese && $comment_chars > 80) {
+            $approved = 'spam';
+        }
+    }
+
+    return $approved;
+}
+add_filter('pre_comment_approved', 'dangopress_tag_spam', 99, 2);
+
+/*
  * Open the link in the new tab
  */
 function dangopress_new_tab($link)
