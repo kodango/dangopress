@@ -22,9 +22,9 @@
         <div class="container clearfix">
             <div class="caption logo">
                 <?php if (is_home()): ?>
-                <h1><a class="sprite" href="<?php bloginfo('url'); ?>" title="<?php bloginfo('name'); ?>" rel="home"><?php bloginfo('name'); ?></a></h1>
+                <h1><a href="<?php bloginfo('url'); ?>" title="<?php bloginfo('name'); ?>" rel="home"><?php bloginfo('name'); ?></a></h1>
                 <?php else: ?>
-                <a class="sprite" href="<?php bloginfo('url'); ?>" title="<?php bloginfo('name'); ?>" rel="home"><?php bloginfo('name'); ?></a>
+                <a href="<?php bloginfo('url'); ?>" title="<?php bloginfo('name'); ?>" rel="home"><?php bloginfo('name'); ?></a>
                 <?php endif; ?>
             </div>
 

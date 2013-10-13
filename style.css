@@ -25,7 +25,7 @@ body {
 }
 
 body, button, input, select, textarea {
-    font: normal 14px/28px arial, sans-serif;
+    font: normal 14px/26px arial, sans-serif;
 }
 
 img { border: none; }
@@ -47,8 +47,6 @@ caption, th, td {
 }
 
 textarea, input {
-    margin: 0;
-    padding: 3px;
     border: 1px solid #ededed;
     font-size: 12px;
     line-height: normal;
@@ -58,7 +56,6 @@ blockquote {
     display: block;
     padding: 5px 20px;
     vertical-align: baseline;
-    font-style: normal;
     font-size: 12px;
 }
 
@@ -97,7 +94,7 @@ a {
 }
 
 a:hover {
-    text-decoration: underline;
+    text-decoration: none;
 }
 
 .clearfix:after {
@@ -120,13 +117,6 @@ a:hover {
 .container {
     width: 980px;
     margin: 0 auto;
-}
-
-.sprite {
-    display:inline-block;
-    overflow:hidden;
-    background-repeat:no-repeat;
-    background-image:url(./images/sprites.png);
 }
 
 #header {
@@ -154,19 +144,8 @@ a:hover {
 
 .logo {
     height: 42px;
-    margin-right: 15px;
-}
-
-.logo a {
-    display:block;
-    text-indent: -9999px;
-    width: 140px;
-    height: 40px;
-    background-position: -2px -2px;
-}
-
-.logo a:hover {
-    text-decoration: none;
+    margin-right: 35px;
+    padding: 3px 0;
 }
 
 #mobile-menu {
@@ -192,7 +171,6 @@ a:hover {
     border-top: 2px solid #5895be;
     padding-top: 3px;
     font-weight: bold;
-    text-decoration: none;
 }
 
 .search-box {
@@ -314,7 +292,6 @@ a:hover {
 .post-meta a:hover,
 .comments-link a:hover {
     color: #5895be;
-    text-decoration: underline;
 }
 
 .post-content p, .comment-body p {
@@ -408,7 +385,6 @@ a:hover {
 }
 
 .related-posts li a:hover {
-    text-decoration: none;
     border-bottom: 1px solid #5895be;
 }
 
@@ -424,7 +400,6 @@ a:hover {
 
 #post-pagination a:hover {
     color: #888;
-    text-decoration: none;
 }
 
 #post-pagenavi {
@@ -445,7 +420,6 @@ a:hover {
 .comment-pagenavi a:hover {
     background: #f8f8f8;
     border-bottom-color: #5895be;
-    text-decoration: none;
 }
 
 #sidebar {
@@ -567,11 +541,6 @@ ul.tabnav li.selected, ul.tabnav li:hover {
     margin-left: 5px;
 }
 
-.backtop:hover { 
-    text-decoration: none;
-    color: #444;
-}
-
 #comments {
     padding-top: 20px;
     clear: both;
@@ -584,12 +553,10 @@ ul.tabnav li.selected, ul.tabnav li:hover {
 }
 
 #comments-tabber a {
-    height: 30px;
-    padding: 0 20px;
+    padding: 3px 20px;
     display: block;
     float: left;
     color: #444;
-    text-decoration: none;
     border: 1px solid #ddd;
     margin: 0 0 -1px -1px;
 }
@@ -679,7 +646,6 @@ ul.tabnav li.selected, ul.tabnav li:hover {
 }
 
 #cancel-comment-reply-link:hover {
-    text-decoration: none;
     color: red;
 }
 
@@ -742,7 +708,6 @@ ul.tabnav li.selected, ul.tabnav li:hover {
 
 .comment-reply-link:hover {
     color: #5895be;
-    text-decoration: none;
 }
 
 .comment {
@@ -832,10 +797,6 @@ p.comment-author {
 
 .post-content .comments-num a {
     color: #888;
-}
-
-.post-content .comments-num a:hover {
-    text-decoration: none;
 }
 
 pre .pln { color: #333; }
