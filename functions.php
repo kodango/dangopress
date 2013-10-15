@@ -523,7 +523,8 @@ function dangopress_comments_callback($comment, $args, $depth) {
                     echo '<p class="comment-author">' . $parent_link . '</p>';
                 }
 
-                comment_text() ?>
+                comment_text();
+            ?>
             </div>
         </div>
     </div>
@@ -584,7 +585,7 @@ function dangopress_getridof_spam($commentdata)
     /* Check whether the comment is pingback or trackback */
     $is_ping = in_array($comment_type, array('pingback', 'trackback'));
 
-    if (!is_ping) {
+    if (!is_ping) { // For normal comments
         /* Check the rand nonce strings */
         if (!isset($_POST['comment_nonce']) || $_POST['comment_nonce'] != $nonce) {
             wp_die('请勿以非正常的方式进行评论');
@@ -610,32 +611,45 @@ function dangopress_tag_spam($approved, $commentdata)
     /* Check whether the comment is pingback or trackback */
     $is_ping = in_array($comment_type, array('pingback', 'trackback'));
 
-    if ($is_ping) {
-        return $approved;
+    /* Parse the author url domain part */
+    $author_domain = parse_url($comment_author_url, PHP_URL_PATH);
+
+    /* For pingback/trackback, check the comment author domain length */
+    if ($is_ping && strlen($domain) > 25) {
+        return 'spam';
     }
 
-    /* Comment author url string is too long  */
-    if (strlen($comment_author_url) > 30) {
-        $approved = 'spam';
+    /* For normal comment, check the comment author url length */
+    if (!$is_ping && strlen($comment_author_url) > 25) {
+        return 'spam';
     }
 
     /* Check whether there is any chinese words exists */
     $has_chinese = preg_match('/[\x{4e00}-\x{9fa5}]+/u', $comment_content);
 
-    /* Check whether the gravatar exists */
-    $has_gravatar = dangopress_validate_gravatar($comment_author_email);
-
     /* Check the comment chars length */
     $comment_chars = strlen(trim($comment_content));
 
-    if (!$has_gravatar) { // If no gravatar found, more strict
-        if (!$has_chinese || $comment_chars > 140) {
-            $approved = 'spam';
+    if (!$is_ping) { // Normal comment
+        /* Check whether the gravatar exists */
+        $has_gravatar = dangopress_validate_gravatar($comment_author_email);
+
+        /*
+         * For normal comment without a gravatar:
+         *
+         * Tag it as spam if no chinese words found, or comment characters are 
+         * too many. It's more strict than bellow.
+         */
+        if (!$has_gravatar && (!$has_chinese || $comment_chars > 80)) {
+            return 'spam';
         }
-    } else {
-        if (!$has_chinese && $comment_chars > 80) {
-            $approved = 'spam';
-        }
+    }
+
+    /*
+     * Say too many words without any chinese, tag it spam!
+     */
+    if (!$has_chinese && $comment_chars > 80) {
+        return 'spam';
     }
 
     return $approved;
