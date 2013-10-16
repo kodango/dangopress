@@ -608,16 +608,21 @@ function dangopress_tag_spam($approved, $commentdata)
 {
     extract($commentdata, EXTR_SKIP);
 
+    /* Check whether the comment is pingback or trackback */
+    $is_ping = in_array($comment_type, array('pingback', 'trackback'));
+
     /* Parse the author url domain part */
     $author_domain = parse_url($comment_author_url, PHP_URL_PATH);
 
-    /* check the comment author domain length */
-    if (strlen($domain) > 25) {
+    /* For pingback/trackback, check the comment author domain length */
+    if ($is_ping && strlen($domain) > 25) {
         return 'spam';
     }
 
-    /* Check whether the comment is pingback or trackback */
-    $is_ping = in_array($comment_type, array('pingback', 'trackback'));
+    /* For normal comment, check the comment author url length */
+    if (!$is_ping && strlen($comment_author_url) > 25) {
+        return 'spam';
+    }
 
     /* Check whether there is any chinese words exists */
     $has_chinese = preg_match('/[\x{4e00}-\x{9fa5}]+/u', $comment_content);
