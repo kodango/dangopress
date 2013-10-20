@@ -49,8 +49,8 @@ SidebarFollow.prototype = {
         // 计算父节点的上边到顶部距离
         var parent = element.parent();
         var parentToTop = parent.offset().top;
-        var parentBorderTop = parseInt(parent.css('border-top-width'), 10);
-        var parentPaddingTop = parseInt(parent.css('padding-top'), 10);
+        var parentBorderTop = parseFloat(parent.css('border-top-width'), 10);
+        var parentPaddingTop = parseFloat(parent.css('padding-top'), 10);
         _self.cache.parentToTop = parentToTop + parentBorderTop + parentPaddingTop;
 
         // 滚动屏幕
@@ -79,7 +79,7 @@ SidebarFollow.prototype = {
         var toTop = _self.config.distanceToTop;
 
         // 如果 body 有 top 属性, 消除这些位移
-        var bodyToTop = parseInt(jQuery('body').css('top'), 10);
+        var bodyToTop = parseFloat(jQuery('body').css('top'), 10);
         if(!isNaN(bodyToTop)) {
             toTop += bodyToTop;
         }

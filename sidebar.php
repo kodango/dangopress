@@ -10,6 +10,8 @@
 
 <div id="sidebar">
 
+<?php dynamic_sidebar('sidebar'); ?>
+
 <div class="widget widget-tabber">
     <div class="tabber-title">
         <ul class="tabnav clearfix">
@@ -21,10 +23,10 @@
     </div>
 
     <div class="tabber-content">
-        <ul class="list"><?php dangopress_get_sticky_posts(6, 28); ?></ul>
-        <ul class="list hide"><?php dangopress_get_recent_posts(6, 28); ?></ul>
-        <ul class="list hide"><?php dangopress_get_most_commented(6, 180, 28); ?></ul>
-        <ul class="list hide"><?php dangopress_get_rand_posts(6, 28); ?></ul>
+        <ul class="list"><?php dangopress_get_sticky_posts(6, 34); ?></ul>
+        <ul class="list hide"><?php dangopress_get_recent_posts(6, 34); ?></ul>
+        <ul class="list hide"><?php dangopress_get_most_commented(6, 180, 34); ?></ul>
+        <ul class="list hide"><?php dangopress_get_rand_posts(6, 34); ?></ul>
      </div>
 </div>
 
@@ -32,8 +34,6 @@
     <h3>最新评论</h3>
     <ul><?php dangopress_recent_comments($admin='kodango', $limit=8); ?></ul>
 </div>
-
-<?php dynamic_sidebar('sidebar'); ?>
 
 <?php if (!is_single()): ?>
 
