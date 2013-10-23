@@ -70,6 +70,13 @@ pre {
     word-break: break-word;
 }
 
+pre code {
+    border: none;
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
+}
+
 code, kbd {
     background-color: #fafafa;
     border: 1px solid #ddd;
