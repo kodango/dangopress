@@ -12,7 +12,7 @@ if (is_admin()) {
 /*
  * Include custom function php file if exists.
  *
- * You should put your personal functions in the custom_functinos.php.
+ * You should put your personal functions in the custom_functions.php.
  */
 define('CUSTOM_FUNCTIONS', get_template_directory() . '/custom_functions.php');
 

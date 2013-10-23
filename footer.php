@@ -16,7 +16,7 @@
         <div class="container clearfix">
             <p>
                 <span>Copyright &copy; 2012-2013 <?php bloginfo('name'); ?>.</span>
-                <span class="designed-by">Theme designed by <a href="<?php bloginfo('url'); ?>">kodango</a>.</span>
+                <span class="designed-by">Theme designed by <a href="http://kodango.com">kodango</a>.</span>
             </p>
             <p>
                 <?php
