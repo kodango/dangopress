@@ -180,7 +180,7 @@ function dangopress_setup_load()
                        array(), '20130504', true);
 
     // Theme script
-    wp_enqueue_script('kodango', $url_prefix . '/scripts/kodango.js',
+    wp_enqueue_script('kodango', $url_prefix . '/scripts/kodango.min.js',
                       array('jquery'), '1.0', true);
 }
 add_action('wp_enqueue_scripts', 'dangopress_setup_load');
