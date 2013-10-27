@@ -360,28 +360,24 @@ function dangopress_comments_callback($comment, $args, $depth) {
     <div class="comment-container">
         <div id="comment-<?php echo $comment_id; ?>" class="comment-body <?php if ($comment->comment_approved == '0') echo 'pending-comment'; ?>">
             <div class="comment-avatar"><?php echo get_avatar($comment, 42, '', "$comment->comment_author's avatar"); ?></div>
-            <div class="comment-floor">
-
-            <?php
-                if ($depth == 1) { // Show the floor number
-                     printf(' #%1$s 楼', ++$commentcount);
-                }
-            ?>
-
-            </div>
-
             <div class="comment-meta">
                 <span class="comment-author"><?php comment_author_link(); ?></span>
-                <span class="comment-date"><?php echo dangopress_human_time_diff($comment->comment_date_gmt); ?></span>
-                <span> | 
+                <span class="comment-date">发表于 <?php echo dangopress_human_time_diff($comment->comment_date_gmt); ?></span>
+                <span><i class="icon-retweet"></i>
                 <?php
                     comment_reply_link(array_merge($args, array(
                         'reply_text' => '回复',
                         'depth' => $depth,
                         'max_depth' => $args['max_depth']
                     )));
+
+                    if ($depth == 1) { // Show the floor number
+                         printf(' %1$s 楼', ++$commentcount);
+                    }
                 ?>
+
                 </span>
+
             </div>
 
             <div class="comment-text">

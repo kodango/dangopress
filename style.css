@@ -83,9 +83,10 @@ input[type="submit"]:hover {
 
 blockquote {
     display: block;
-    padding: 5px 20px;
+    padding: 0 20px;
     vertical-align: baseline;
     font-size: 12px;
+    margin: 15px 0;
 }
 
 pre {
@@ -94,9 +95,9 @@ pre {
     font-size: 12px;
     line-height: 1.6;
     border: 1px solid #e1e1e8;
-    padding: 10px;
-    margin: 0 0 15px;
+    padding: 8px;
     word-break: break-word;
+    margin: 15px 0;
 }
 
 pre code {
@@ -110,7 +111,7 @@ code, kbd {
     background-color: #fafafa;
     border: 1px solid #ddd;
     margin: 0 5px;
-    padding: 2px;
+    padding: 3px;
     font-family: "Lucida Sans Typewriter", Monaco, "Courier New", monospace;
     font-size: 12px;
 }
@@ -165,7 +166,7 @@ a:hover {
 
 #header .container {
     line-height: 32px;
-    padding: 20px 15px;
+    padding: 10px 15px;
 }
 
 #header .caption a {
@@ -245,8 +246,8 @@ a:hover {
 }
 
 #content .container {
-    padding-top: 40px;
-    padding-bottom: 40px;
+    padding-top: 20px;
+    padding-bottom: 20px;
 }
 
 #primary {
@@ -257,7 +258,6 @@ a:hover {
 
 #site-breadcrumbs {
     margin-bottom: 15px;
-    padding: 1.5px 0;
 }
 
 #site-breadcrumbs span span,
@@ -275,7 +275,7 @@ a:hover {
 
 #category-description {
     padding: 15px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     line-height: 1.6;
     background-color: #f7f7f9;
     border: 1px solid #e1e1e8;
@@ -296,13 +296,13 @@ a:hover {
 }
 
 .post-title {
-    padding: 10px 0;
+    margin: 15px 0 10px;
     font-size: 18px;
     font-weight: 700;
 }
 
 .home .post-title {
-    padding: 0 0 10px;
+    margin: 0 0 10px;
 }
 
 .post-title a {
@@ -311,7 +311,7 @@ a:hover {
 
 .post-meta {
     font-size: 12px;
-    padding-bottom: 15px;
+    margin-bottom: 15px;
     color: #888;
 }
 
@@ -334,12 +334,12 @@ a:hover {
 }
 
 .post-content p, .comment-body p {
-    padding-bottom: 15px;
+    margin: 15px 0;
     color: #444;
 }
 
 .post-content table {
-    margin-bottom: 15px;
+    margin: 15px 0;
 }
 
 .post-content th {
@@ -359,7 +359,7 @@ a:hover {
 }
 
 .post-image {
-    padding-bottom: 15px;
+    margin: 15px 0;
 }
 
 .post-content img {
@@ -376,27 +376,25 @@ a:hover {
 
 .post-content h4 {
     font-size: 14px;
-    padding-bottom: 5px;
+    margin: 15px 0;
 }
 
 .post-content ul {
     list-style: square outside;
-    padding: 0 0 15px 25px;
+    padding-left: 25px;
+    margin: 15px 0;
 }
 
 .post-content ol {
     list-style: decimal outside;
-    padding: 0 0 15px 25px;
+    padding-left: 25px;
+    margin: 15px 0;
 }
 
 .post-content ul li,
 .post-content ol li {
     margin-bottom: 5px;
     line-height: 1.8;
-}
-
-.related-posts { 
-    padding: 15px 0;
 }
 
 .related-posts .caption {
@@ -411,7 +409,8 @@ a:hover {
 }
 
 .related-posts ul {
-    padding: 15px 0 0 25px;
+    padding-left: 25px;
+    margin: 15px 0;
     list-style: circle outside;
 }
 
@@ -422,11 +421,11 @@ a:hover {
 }
 
 #post-pagination a {
-    margin-left: 10px;
+    margin-left: 5px;
 }
 
 #post-pagenavi {
-    padding: 15px 0 20px;
+    padding: 15px 0 0;
     border-top: 1px solid #ededed;
 }
 
@@ -465,10 +464,11 @@ a:hover {
 .widget h3 {
     color: #444;
     font-size: 14px;
+    margin-bottom: 15px;
 }
 
 .widget ul {
-    padding: 10px 0 10px 15px;
+    padding-left: 15px;
     list-style: disc outside;
 }
 
@@ -486,13 +486,18 @@ a:hover {
 }
 
 .widget ul.children {
-    padding-left: 25px;
+    padding-left: 15px;
     list-style: circle outside;
 }
 
+.widget ul.tabnav h3 {
+    margin: 0;
+}
+
 .widget ul.tabnav {
-    border-bottom: 1px solid #ddd;
     padding: 0;
+    margin-bottom: 15px;
+    border-bottom: 1px solid #ddd;
     list-style: none;
 }
 
@@ -522,19 +527,20 @@ ul.tabnav li.selected, ul.tabnav li:hover {
 }
 
 .widget .recent-comments {
-    padding: 10px 0;
+    padding: 0;
     list-style: none;
 }
 
 .recent-comments li {
     line-height: 1.5;
-    padding: 2px 0;
+    margin: 2px 0;
 }
 
 .recent-comments .avatar {
     float: left;
     width: 32px;
     height: 32px;
+    padding-top: 3px;
 }
 
 .recent-comments .rc_info {
@@ -561,6 +567,7 @@ ul.tabnav li.selected, ul.tabnav li:hover {
 }
 
 #footer {
+    margin-top: 30px;
     border-top: 1px solid #ededed;
     color: #888;
 }
@@ -583,18 +590,18 @@ ul.tabnav li.selected, ul.tabnav li:hover {
 }
 
 #comments {
-    padding-top: 20px;
+    margin-top: 20px;
     clear: both;
 }
 
 #comments-tabber {
-    padding: 0 0 0 15px;
+    padding-left: 15px;
     border-bottom: 1px solid #ddd;
     margin-bottom: 15px;
 }
 
 #comments-tabber a {
-    padding: 3px 20px;
+    padding: 3px 15px;
     display: block;
     float: left;
     color: #444;
@@ -655,60 +662,11 @@ ul.tabnav li.selected, ul.tabnav li:hover {
     width: 98%;
     padding: 5px;
     margin: 15px 0 0;
-    border: 1px solid #ededed;
 }
 
 .comment-pagenavi {
     padding-top: 15px;
     border-top: 1px solid #ddd;
-}
-
-.comment-body {
-    padding-left: 60px;
-    padding-right: 30px;
-    min-height: 55px;
-    position: relative;
-    line-height: 1.6;
-}
-
-.comment-body p:last-child {
-    padding: 0;
-}
-
-.comment-avatar {
-    position: absolute;
-    top: 2px;
-    left: 0;
-}
-
-.comment-floor {
-    position: absolute;
-    top: 0;
-    right: 0;
-    display: block;
-    font-size: 13px;
-    color: #888;
-}
-
-.comment-meta {
-    padding-bottom: 15px;
-}
-
-.comment-meta span {
-    color: #888;
-    font-size: 13px;
-}
-
-.comment-date {
-    margin-left: 15px;
-}
-
-.comment-text {
-    padding: 0 0 20px;
-}
-
-.comment-reply-link {
-    color: #888;
 }
 
 .comment {
@@ -720,11 +678,48 @@ ul.tabnav li.selected, ul.tabnav li:hover {
 }
 
 .comment-container {
-    padding: 20px 0 0;
+    padding-right: 15px;
 }
 
-.comment.depth-1>.children {
+li.depth-2 {
+    margin-left: 57px;
+}
+
+li.depth-2 .comment-container {
+    /*padding-left: 15px;*/
+}
+
+.comment-body {
+    padding-left: 57px;
     position: relative;
+    line-height: 1.6;
+}
+
+.comment-avatar {
+    position: absolute;
+    top: 2px;
+    left: 0;
+}
+
+.comment-meta {
+    margin-top: 15px;
+}
+
+.comment-meta span {
+    color: #888;
+    font-size: 13px;
+}
+
+.comment-meta i {
+    margin-left: 15px;
+}
+
+.comment-reply-link {
+    color: #888;
+}
+
+.comment-date {
+    margin-left: 15px;
 }
 
 span.comment-author,
