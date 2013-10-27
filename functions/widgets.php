@@ -163,10 +163,10 @@ class Dangopress_PostsTabber_Widget extends WP_Widget {
             $number = 6;
 
         // Get the maximum character number of post title
-        $chars = (!empty($instance['chars'])) ? $instance['chars'] : 32;
+        $chars = (!empty($instance['chars'])) ? $instance['chars'] : 30;
 
         if (!$chars)
-            $chars = 32;
+            $chars = 30;
 
         $output .= $before_widget;
 
@@ -222,7 +222,7 @@ class Dangopress_PostsTabber_Widget extends WP_Widget {
     function form($instance)
     {
         $number = isset($instance['number']) ? absint($instance['number']) : 6;
-        $chars = isset($instance['chars']) ? absint($instance['chars']) : 32;
+        $chars = isset($instance['chars']) ? absint($instance['chars']) : 30;
 ?>
         <p><label for="<?php echo $this->get_field_id('number'); ?>">显示文章数量: </label>
         <input class="widefat" id="<?php echo $this->get_field_id('number'); ?>" name="<?php echo $this->get_field_name('number'); ?>" type="text" value="<?php echo $number; ?>" /></p>

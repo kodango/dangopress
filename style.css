@@ -333,7 +333,7 @@ a:hover {
     color: #2C63A9;
 }
 
-.post-content p, .comment-body p {
+.post-content p {
     margin: 15px 0;
     color: #444;
 }
@@ -702,7 +702,7 @@ li.depth-2 .comment-container {
 }
 
 .comment-meta {
-    margin-top: 15px;
+    margin-top: 10px;
 }
 
 .comment-meta span {
@@ -731,6 +731,11 @@ span.comment-author a {
 p.comment-author {
     font-size: 13px;
     padding-bottom: 5px;
+}
+
+.comment-body p {
+    margin: 10px 0;
+    color: #444;
 }
 
 #trackbacks {
@@ -882,6 +887,7 @@ pre .pln { color: #333; }
 
 #header {
     border-bottom: none;
+    margin-bottom: 50px;
 }
 
 .header-menu {
