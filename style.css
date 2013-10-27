@@ -52,6 +52,35 @@ textarea, input {
     line-height: normal;
 }
 
+input:focus,
+textarea:focus { 
+    outline: none;
+    border-color: #ddd;
+}
+
+input {
+    background: #fff;
+    margin: 10px 0;
+    padding: 6px 8px;
+}
+
+input[type="submit"] {
+    color: #444;
+    cursor: pointer;
+    padding: 6px 10px;
+    margin: 10px 0 20px;
+    font-weight: bold;
+    border: 1px solid #ddd;
+    background: #efefef; 
+    background: -moz-linear-gradient(top,  #ffffff 0%, #efefef 100%); 
+    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ffffff), color-stop(100%, #efefef));
+    background: -webkit-linear-gradient(top,  #ffffff 0%, #efefef 100%);
+}
+
+input[type="submit"]:hover {
+    background: #fff;
+}
+
 blockquote {
     display: block;
     padding: 5px 20px;
@@ -193,12 +222,13 @@ a:hover {
     padding-right: 4px;
 }
 
-.search-input {
+.search-box .search-input {
     width: 212px;
     height: 30px;
     padding: 0 5px;
     border: none;
     outline: 0;
+    margin: 0;
 }
 
 .search-submit {
@@ -438,21 +468,32 @@ a:hover {
 }
 
 .widget ul {
-    padding: 10px 0;
-}
-
-.widget ul.list {
     padding: 10px 0 10px 15px;
-    list-style: square outside;
+    list-style: disc outside;
 }
 
 .widget small {
     display: block;
 }
 
+.widget_search input[type="text"] {
+    width: 200px;
+    margin-right: 10px;
+}
+
+.widget_search label {
+    display: none;
+}
+
+.widget ul.children {
+    padding-left: 25px;
+    list-style: circle outside;
+}
+
 .widget ul.tabnav {
     border-bottom: 1px solid #ddd;
     padding: 0;
+    list-style: none;
 }
 
 ul.tabnav li { 
@@ -478,6 +519,11 @@ ul.tabnav li.selected {
 
 ul.tabnav li.selected, ul.tabnav li:hover {
     background: #fff;
+}
+
+.widget .recent-comments {
+    padding: 10px 0;
+    list-style: none;
 }
 
 .recent-comments li {
@@ -592,46 +638,7 @@ ul.tabnav li.selected, ul.tabnav li:hover {
 #comments input[type="url"],
 #comments input[type="tel"] {
     width: 40%;
-}
-
-#comments input[type="text"]:focus,
-#comments input[type="password"]:focus,
-#comments input[type="email"]:focus,
-#comments input[type="url"]:focus,
-#comments input[type="tel"]:focus,
-#comments textarea:focus { 
-    outline: none;
-    border-color: #ddd;
-}
-
-#comments input[type="text"],
-#comments input[type="password"],
-#comments input[type="email"],
-#comments input[type="url"],
-#comments input[type="tel"] {
-    background: #fff;
-    border: 1px solid #ededed;
     display: block;
-    margin: 10px 0;
-    max-width: 100%;
-    padding: 6px 8px;
-}
-
-#comments input[type="submit"] {
-    color: #444;
-    cursor: pointer;
-    padding: 5px 10px;
-    margin: 10px 0 20px;
-    font-weight: bold;
-    border: 1px solid #ddd;
-    background: #efefef; 
-    background: -moz-linear-gradient(top,  #ffffff 0%, #efefef 100%); 
-    background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ffffff), color-stop(100%, #efefef));
-    background: -webkit-linear-gradient(top,  #ffffff 0%, #efefef 100%);
-}
-
-#comments input[type="submit"]:hover {
-    background: #fff;
 }
 
 #cancel-comment-reply-link {
@@ -956,7 +963,7 @@ pre .pln { color: #333; }
     border: 1px solid #ddd;
 }
 
-.search-input {
+.search-box .search-input {
     width: 150px;
     border-right: 1px solid #ddd;
 }

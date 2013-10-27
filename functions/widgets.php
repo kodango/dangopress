@@ -156,17 +156,17 @@ class Dangopress_PostsTabber_Widget extends WP_Widget {
         extract($args, EXTR_SKIP);
         $output = "";
 
-        // Get the number of comments
-        $number = (!empty($instance['number'])) ? $instance['number'] : 8;
+        // Get the number of posts
+        $number = (!empty($instance['number'])) ? $instance['number'] : 6;
 
         if (!$number)
-            $number = 8;
+            $number = 6;
 
-        // Get the maximum character number of comment content
-        $chars = (!empty($instance['chars'])) ? $instance['chars'] : 25;
+        // Get the maximum character number of post title
+        $chars = (!empty($instance['chars'])) ? $instance['chars'] : 32;
 
         if (!$chars)
-            $chars = 25;
+            $chars = 32;
 
         $output .= $before_widget;
 
@@ -180,10 +180,10 @@ class Dangopress_PostsTabber_Widget extends WP_Widget {
 
         // Show posts list in each tab
         $output .= '<div class="tabber-content">';
-        $output .= '<ul class="list">' . dangopress_get_rand_posts($number, $chars) . '</ul>';
-        $output .= '<ul class="list hide">' . dangopress_get_sticky_posts($number, $chars) . '</ul>';
-        $output .= '<ul class="list hide">' . dangopress_get_most_commented($number, $chars) . '</ul>';
-        $output .= '<ul class="list hide">' . dangopress_get_recent_posts($number, $chars) . '</ul>';
+        $output .= '<ul class="">' . dangopress_get_rand_posts($number, $chars) . '</ul>';
+        $output .= '<ul class="hide">' . dangopress_get_sticky_posts($number, $chars) . '</ul>';
+        $output .= '<ul class="hide">' . dangopress_get_most_commented($number, $chars) . '</ul>';
+        $output .= '<ul class="hide">' . dangopress_get_recent_posts($number, $chars) . '</ul>';
         $output .= '</div>';
 
         $output .= $after_widget;
@@ -222,7 +222,7 @@ class Dangopress_PostsTabber_Widget extends WP_Widget {
     function form($instance)
     {
         $number = isset($instance['number']) ? absint($instance['number']) : 6;
-        $chars = isset($instance['chars']) ? absint($instance['chars']) : 34;
+        $chars = isset($instance['chars']) ? absint($instance['chars']) : 32;
 ?>
         <p><label for="<?php echo $this->get_field_id('number'); ?>">显示文章数量: </label>
         <input class="widefat" id="<?php echo $this->get_field_id('number'); ?>" name="<?php echo $this->get_field_name('number'); ?>" type="text" value="<?php echo $number; ?>" /></p>
@@ -620,7 +620,7 @@ class Dangopress_MostViewedPosts_Widget extends WP_Widget {
         if ($title)
             $output .= $before_title . $title . $after_title;
 
-        $output .= '<ul class="list">';
+        $output .= '<ul class="">';
         $output .= get_timespan_most_viewed('post', $number, $chars, false, false, $days);
         $output .= '</ul>';
         $output .= $after_widget;
