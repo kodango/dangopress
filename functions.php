@@ -245,8 +245,12 @@ add_filter('style_loader_src', 'dangopress_remove_version', 15, 1);
  */
 function dangopress_esc_html($content)
 {
-    $regex = '/(<pre\s+[^>]*?class\s*?=\s*?[",\'].*?prettyprint.*?[",\'].*?>)(.*?)(<\/pre>)/sim';
-    return preg_replace_callback($regex, dangopress_esc_callback, $content);
+    $patterns = array(
+        '/(<pre\s+[^>]*?class\s*?=\s*?[",\'].*?prettyprint.*?[",\'].*?>)(.*?)(<\/pre>)/sim',
+        '/(<pre>[\n\s]*<code>)(.*?)(<\/code>[\n\s]*<\/pre>)/sim',
+    );
+
+    return preg_replace_callback($patterns, dangopress_esc_callback, $content);
 }
 
 function dangopress_esc_callback($matches)
@@ -257,6 +261,7 @@ function dangopress_esc_callback($matches)
 
     //$content = htmlspecialchars($content, ENT_NOQUOTES, get_bloginfo('charset'));
     $content = esc_html($content);
+    $tag_open = preg_replace('/<pre>[\n\s]*<code>/', '<pre class="prettyprint"><code>', $tag_open);
 
     return $tag_open . $content . $tag_close;
 }

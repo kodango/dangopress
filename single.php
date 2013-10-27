@@ -26,6 +26,15 @@ get_header();?>
     <div class="post-content clearfix">
         <?php the_content(); ?>
     </div>
+
+    <div class="post-copyright">
+        <p>
+            <i class="icon-info-sign"></i>
+            原创文章, 转载请注明转自: <a href="<?php bloginfo('url'); ?>"><?php bloginfo('name'); ?></a>
+            , 本文固定链接地址:
+            <a rel="shortlink" href="<?php echo wp_get_shortlink(); ?>"><?php the_title(); ?></a>
+        </p>
+    </div>
 </div>
 
 <?php if (function_exists('related_posts')): ?>

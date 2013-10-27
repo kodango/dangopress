@@ -1,6 +1,6 @@
 /*
  * Theme Name: dangopress
- * Version: 0.4.2
+ * Version: 0.4.3
  * Description: a simple responsive blog theme
  *
  * Author: kodango
@@ -397,6 +397,12 @@ a:hover {
     line-height: 1.8;
 }
 
+.post-copyright p {
+    font-weight: bold;
+    font-style: italic;
+    margin-top: 25px;
+}
+
 .related-posts .caption {
     font-size: 16px;
     font-weight: bold;
@@ -702,7 +708,7 @@ li.depth-2 .comment-container {
 }
 
 .comment-meta {
-    margin-top: 10px;
+    margin-top: 15px;
 }
 
 .comment-meta span {
@@ -734,7 +740,7 @@ p.comment-author {
 }
 
 .comment-body p {
-    margin: 10px 0;
+    margin: 15px 0;
     color: #444;
 }
 
