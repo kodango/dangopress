@@ -145,7 +145,7 @@ a:hover {
     color: #333;
 }
 
-.logo, .menu, .menu li {
+.logo, .header-menu .menu, .header-menu .menu li {
     display: block;
     float: left;
 }
@@ -160,11 +160,11 @@ a:hover {
     display: none;
 }
 
-.menu li {
+.header-menu .menu li {
     margin-right: 16px;
 }
 
-.menu li a {
+.header-menu .menu li a {
     display: block;
     height: 32px;
     line-height: 32px;
@@ -174,8 +174,9 @@ a:hover {
     _white-space: nowrap;
 }
 
-.menu li a:hover, .menu li a:active,
-.menu li.current-menu-item a {
+.header-menu .menu li a:hover,
+.header-menu .menu li a:active,
+.header-menu .menu li.current-menu-item a {
     border-top: 2px solid #5895be;
     padding-top: 3px;
     font-weight: bold;
@@ -420,7 +421,8 @@ a:hover {
     width: 300px;
 }
 
-#sidebar .friend-links li {
+#sidebar .friend-links li,
+#sidebar .widget-links li {
     width: 50%;
     float: left;
 }
@@ -462,7 +464,7 @@ ul.tabnav li {
     background: #fafafa;
 }
 
-ul.tabnav li.four {
+ul.four li {
     width: 20%;
     padding: 0 1.5px; 
     margin: 0 5px;
@@ -897,20 +899,22 @@ pre .pln { color: #333; }
 
 @media screen and (max-width: 640px) {
 
-.menu, .menu li {
+.header-menu .menu,
+.header-menu .menu li {
     float: none;
 }
 
-.menu li {
+.header-menu .menu li {
     margin-right: 0;
 }
 
-.menu li a {
+.header-menu .menu li a {
     padding: 5px 6%;
 }
 
-.menu li a:hover, .menu li a:active,
-.menu li.current-menu-item a {
+.header-menu .menu li a:hover,
+.header-menu .menu li a:active,
+.header-menu .menu li.current-menu-item a {
     border: none;
     padding: 5px 6%;
     background: #fafafa;

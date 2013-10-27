@@ -10,16 +10,21 @@ if (is_admin()) {
 }
 
 /*
- * Include custom function php file if exists.
- *
- * You should put your personal functions in the custom_functions.php.
- */
-define('CUSTOM_FUNCTIONS', get_template_directory() . '/custom_functions.php');
-
-/*
  * Check whether the user is visiting in mobile device
  */
 define('IS_MOBILE', wp_is_mobile());
+
+/*
+ * Require widgets functions
+ */
+require_once('functions/widgets.php');
+
+/*
+ * Include custom function php file if exists.
+ *
+ * You should put your personal functions in the functions/custom.php.
+ */
+define('CUSTOM_FUNCTIONS', get_template_directory() . '/functions/custom.php');
 
 if (file_exists(CUSTOM_FUNCTIONS)) {
     require_once(CUSTOM_FUNCTIONS);
@@ -116,7 +121,18 @@ function dangopress_setup_theme()
     register_sidebar(array(
         'name' => 'Sidebar',
         'id' => 'sidebar',
-        'description' => 'Widgets in this area are used on the main sidebar region.',
+        'description' => '该区域的小工具会显示在右方的侧栏中',
+        'before_widget' => '<div class="widget %2$s">',
+        'after_widget' => '</div>',
+        'before_title' => '<h3>',
+        'after_title' => '</h3>',
+    ));
+
+    // Register auto-followed sidebar
+    register_sidebar(array(
+        'name' => 'Sidebar Follow',
+        'id' => 'sidebar-follow',
+        'description' => '该区域的小工具会显示在右方侧栏的跟随部分中',
         'before_widget' => '<div class="widget %2$s">',
         'after_widget' => '</div>',
         'before_title' => '<h3>',
@@ -164,7 +180,7 @@ function dangopress_setup_load()
                        array(), '20130504', true);
 
     // Theme script
-    wp_enqueue_script('kodango', $url_prefix . '/scripts/kodango.min.js',
+    wp_enqueue_script('kodango', $url_prefix . '/scripts/kodango.js',
                       array('jquery'), '1.0', true);
 }
 add_action('wp_enqueue_scripts', 'dangopress_setup_load');
@@ -300,147 +316,6 @@ function dangopress_human_time_diff($gmt_time)
         $diff = human_time_diff($from_timestamp, $to_timestamp);
         return preg_replace('/(\d+)/', "$1 ", "{$diff}前");
     }
-}
-
-/*
- * Show a list of recent comments
- */
-function dangopress_recent_comments($admin, $limit)
-{
-    global $wpdb;
-
-    $sql = "SELECT DISTINCT ID, post_title, post_password, comment_ID,comment_author,
-           comment_date_gmt, comment_date, comment_post_ID, comment_approved, comment_type,
-           comment_author_url, comment_author_email, SUBSTRING(comment_content,1,22) AS com_excerpt
-           FROM $wpdb->comments LEFT OUTER JOIN $wpdb->posts
-           ON ($wpdb->comments.comment_post_ID=$wpdb->posts.ID)
-           WHERE comment_approved ='1' AND comment_type=''
-           AND post_password='' AND user_id='0' AND comment_author!='$admin'
-           ORDER BY comment_date_gmt DESC LIMIT $limit";
- 
-    $comments = $wpdb->get_results($sql);
-    $output="";
-
-    foreach ($comments as $comment) {
-        $output .= '<li class="clearfix rc_item">' . get_avatar($comment, 32, '', "$comment->comment_author's avatar");
-        $output .= '<div class="rc_info">';
-        $output .= '<a href="' . get_comment_link($comment) . '" title="《' . $comment->post_title . '》上的评论">';
-        $output .= '<span class="rc_name">' . strip_tags($comment->comment_author) . '</span></a>';
-        $output .= '<span class="rc_time">' . dangopress_human_time_diff($comment->comment_date_gmt) . '</span>';
-        $output .= '<p class="rc_com">' . strip_tags($comment->com_excerpt) . '</p>';
-        $ooutput .= '</div></li>';
-    }
-
-    $output = convert_smilies($output);
-
-    echo $output;
-}
-
-/*
- * Get a list of recent posts
- */
-
-function dangopress_get_recent_posts($post_num = 10, $chars = 30)
-{
-    $recents = wp_get_recent_posts("numberposts=$post_num&offset=0");
-    $output = '';
-
-    foreach ($recents as $post) {
-        $permalink = get_permalink($post['ID']);
-        $title = $post['post_title'];
-        $title_attr = esc_attr(strip_tags($title));
-        $human_time = dangopress_human_time_diff($post['post_date_gmt']);
-
-        $link = '<a href="' . $permalink. '" rel="bookmark" title="详细阅读《' . $title_attr . '》">';
-        $link .= wp_trim_words($title, $chars) . '</a>'; 
-
-        $output .= '<li>' . $link . '<small>发表于 ' . $human_time . '</small></li>';
-    }
-
-    echo $output;
-}
-
-/*
- * Get a list of random posts
- */
-function dangopress_get_rand_posts($post_num = 10, $chars = 30)
-{
-    $rands = get_posts("numberposts=$post_num&orderby=rand");
-    $output = '';
-
-    foreach ($rands as $post) {
-        $permalink = get_permalink($post->ID);
-        $title = $post->post_title;
-        $title_attr = esc_attr(strip_tags($title));
-        $human_time = dangopress_human_time_diff($post->post_date_gmt);
-
-        $link = '<a href="' . $permalink. '" rel="bookmark" title="随机阅读《' . $title_attr . '》">';
-        $link .= wp_trim_words($title, $chars) . '</a>'; 
-
-        $output .= '<li>' . $link . '<small>发表于 ' . $human_time . '</small></li>';
-    }
-
-    echo $output;
-}
-
-/*
- * Get a list of sticky posts
- */
-function dangopress_get_sticky_posts($post_num = 10, $chars = 30)
-{
-    $args = array(
-        'numberposts' => $posts_num,
-        'post__in' => get_option('sticky_posts'),
-        'orderby' => 'modified'
-    );
-
-    $sticky_posts = get_posts($args);
-    $output = '';
-
-    foreach ($sticky_posts as $post) {
-        $permalink = get_permalink($post->ID);
-        $title = $post->post_title;
-        $title_attr = esc_attr(strip_tags($title));
-        $human_time = dangopress_human_time_diff($post->post_date_gmt);
-
-        $link = '<a href="' . $permalink. '" rel="bookmark" title="推荐阅读《' . $title_attr . '》">';
-        $link .= wp_trim_words($title, $chars) . '</a>'; 
-
-        $output .= '<li>' . $link . '<small>发表于 ' . $human_time . '</small></li>';
-    }
-
-    echo $output;
-}
-
-/*
- * Get the most commented posts
- */
-function dangopress_get_most_commented($posts_num = 10, $days = 60, $chars = 30)
-{
-    global $wpdb;
-
-    $sql = "SELECT ID , post_title , comment_count
-           FROM $wpdb->posts
-           WHERE post_type = 'post' AND post_status = 'publish'
-           AND TO_DAYS(now()) - TO_DAYS(post_date) < $days
-           ORDER BY comment_count DESC LIMIT 0 , $posts_num ";
-
-    $posts = $wpdb->get_results($sql);
-    $output = "";
-    
-    foreach ($posts as $post) {
-        $permalink = get_permalink($post->ID);
-        $title = $post->post_title;
-        $title_attr = esc_attr(strip_tags($title));
-        $comment_num = $post->comment_count;
-
-        $link = '<a href="' . $permalink. '" rel="bookmark" title="详细阅读《' . $title_attr . '》">';
-        $link .= wp_trim_words($title, $chars) . '</a>'; 
-
-        $output .= '<li>' . $link . '<small>共 ' . $comment_num . ' 条评论</small></li>';
-    }
-
-    echo $output;
 }
 
 /*
