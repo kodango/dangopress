@@ -319,21 +319,6 @@ function dangopress_human_time_diff($gmt_time)
 }
 
 /*
- * Add the end mark in the end of post
- */
-function dangopress_add_end_mark($content)
-{
-    $options = get_option('dangopress_options');
-
-    if (is_singular()) {
-        return $content . $options['post_end_mark'];
-    } else {
-        return $content;
-    }
-}
-add_filter('the_content', 'dangopress_add_end_mark');
-
-/*
 /*
  * Display comment lists
  */
