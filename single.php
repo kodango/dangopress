@@ -9,9 +9,11 @@ get_header();?>
 
 <?php if ( have_posts( )) : while ( have_posts() ) : the_post(); ?>
 <div <?php post_class(); ?>>
+    <?php if (!function_exists('yoast_breadcrumb')): ?>
     <div class="post-header">
         <h1 class="post-title"><?php the_title(); ?></h1>
     </div>
+    <?php endif; ?>
     <div class="post-meta clearfix">
         <span class="post-time"><i class="icon-calendar"></i><?php the_time('Y/m/d'); ?></span>
         <span class="post-author"><i class="icon-user"></i>by <?php the_author_link(); ?></span>
@@ -31,7 +33,7 @@ get_header();?>
         <p>
             <i class="icon-info-sign"></i>
             转载请注明转自: <a href="<?php bloginfo('url'); ?>"><?php bloginfo('name'); ?></a>
-            , 本文固定链接地址:
+            , 本文固定链接:
             <a rel="shortlink" href="<?php echo wp_get_shortlink(); ?>"><?php the_title(); ?></a>
         </p>
     </div>
@@ -49,7 +51,7 @@ get_header();?>
 <div class="post-footer clearfix">
 <div id="post-pagination" class="alignleft">
     <div class="post-prev">
-        <span class="icon-chevron-sign-left"></span> 上一篇:
+        <span class="icon-chevron-sign-left"></span>
         <?php
             $prev_post = get_previous_post();
 
@@ -62,7 +64,7 @@ get_header();?>
         ?>
     </div>
     <div class="post-next">
-        <span class="icon-chevron-sign-right"></span> 下一篇:
+        <span class="icon-chevron-sign-right"></span>
         <?php
             $next_post = get_next_post();
 

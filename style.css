@@ -403,6 +403,11 @@ a:hover {
     margin-top: 25px;
 }
 
+.related-posts {
+    border-top: 1px solid #ededed;
+    padding-top: 15px;
+}
+
 .related-posts .caption {
     font-size: 16px;
     font-weight: bold;
@@ -427,7 +432,7 @@ a:hover {
 }
 
 #post-pagination a {
-    margin-left: 5px;
+    margin-left: 8px;
 }
 
 #post-pagenavi {

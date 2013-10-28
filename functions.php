@@ -630,6 +630,7 @@ function dangopress_customize_breadcrumb($link_output, $link)
     $index = $link['my_index'];
     $total_count = $link['my_total_count'];
 
+    /*
     if ($index == 1) {
         // no follow the home link
         $link_output = dangopress_nofollow_link($link_output);
@@ -637,13 +638,28 @@ function dangopress_customize_breadcrumb($link_output, $link)
         // surround <h1> for the last element in archive or search page
         //$link_output = '<h1>' . $link_output . '</h1>';
         $link_output = preg_replace(array('/<span /', '/<\/span>/'), array('<h1 ', '</h1>'), $link_output);
-    } else if (is_single() && $index == ($total_count-1)) {
+    } else if ((is_single()) && $index == ($total_count-1)) {
         // surround <h2> for the post category in single post page
         //$link_output = '<h2>' . $link_output . '</h2>';
         $link_output = preg_replace(array('/<span /', '/<\/span>/'), array('<h2 ', '</h2>'), $link_output);
-    } else if (is_singular() && $index == $total_count) {
+    } else if (is_single() && $index == $total_count) {
         // remove post title from the breadcrumbs
         $link_output = str_replace($link['text'], '当前位置', $link_output);
+        //$link_output = preg_replace(array('/<span /', '/<\/span>/'), array('<h1 ', '</h1>'), $link_output);
+    }
+ */
+
+    if ($index == 1) {
+        // no follow the home link
+        $link_output = dangopress_nofollow_link($link_output);
+    } else if ($index == $total_count) {
+        // surround <h1> for the last element
+        //$link_output = '<h1>' . $link_output . '</h1>';
+        $link_output = preg_replace(array('/<span /', '/<\/span>/'), array('<h1 ', '</h1>'), $link_output);
+    } else if ($index == ($total_count-1) && isset($link['term'])) {
+        // surround <h2> for the post category
+        //$link_output = '<h2>' . $link_output . '</h2>';
+        $link_output = preg_replace(array('/<span /', '/<\/span>/'), array('<h2 ', '</h2>'), $link_output);
     }
 
     return $link_output;
