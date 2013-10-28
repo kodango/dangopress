@@ -739,9 +739,8 @@ span.comment-author a {
     font-weight: bold;
 }
 
-p.comment-author {
-    font-size: 13px;
-    padding-bottom: 5px;
+span.at-author {
+    margin-right: 5px;
 }
 
 .comment-body p {

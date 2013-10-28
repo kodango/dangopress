@@ -372,25 +372,32 @@ function dangopress_comments_callback($comment, $args, $depth) {
 
             <div class="comment-text">
 
-            <?php
-                if ($comment->comment_parent) { // Show reply to somebody
-                    $parent = get_comment($comment->comment_parent);   
-                    $parent_href = htmlspecialchars(get_comment_link($comment->comment_parent));
-
-                    $parent_author = $parent->comment_author;
-                    $parent_title = mb_strimwidth(strip_tags($parent->comment_content), 0, 100, '...');
-
-                    $parent_link = "<a href=\"$parent_href\" title=\"$parent_title\">@$parent_author</a>";
-                    echo '<p class="comment-author">' . $parent_link . '</p>';
-                }
-
-                comment_text();
-            ?>
+            <?php comment_text(); ?>
             </div>
         </div>
     </div>
 <?php
 }
+
+/*
+ * Add at user before comment text
+ */
+function dangopress_add_at_author($comment_text, $comment)
+{
+    if ($comment->comment_parent) { // Show reply to somebody
+        $parent = get_comment($comment->comment_parent);   
+        $parent_href = htmlspecialchars(get_comment_link($comment->comment_parent));
+
+        $parent_author = $parent->comment_author;
+        $parent_title = mb_strimwidth(strip_tags($parent->comment_content), 0, 100, '...');
+
+        $parent_link = "<a href=\"$parent_href\" title=\"$parent_title\">@$parent_author</a>";
+        $comment_text = '<span class="at-author">' . $parent_link . ':</span>' . $comment_text;
+    }
+
+    return $comment_text;
+}
+add_filter('comment_text', 'dangopress_add_at_author', 10, 2);
 
 /*
  * Check whether a gravatar exists for a given user email
