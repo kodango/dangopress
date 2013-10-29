@@ -370,10 +370,7 @@ function dangopress_comments_callback($comment, $args, $depth) {
 
             </div>
 
-            <div class="comment-text">
-
-            <?php comment_text(); ?>
-            </div>
+            <div class="comment-text"><?php comment_text(); ?></div>
         </div>
     </div>
 <?php
@@ -507,8 +504,10 @@ function dangopress_tag_spam($approved, $commentdata)
          *
          * Tag it as spam if no chinese words found, or comment characters are 
          * too many. It's more strict than bellow.
+         *
+         * One chinese character in UTF-8 takes up 3 bytes
          */
-        if (!$has_gravatar && (!$has_chinese || $comment_chars > 80)) {
+        if (!$has_gravatar && (!$has_chinese || $comment_chars > 120)) {
             return 'spam';
         }
     }
