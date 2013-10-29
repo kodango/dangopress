@@ -19,7 +19,7 @@ get_header();?>
     </div>
 
     <div class="post-meta clearfix">
-        <span class="post-time"><i class="icon-calendar"></i><?php the_time('Y/m/d'); ?></span>
+        <span class="post-time"><i class="icon-calendar"></i><?php echo date('F j, Y', get_the_time('U')); ?></span>
         <span class="post-author"><i class="icon-user"></i>by <?php the_author_link(); ?></span>
         <?php if (function_exists('the_user_views')): ?>
             <span class="post-view"><i class="icon-sun"></i><?php the_user_views(); ?></span>

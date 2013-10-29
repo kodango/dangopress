@@ -15,3 +15,4 @@
 <div id="sidebar-follow">
     <?php dynamic_sidebar('sidebar-follow'); ?>
 </div>
+</div>

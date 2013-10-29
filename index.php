@@ -23,7 +23,7 @@ get_header(); ?>
             <h2 class="post-title"><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h2>
         </div>
         <div class="post-meta clearfix">
-            <span class="post-time"><i class="icon-calendar"></i><?php the_time('Y/m/d'); ?></span>
+            <span class="post-time"><i class="icon-calendar"></i><?php echo date('F j, Y', get_the_time('U')); ?></span>
             <span class="post-cat"><i class="icon-folder-close"></i><?php the_category(' '); ?></span>
             <?php if (function_exists('the_user_views')): ?>
                 <span class="post-view"><i class="icon-sun"></i><?php the_user_views(); ?></span>

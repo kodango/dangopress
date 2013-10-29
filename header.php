@@ -18,29 +18,26 @@
 
 <body <?php body_class(); ?>>
 <div id="page">
-    <div id="header">
-        <div class="container clearfix">
-            <div class="caption logo">
-                <?php if (is_home()): ?>
-                <h1><a href="<?php bloginfo('url'); ?>" title="<?php bloginfo('name'); ?>" rel="home"><?php bloginfo('name'); ?></a></h1>
-                <?php else: ?>
-                <a href="<?php bloginfo('url'); ?>" title="<?php bloginfo('name'); ?>" rel="home"><?php bloginfo('name'); ?></a>
-                <?php endif; ?>
-            </div>
+    <div id="header" class="clearfix">
+        <div class="caption logo">
+            <?php if (is_home()): ?>
+            <h1><a href="<?php bloginfo('url'); ?>" title="<?php bloginfo('name'); ?>" rel="home"><?php bloginfo('name'); ?></a></h1>
+            <?php else: ?>
+            <a href="<?php bloginfo('url'); ?>" title="<?php bloginfo('name'); ?>" rel="home"><?php bloginfo('name'); ?></a>
+            <?php endif; ?>
+        </div>
 
-            <div id="mobile-menu"><i class="icon-list"></i></div>
+        <div id="mobile-menu"><i class="icon-list"></i></div>
 
-            <?php wp_nav_menu(array('theme_location' => 'primary', 'container_class' => 'header-menu')); ?>
+        <?php wp_nav_menu(array('theme_location' => 'primary', 'container_class' => 'header-menu')); ?>
 
-            <div class="search-box">
-                <form method="get" id="search-form" class="search-form" action="<?php bloginfo('url'); ?>/">
-                    <input type="text" name="s" class="search-input" size="15">
-                    <button type="submit" alt="search" class="search-submit"><i class="icon-search"></i></button>
-                </form>
-            </div>
+        <div class="search-box">
+            <form method="get" id="search-form" class="search-form" action="<?php bloginfo('url'); ?>/">
+                <input type="text" name="s" class="search-input" size="15">
+                <button type="submit" alt="search" class="search-submit"><i class="icon-search"></i></button>
+            </form>
         </div>
     </div>
 
-    <div id="content">
-    <div class="container clearfix">
+    <div id="content" class="clearfix">
         <div id="primary"><?php dangopress_breadcrumb(); ?>
