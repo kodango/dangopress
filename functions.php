@@ -5,6 +5,16 @@
  * @package dangopress
  */
  
+/*
+ * Initialize the update checker
+ */
+require 'functions/theme-update-checker.php';
+
+$update_checker = new ThemeUpdateChecker(
+    'dangopress-theme',
+    'https://raw.github.com/dangoakachan/dangopress/master/theme-update.json'
+);
+
 if (is_admin()) {
     require_once('theme-options.php');
 }
