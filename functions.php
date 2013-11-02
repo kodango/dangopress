@@ -347,11 +347,12 @@ function dangopress_comments_callback($comment, $args, $depth) {
     $comment_id = $comment->comment_ID; ?>
 
     <li <?php comment_class(); ?> id="li-comment-<?php echo $comment_id; ?>">
-    <div class="comment-container">
         <div id="comment-<?php echo $comment_id; ?>" class="comment-body <?php if ($comment->comment_approved == '0') echo 'pending-comment'; ?>">
-            <div class="comment-avatar"><?php echo get_avatar($comment, 42, '', "$comment->comment_author's avatar"); ?></div>
+            <div class="comment-avatar">
+                <?php echo get_avatar($comment, $depth==1 ? 48: 32, '', "$comment->comment_author's avatar"); ?>
+            </div>
             <div class="comment-meta">
-                <span class="comment-author"><?php comment_author_link(); ?></span>
+                <span class="comment-author<?php echo user_can($comment->user_id, 'administrator') ? ' postauthor': ''?>"><?php comment_author_link(); ?></span>
                 <span class="comment-date">发表于 <?php echo dangopress_human_time_diff($comment->comment_date_gmt); ?></span>
                 <span><i class="icon-retweet"></i>
                 <?php
@@ -372,7 +373,6 @@ function dangopress_comments_callback($comment, $args, $depth) {
 
             <div class="comment-text"><?php comment_text(); ?></div>
         </div>
-    </div>
 <?php
 }
 
@@ -458,7 +458,8 @@ function dangopress_getridof_spam($commentdata)
     }
 
     /* Check whether the comment text contains the japanese chars */
-    if (preg_match('/[ぁ-ん]+|[ァ-ヴ]+/u', $comment_content)) {
+    //if (preg_match('/[ぁ-ん]+|[ァ-ヴ]+/u', $comment_content)) {
+    if (preg_match('/[ぁ-ん]+|[ァ-ヴ]+/u', $comment_author)) {
         wp_die('请勿恶意评论');
     }
 

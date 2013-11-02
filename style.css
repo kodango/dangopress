@@ -686,22 +686,55 @@ ul.tabnav li.selected, ul.tabnav li:hover {
     border-top: none;
 }
 
-.comment-container {
-    padding-right: 15px;
+#comments .children {
+    position: relative;
 }
 
-li.depth-2 {
-    margin-left: 57px;
+#comments .children:before,
+#comments .children:after {
+    position: absolute;
+    content: "";
+    left: 5px;
+    top: -15px;
+    width: 0;
+    z-index: 99;
+    border: 1px solid transparent;
 }
 
-li.depth-2 .comment-container {
-    /*padding-left: 15px;*/
+#comments .children:before {
+    border-bottom-color: #fff;
+    border-width: 8px;
+    z-index: 100;
+}
+
+#comments .children:after {
+    border-bottom-color: #ddd;
+    border-width: 9px;
+    left: 4px;
+    top: -17px;
+}
+
+#comments .children .children:before,
+#comments .children .children:after {
+    display: none;
 }
 
 .comment-body {
-    padding-left: 57px;
+    padding: 0 15px 10px 65px;
     position: relative;
     line-height: 1.6;
+}
+
+li.depth-1 {
+    padding-bottom: 15px;
+}
+
+li.depth-1>.children {
+    margin-left: 65px;
+}
+
+li.depth-2 .comment-body {
+    padding-left: 48px;
 }
 
 .comment-avatar {
@@ -731,19 +764,24 @@ li.depth-2 .comment-container {
     margin-left: 15px;
 }
 
-span.comment-author,
-span.comment-author a {
+.comment-text p {
+    margin: 5px 0 15px 0;
+}
+
+span.comment-author {
     color: #444;
-    font-weight: bold;
+}
+
+li.depth-2 span.comment-author a {
+    color: #444;
+}
+
+li.comment span.postauthor a {
+    color: #cd1144;
 }
 
 span.at-author {
-    margin-right: 5px;
-}
-
-.comment-body p {
-    margin: 15px 0;
-    color: #444;
+    margin-right: 10px;
 }
 
 #trackbacks {

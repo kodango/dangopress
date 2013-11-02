@@ -32,7 +32,7 @@
                 }
             ?>
 
-            <a href="#backtop" title="回到顶部" class="backtop">回到顶部<i class="icon-circle-arrow-right"></i></a>
+            <a href="#backtop" title="回到顶部" class="backtop">回到顶部<i class="icon-circle-arrow-up"></i></a>
         </p>
         <?php wp_footer(); ?>
     </div>
