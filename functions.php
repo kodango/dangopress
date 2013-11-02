@@ -11,7 +11,7 @@
 require 'functions/theme-update-checker.php';
 
 $update_checker = new ThemeUpdateChecker(
-    'dangopress-theme',
+    'dangopress',
     'https://raw.github.com/dangoakachan/dangopress/master/theme-update.json'
 );
 
