@@ -417,10 +417,35 @@ a:hover {
     font-weight: normal;
 }
 
+.related-posts h2 a {
+    border: 1px solid #ddd;
+    background-color: #fafafa;
+    padding: 3px;
+    color: #444;
+}
+
 .related-posts ul {
-    padding-left: 25px;
+    /*padding-left: 25px;*/
     margin: 15px 0;
-    list-style: circle outside;
+    /*list-style: circle outside;*/
+}
+
+.related-posts li {
+    padding: 2px 0;
+    font-size: 13px;
+}
+
+.related-posts li span {
+    color: #888;
+}
+
+.related-posts li a {
+    margin-left: 10px;
+}
+
+.related-posts li .post-view,
+.related-posts li .post-comment {
+    float: right;
 }
 
 .post-footer {
@@ -985,7 +1010,9 @@ pre .pln { color: #333; }
 @media screen and (max-width: 480px) {
 
 .post-meta .post-view, .designed-by,
-.comment-date, .comments-num {
+.comment-date, .comments-num,
+.related-posts li .post-view,
+.related-posts li .post-comment {
     display: none;
 }
 
