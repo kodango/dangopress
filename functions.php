@@ -458,8 +458,8 @@ function dangopress_getridof_spam($commentdata)
     }
 
     /* Check whether the comment text contains the japanese chars */
-    //if (preg_match('/[ぁ-ん]+|[ァ-ヴ]+/u', $comment_content)) {
-    if (preg_match('/[ぁ-ん]+|[ァ-ヴ]+/u', $comment_author)) {
+    if (preg_match('/[ぁ-ん]+|[ァ-ヴ]+/u', $comment_content) || 
+            preg_match('/[ぁ-ん]+|[ァ-ヴ]+/u', $comment_author)) {
         wp_die('请勿恶意评论');
     }
 
