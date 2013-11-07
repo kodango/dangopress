@@ -190,7 +190,7 @@ class Dangopress_PostsTabber_Widget extends WP_Widget {
         echo $output;
 
         // Set the cache in the end
-        $cache[$args['widget']] = $output;
+        $cache[$args['widget_id']] = $output;
         wp_cache_set('widget_dangopress_poststabber', $cache, 'widget');
     }
 
@@ -199,7 +199,7 @@ class Dangopress_PostsTabber_Widget extends WP_Widget {
      */
     function flush_widget_cache()
     {
-        wp_cache_delete('widget_dangopress_recentcomments', 'widget');
+        wp_cache_delete('widget_dangopress_poststabber', 'widget');
     }
 
     /*
@@ -371,7 +371,7 @@ class Dangopress_RecentComments_Widget extends WP_Widget {
         echo $output;
 
         // Set the cache in the end
-        $cache[$args['widget']] = $output;
+        $cache[$args['widget_id']] = $output;
         wp_cache_set('widget_dangopress_recentcomments', $cache, 'widget');
     }
 
@@ -628,7 +628,7 @@ class Dangopress_MostViewedPosts_Widget extends WP_Widget {
         echo $output;
 
         // Set the cache in the end
-        $cache[$args['widget']] = $output;
+        $cache[$args['widget_id']] = $output;
         wp_cache_set('widget_dangopress_most_viewed_posts', $cache, 'widget');
     }
 }
