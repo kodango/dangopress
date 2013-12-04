@@ -11,27 +11,62 @@
  *
  * Tags: white, simple, two-columns, responsive
  */
-html,body,div,p,ol,ul,li,dl,dt,dd,h1,h2,h3,h4,h5,h6,form,input,select,button,textarea,iframe,table,th,td,blockquote {
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend, table, caption,
+tbody, tfoot, thead, tr, th, td, article, aside,
+canvas, details, embed, figure, figcaption, footer,
+header, hgroup, menu, nav, output, ruby, section,
+summary, time, mark, audio, video {
     margin: 0;
     padding: 0;
-    -webkit-text-size-adjust: 100%;
-    -ms-text-size-adjust: 100%;
-    text-rendering: optimizelegibility;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+    display: block;
 }
 
 body {
-    color: #444;
-    background: #fff;
+    line-height: 1;
+    color: #000;
+    background-color: #FFF;
 }
 
 body, button, input, select, textarea {
-    font: normal 14px/26px arial, sans-serif;
+    font: normal 14px/24px "Helvetica Neue",Helvetica,Arial,sans-serif;
 }
-
-img { border: none; }
 
 ol, ul {
     list-style: none;
+}
+
+img {
+    border: none;
+}
+
+a {
+    outline: 0;
+    color: #444;
+    text-decoration: none;
+}
+
+a:hover {
+    color: #2C63A9;
+    text-decoration: none;
 }
 
 table {
@@ -116,23 +151,8 @@ code, kbd {
     font-size: 12px;
 }
 
-h1, h2, h3, h4, h5, h6 {
-    clear: both;
-}
-
 small {
     color: #888;
-}
-
-a {
-    outline: 0;
-    color: #2C63A9;
-    text-decoration: none;
-}
-
-a:hover {
-    text-decoration: none;
-    color: #2C63A9;
 }
 
 .clearfix:after {
@@ -169,7 +189,6 @@ a:hover {
 #header .caption a {
     font-size: 25px;
     font-weight: bold;
-    color: #333;
 }
 
 .logo, .header-menu .menu, .header-menu .menu li {
@@ -196,7 +215,6 @@ a:hover {
     height: 32px;
     line-height: 32px;
     padding: 5px 2px;
-    color: #444;
     outline: medium none;
     _white-space: nowrap;
 }
@@ -257,6 +275,10 @@ a:hover {
     margin-bottom: 15px;
 }
 
+.single #site-breadcrumbs {
+    margin-bottom: 0;
+}
+
 #site-breadcrumbs span span,
 #site-breadcrumbs span h2,
 #site-breadcrumbs span h1 {
@@ -302,32 +324,21 @@ a:hover {
     margin: 0 0 10px;
 }
 
-.post-title a {
-    color: #444;
-}
-
 .post-meta {
     font-size: 12px;
     margin-bottom: 15px;
-    color: #888;
-}
-
-.post-meta a,.comments-link a {
-    color: #888;
+    border-bottom: 1px dashed #ededed;
 }
 
 .post-meta>span {
     margin-right: 10px;
-    font-weight: bold;
 }
 
 .post-meta i {
     margin-right: 5px;
 }
 
-.post-title a:hover,
-.post-meta a:hover,
-.comments-link a:hover {
+.post-content a {
     color: #2C63A9;
 }
 
@@ -421,7 +432,6 @@ a:hover {
     border: 1px solid #ddd;
     background-color: #fafafa;
     padding: 3px;
-    color: #444;
 }
 
 .related-posts ul {
@@ -441,6 +451,7 @@ a:hover {
 
 .related-posts li a {
     margin-left: 10px;
+    color: #2C63A9;
 }
 
 .related-posts li .post-view,
@@ -469,13 +480,14 @@ a:hover {
     margin: 0 5px 2px 0;
     padding: 0 8px;
     border: 1px solid #ddd;
-    color: #444;
 }
 
-.page-numbers:hover,.page-numbers.current,
+.page-numbers:hover,
+.page-numbers.current,
 .comment-pagenavi a:hover {
     background: #f8f8f8;
     border-bottom-color: #5895be;
+    color: #2C63A9;
 }
 
 #sidebar {
@@ -546,7 +558,7 @@ ul.tabnav li {
 
 ul.four li {
     width: 20%;
-    padding: 0 1.5px; 
+    padding: 0 1px; 
     margin: 0 5px;
 }
 
@@ -638,7 +650,6 @@ ul.tabnav li.selected, ul.tabnav li:hover {
     padding: 3px 15px;
     display: block;
     float: left;
-    color: #444;
     border: 1px solid #ddd;
     margin: 0 0 -1px -1px;
 }
@@ -794,13 +805,10 @@ li.depth-2 .comment-body {
 }
 
 span.comment-author {
-    color: #444;
+    font-weight: bold;
 }
 
-li.depth-2 span.comment-author a {
-    color: #444;
-}
-
+li.comment span.postauthor,
 li.comment span.postauthor a {
     color: #cd1144;
 }
