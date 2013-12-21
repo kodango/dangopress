@@ -496,6 +496,13 @@ function dangopress_tag_spam($approved, $commentdata)
     /* Check the comment chars length */
     $comment_chars = strlen(trim($comment_content));
 
+    /*
+     * Say too many words without any chinese, tag it spam!
+     */
+    if (!$has_chinese && $comment_chars > 80) {
+        return 'spam';
+    }
+
     if (!$is_ping) { // Normal comment
         /* Check whether the gravatar exists */
         $has_gravatar = dangopress_validate_gravatar($comment_author_email);
@@ -508,16 +515,13 @@ function dangopress_tag_spam($approved, $commentdata)
          *
          * One chinese character in UTF-8 takes up 3 bytes
          */
-        if (!$has_gravatar && (!$has_chinese || $comment_chars > 120)) {
-            return 'spam';
+        if (!$has_gravatar) {
+            if (!$has_chinese || $comment_chars > 120)) {
+                return 'spam';
+            } else {
+                return 0; // disapproved
+            }
         }
-    }
-
-    /*
-     * Say too many words without any chinese, tag it spam!
-     */
-    if (!$has_chinese && $comment_chars > 80) {
-        return 'spam';
     }
 
     return $approved;
