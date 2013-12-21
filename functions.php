@@ -516,7 +516,7 @@ function dangopress_tag_spam($approved, $commentdata)
          * One chinese character in UTF-8 takes up 3 bytes
          */
         if (!$has_gravatar) {
-            if (!$has_chinese || $comment_chars > 120)) {
+            if (!$has_chinese || $comment_chars > 120) {
                 return 'spam';
             } else {
                 return 0; // disapproved
