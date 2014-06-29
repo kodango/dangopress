@@ -14,10 +14,12 @@ get_header();?>
 
 <?php if ( have_posts() ) : while ( have_posts() ) : the_post(); ?>
 
+    <?php if (!function_exists('yoast_breadcrumb')): ?>
     <div class="post-header">
         <h1 class="post-title"><?php the_title(); ?></h1>
     </div>
-
+    <?php endif; ?>
+<!--
     <div class="post-meta clearfix">
         <span class="post-time"><i class="icon-calendar"></i><?php echo date('F j, Y', get_the_time('U')); ?></span>
         <span class="post-author"><i class="icon-user"></i>by <?php the_author_link(); ?></span>
@@ -28,7 +30,7 @@ get_header();?>
             <i class="icon-comments"></i><?php comments_popup_link('抢沙发', '1 个评论', '% 个评论', 'comments-link' ); ?>
        </span>
     </div>
-
+-->
     <div <?php post_class(); ?>>
         <div class="post-content clearfix"><?php the_content(); ?></div>
     </div>

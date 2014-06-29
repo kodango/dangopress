@@ -120,12 +120,12 @@ SidebarFollow.prototype = {
     }
 };
 
-/* 
+/*
  * Initialize the function
  */
-jQuery(function($) {    
+jQuery(function($) {
     /* scroll back to top */
-    $(".backtop").click(function(event){        
+    $(".backtop").click(function(event){
         event.preventDefault();
         $('html,body').animate({ scrollTop:0 }, 'fast');
     });
@@ -150,7 +150,7 @@ jQuery(function($) {
     $('#comments-tabber a').on('click', function() {
          if (this.className == 'curtab')
              return;
-   
+
          $(this).attr('class', 'curtab')
                .siblings().attr('class', 'tab');
 
@@ -160,7 +160,7 @@ jQuery(function($) {
     /* Sidebar follow */
     (new SidebarFollow()).init({
         element: '#sidebar-follow',
-        distanceToTop: 15
+        distanceToTop: 70
     });
 
     /* Mobile menu switch */

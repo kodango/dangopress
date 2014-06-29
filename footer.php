@@ -5,38 +5,40 @@
  * @package dangopress
  */
 ?>
-	
-        </div> <!-- end primary -->
 
-        <?php get_sidebar(); ?>
-    </div> <!-- end content -->
+    </div> <!-- end primary -->
 
-    <div id="footer">
-        <p>
-            <span>Copyright &copy; 2012-2013 <?php bloginfo('name'); ?>.</span>
-            <span class="designed-by">主题由 <a href="http://kodango.com">kodango</a> 设计.</span>
-        </p>
-        <p>
-            <?php
-                $options = get_option('dangopress_options');
-                $sitemap = $options['sitemap_xml'];
+    <?php get_sidebar(); ?>
+</div> <!-- end content container -->
+</div> <!-- end content -->
 
-                if (!empty($sitemap)) {
-                    $link = '<a href="' . get_bloginfo('url') . '/' . $sitemap . '">站点地图</a>';
+<div id="footer">
+<div class="container">
+   <p>
+       <span>Copyright &copy; 2012-2013 <?php bloginfo('name'); ?>.</span>
+       <span class="designed-by">主题由 <a href="http://kodango.com">kodango</a> 设计.</span>
+   </p>
+   <p>
+       <?php
+           $options = get_option('dangopress_options');
+           $sitemap = $options['sitemap_xml'];
 
-                    if (!is_home()) {
-                        $link = dangopress_nofollow_link($link);
-                    }
+           if (!empty($sitemap)) {
+               $link = '<a href="' . get_bloginfo('url') . '/' . $sitemap . '">站点地图</a>';
 
-                    echo $link;
-                }
-            ?>
+               if (!is_home()) {
+                   $link = dangopress_nofollow_link($link);
+               }
 
-            <a href="#backtop" title="回到顶部" class="backtop">回到顶部<i class="icon-circle-arrow-up"></i></a>
-        </p>
-        <?php wp_footer(); ?>
-    </div>
+               echo $link;
+           }
+       ?>
 
-</div> <!-- end page -->
+       <a href="#backtop" title="回到顶部" class="backtop">回到顶部<i class="icon-circle-arrow-up"></i></a>
+   </p>
+   <?php wp_footer(); ?>
+</div>
+</div>
+
 </body>
 </html>

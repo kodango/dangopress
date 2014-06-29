@@ -11,7 +11,7 @@
  *
  * Tags: white, simple, two-columns, responsive
  */
-/* http://meyerweb.com/eric/tools/css/reset/ 
+/* http://meyerweb.com/eric/tools/css/reset/
    v2.0 | 20110126
    License: none (public domain)
 */
@@ -35,7 +35,7 @@ summary, time, mark, audio, video {
 }
 
 /* HTML5 display-role reset for older browsers */
-article, aside, details, figcaption, figure, 
+article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
     display: block;
 }
@@ -47,7 +47,11 @@ body {
 }
 
 body, button, input, select, textarea {
-    font: normal 14px/24px "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font: normal 14px/1.6 "Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+
+body {
+    background: #ededed;
 }
 
 ol, ul {
@@ -88,7 +92,7 @@ textarea, input {
 }
 
 input:focus,
-textarea:focus { 
+textarea:focus {
     outline: none;
     border-color: #ddd;
 }
@@ -106,8 +110,8 @@ input[type="submit"] {
     margin: 10px 0 20px;
     font-weight: bold;
     border: 1px solid #ddd;
-    background: #efefef; 
-    background: -moz-linear-gradient(top,  #ffffff 0%, #efefef 100%); 
+    background: #efefef;
+    background: -moz-linear-gradient(top,  #ffffff 0%, #efefef 100%);
     background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, #ffffff), color-stop(100%, #efefef));
     background: -webkit-linear-gradient(top,  #ffffff 0%, #efefef 100%);
 }
@@ -128,7 +132,6 @@ pre {
     background-color: #f7f7f9;
     font-family: "Lucida Sans Typewriter", Monaco, "Courier New", monospace;
     font-size: 12px;
-    line-height: 1.6;
     border: 1px solid #e1e1e8;
     padding: 8px;
     word-break: break-word;
@@ -155,7 +158,8 @@ small {
     color: #888;
 }
 
-.clearfix:after {
+.clearfix:after,
+.container:after {
     content: ".";
     display: block;
     clear: both;
@@ -163,7 +167,7 @@ small {
     height:0;
 }
 
-.clearfix {
+.clearfix, .container {
     *+height: 1%;
 }
 
@@ -172,49 +176,53 @@ small {
 .alignleft { float: left; }
 .hide { display:none; }
 
-#page {
+.container {
     width: 1000px;
     margin: 0 auto;
 }
 
 #header {
-    border-bottom: 1px solid #ededed;
-    margin-bottom: 30px;
-    position: relative;
-    z-index: 900;
+    position: fixed;
+    z-index: 1111;
+    width: 100%;
+    top: 0px;
+    border: none;
     line-height: 32px;
-    padding: 10px 0;
+    padding: 5px 0;
+    background-color: #fff;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
 }
 
-#header .caption a {
+.logo  {
+    display: block;
+    float: left;
+    padding: 3px 0;
+}
+
+.logo a,
+.logo a:hover {
+    color: #333;
     font-size: 25px;
     font-weight: bold;
 }
 
-.logo, .header-menu .menu, .header-menu .menu li {
-    display: block;
-    float: left;
-}
-
-.logo {
-    height: 42px;
-    margin-right: 35px;
-    padding: 3px 0;
-}
-
-#mobile-menu {
-    display: none;
+.header-menu .menu {
+    float: right;
+    width: 300px;
 }
 
 .header-menu .menu li {
+    display: block;
     margin-right: 25px;
-}
+    float: left;
+ }
 
 .header-menu .menu li a {
+    color: #666;
     display: block;
     height: 32px;
-    line-height: 32px;
     padding: 5px 2px;
+    line-height: 32px;
     outline: medium none;
     _white-space: nowrap;
 }
@@ -222,9 +230,8 @@ small {
 .header-menu .menu li a:hover,
 .header-menu .menu li a:active,
 .header-menu .menu li.current-menu-item a {
-    border-top: 2px solid #5895be;
-    padding-top: 3px;
     font-weight: bold;
+    color: #333;
 }
 
 .search-box {
@@ -261,8 +268,13 @@ small {
 }
 
 #content {
-    padding-top: 20px;
-    padding-bottom: 20px;
+    margin-top: 75px;
+}
+
+#content .container {
+    background: #fff;
+    padding: 25px;
+    box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
 }
 
 #primary {
@@ -273,6 +285,8 @@ small {
 
 #site-breadcrumbs {
     margin-bottom: 15px;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #ededed;
 }
 
 .single #site-breadcrumbs {
@@ -295,7 +309,6 @@ small {
 #category-description {
     padding: 15px;
     margin-bottom: 15px;
-    line-height: 1.6;
     background-color: #f7f7f9;
     border: 1px solid #e1e1e8;
     font-size: 14px;
@@ -362,7 +375,7 @@ small {
 .post-content td {
     border-bottom: 1px solid #ddd;
     font-size: 12px;
-    padding: 5px 10px; 
+    padding: 5px 10px;
     vertical-align: top;
     text-align: left;
 }
@@ -403,7 +416,6 @@ small {
 .post-content ul li,
 .post-content ol li {
     margin-bottom: 5px;
-    line-height: 1.8;
 }
 
 .post-copyright p {
@@ -511,6 +523,7 @@ small {
     color: #444;
     font-size: 14px;
     margin-bottom: 15px;
+    font-weight: bold;
 }
 
 .widget ul {
@@ -547,7 +560,7 @@ small {
     list-style: none;
 }
 
-ul.tabnav li { 
+ul.tabnav li {
     float: left;
     border: 1px solid #ddd;
     border-bottom: none;
@@ -558,12 +571,12 @@ ul.tabnav li {
 
 ul.four li {
     width: 20%;
-    padding: 0 1px; 
+    padding: 0 1px;
     margin: 0 5px;
 }
 
 ul.tabnav li.selected {
-    cursor: default; 
+    cursor: default;
     border-bottom: 1px solid #fff;
     margin-bottom: -1px;
 }
@@ -613,13 +626,9 @@ ul.tabnav li.selected, ul.tabnav li:hover {
 }
 
 #footer {
-    margin-top: 30px;
-    border-top: 1px solid #ededed;
     color: #888;
-}
-
-#footer {
-    padding: 15px 0;
+    padding: 5px 0;
+    margin-top: 15px;
     text-align: center;
 }
 
@@ -758,7 +767,6 @@ ul.tabnav li.selected, ul.tabnav li:hover {
 .comment-body {
     padding: 0 15px 10px 65px;
     position: relative;
-    line-height: 1.6;
 }
 
 li.depth-1 {
@@ -926,120 +934,4 @@ pre .pln { color: #333; }
 
 .donate-btn a:first-child {
     margin-bottom: 15px;
-}
-
-@media screen and (max-width: 1000px) {
-
-.logo {
-    float: none;
-}
-
-#page {
-    width: 90%;
-    margin: 0 auto;
-}
-
-#primary {
-    width: 100%;
-}
-
-#sidebar {
-    display: none;
-}
-
-#header {
-    height: 42px;
-    margin-bottom: 50px;
-}
-
-.header-menu {
-    position: absolute;
-    left: 0;
-    right: 0;
-    top: 62px;
-    border-bottom: 1px solid #ededed;
-}
-
-.search-box {
-    position: absolute;
-    top: 10px;
-    right: 0; 
-    float: none;
-    display: block;
-}
-
-}
-
-@media screen and (max-width: 640px) {
-
-#mobile-menu {
-    display: block;
-    font-size: 32px;
-    padding: 5px 0;
-    position: absolute;
-    right: 0;
-    top: 10px;
-}
-
-#mobile-menu:hover {
-    cursor: pointer;
-}
-
-#mobile-menu i {
-    line-height: 32px;
-}
-
-.header-menu,
-.search-form,
-.search-box {
-    display: none;
-}
-
-#post-pagination,
-#social-share {
-    clear: both;
-    float: none;
-}
-
-#social-share {
-    margin-top: 15px;
-}
-
-.post-title {
-    font-size: 18px;
-}
-
-.comment-text {
-    word-break: break-word;
-}
-
-}
-
-@media screen and (max-width: 480px) {
-
-.post-meta .post-view, .designed-by,
-.comment-date, .comments-num,
-.related-posts li .post-view,
-.related-posts li .post-comment {
-    display: none;
-}
-
-.post-content .archives-list {
-    border: none;
-    margin: 0;
-    padding: 0;
-}
-
-.post-content .archives-list li {
-    padding: 0;
-}
-
-.post-content .archives-list li div {
-    display: block;
-}
-
-.post-content .post-link {
-    margin-left: 4px;
-}
-
 }

@@ -4,7 +4,7 @@
  *
  * @package dangopress
  */
- 
+
 if (is_admin()) {
     require_once('theme-options.php');
 }
@@ -35,7 +35,7 @@ if (file_exists(CUSTOM_FUNCTIONS)) {
  */
 $content_width = 640;
 
-/* 
+/*
  * Customize filter and actions
  */
 remove_action('wp_head', 'feed_links', 2);
@@ -52,12 +52,12 @@ remove_action('wp_head', 'wp_generator');
 remove_action('wp_head', 'rel_canonical');
 remove_action('wp_head', 'wp_shortlink_wp_head', 10, 0);
 
-/* 
+/*
  * Disable xml rpc
  */
 add_filter('xmlrpc_enabled', '__return_false');
 
-/* 
+/*
  * Disable Automatic Formatting
  */
 remove_filter('the_content', 'wptexturize');
@@ -112,7 +112,7 @@ function dangopress_setup_theme()
     // Add theme support
     add_theme_support('automatic-feed-links');
     add_theme_support('custom-background');
-    add_theme_support('post-thumbnails'); 
+    add_theme_support('post-thumbnails');
 
     // Register wordpress menu
     register_nav_menus(array('primary' => 'Primary Navigation'));
@@ -240,7 +240,7 @@ function dangopress_remove_version($src)
 add_filter('script_loader_src', 'dangopress_remove_version', 15, 1);
 add_filter('style_loader_src', 'dangopress_remove_version', 15, 1);
 
-/* 
+/*
  * Escape special characters in pre.prettyprint into their HTML entities
  */
 function dangopress_esc_html($content)
@@ -342,7 +342,7 @@ function dangopress_comments_callback($comment, $args, $depth) {
         } else {
             $commentcount = 0;
         }
-    } 
+    }
 
     $comment_id = $comment->comment_ID; ?>
 
@@ -382,7 +382,7 @@ function dangopress_comments_callback($comment, $args, $depth) {
 function dangopress_add_at_author($comment_text, $comment)
 {
     if ($comment->comment_parent) { // Show reply to somebody
-        $parent = get_comment($comment->comment_parent);   
+        $parent = get_comment($comment->comment_parent);
         $parent_href = htmlspecialchars(get_comment_link($comment->comment_parent));
 
         $parent_author = $parent->comment_author;
@@ -408,7 +408,7 @@ function dangopress_validate_gravatar($email)
 
     $hashkey = md5(strtolower(trim($email)));
     $uri = 'http://www.gravatar.com/avatar/' . $hashkey . '?d=404';
- 
+
     $data = wp_cache_get($hashkey);
 
     if ($data === false) {
@@ -421,7 +421,7 @@ function dangopress_validate_gravatar($email)
         }
 
         wp_cache_set($hashkey, $data, $group = '', $expire = 60*60*24);
-    }       
+    }
 
     if ($data == '200') {
         return true;
@@ -458,7 +458,7 @@ function dangopress_getridof_spam($commentdata)
     }
 
     /* Check whether the comment text contains the japanese chars */
-    if (preg_match('/[ぁ-ん]+|[ァ-ヴ]+/u', $comment_content) || 
+    if (preg_match('/[ぁ-ん]+|[ァ-ヴ]+/u', $comment_content) ||
             preg_match('/[ぁ-ん]+|[ァ-ヴ]+/u', $comment_author)) {
         wp_die('请勿恶意评论');
     }
@@ -510,7 +510,7 @@ function dangopress_tag_spam($approved, $commentdata)
         /*
          * For normal comment without a gravatar:
          *
-         * Tag it as spam if no chinese words found, or comment characters are 
+         * Tag it as spam if no chinese words found, or comment characters are
          * too many. It's more strict than bellow.
          *
          * One chinese character in UTF-8 takes up 3 bytes
@@ -606,7 +606,8 @@ add_action('comment_post', 'dangopress_email_nodify');
  */
 function dangopress_breadcrumb()
 {
-    if (!function_exists('yoast_breadcrumb') || is_home() || is_page())
+    //if (!function_exists('yoast_breadcrumb') || is_home() || is_page())
+    if (!function_exists('yoast_breadcrumb') || is_home())
         return;
 
     yoast_breadcrumb('<div id="site-breadcrumbs">', '</div>');
@@ -633,7 +634,7 @@ function dangopress_number_breadcrumbs($links)
 }
 add_filter('wpseo_breadcrumb_links', 'dangopress_number_breadcrumbs', 10, 1);
 
-/* 
+/*
  * Customize breadcrumb links
  */
 function dangopress_customize_breadcrumb($link_output, $link)
@@ -689,8 +690,8 @@ function dangopress_place_bdshare()
 ?>
 
 <div id="bdshare" class="bdshare_t bds_tools_24 get-codes-bdshare">
-    <a class="bds_tsina"></a>  
-    <a class="bds_tqq"></a>  
+    <a class="bds_tsina"></a>
+    <a class="bds_tqq"></a>
     <a class="bds_twi"></a>
     <a class="bds_hi"></a>
     <a class="bds_douban"></a>
@@ -698,11 +699,11 @@ function dangopress_place_bdshare()
     <a class="bds_youdao"></a>
     <a class="bds_copy"></a>
     <span class="bds_more"></span>
-</div>  
+</div>
 
 <?php
 
-    add_action('wp_footer', 'dangopress_load_bdshare'); 
+    add_action('wp_footer', 'dangopress_load_bdshare');
 }
 
 /*
@@ -720,7 +721,7 @@ function dangopress_load_bdshare()
 document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
 </script>
 
-<?php 
+<?php
 }
 
 /*
@@ -771,7 +772,7 @@ var _hmt = _hmt || [];
 <?php
     }
 }
-add_action('wp_head', 'dangopress_insert_analytics_snippets'); 
+add_action('wp_head', 'dangopress_insert_analytics_snippets');
 
 /*
  * Show description box in category page

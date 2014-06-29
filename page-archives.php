@@ -14,10 +14,6 @@ $prev_post_year = null;
 <div <?php post_class(); ?>>
     <div class="clearfix post-content">
 
-        <div class="post-header">
-            <h1 class="post-title"><?php the_title(); ?></h1>
-        </div>
-
     <?php while (have_posts()): the_post();
         $post_ts = strtotime($post->post_date);
         $post_year = date('Y', $post_ts);
