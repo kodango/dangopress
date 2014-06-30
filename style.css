@@ -47,7 +47,7 @@ body {
 }
 
 body, button, input, select, textarea {
-    font: normal 14px/1.6 "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font: 13px/22px 'Helvetica Neue',Helvetica,Arial,Sans-serif;
 }
 
 body {
@@ -69,7 +69,7 @@ a {
 }
 
 a:hover {
-    color: #2C63A9;
+    color: #225599;
     text-decoration: none;
 }
 
@@ -179,41 +179,47 @@ small {
 .container {
     width: 1000px;
     margin: 0 auto;
+    padding: 1px 25px;
+}
+
+.left-part {
+    float: left;
+    width: 680px;
+    display: block;
+}
+
+.right-part {
+    float: right;
+    padding-left: 20px;
+    width: 280px;
+    display: block;
 }
 
 #header {
     position: fixed;
-    z-index: 1111;
     width: 100%;
     top: 0px;
+    z-index: 99999;
     border: none;
     line-height: 32px;
-    padding: 5px 0;
     background-color: #fff;
     box-shadow: 0 0 4px rgba(0, 0, 0, 0.4);
 }
 
-.logo  {
-    display: block;
-    float: left;
+.site-logo  {
     padding: 3px 0;
 }
 
-.logo a,
-.logo a:hover {
+.site-logo a,
+.site-logo a:hover {
     color: #333;
     font-size: 25px;
     font-weight: bold;
 }
 
-.header-menu .menu {
-    float: right;
-    width: 300px;
-}
-
 .header-menu .menu li {
     display: block;
-    margin-right: 25px;
+    margin-right: 20px;
     float: left;
  }
 
@@ -234,41 +240,8 @@ small {
     color: #333;
 }
 
-.search-box {
-    float: right;
-    position: relative;
-    padding: 4px 0;
-}
-
-.search-form {
-    border: 1px solid #ededed;
-    padding-right: 4px;
-}
-
-.search-box .search-input {
-    width: 212px;
-    height: 30px;
-    padding: 0 5px;
-    border: none;
-    outline: 0;
-    margin: 0;
-}
-
-.search-submit {
-    top: 0;
-    border: none;
-    cursor: pointer;
-    background: transparent;
-    color: #888;
-    padding: 0 4px;
-}
-
-.search-submit:hover {
-    color: #444;
-}
-
 #content {
-    margin-top: 75px;
+    margin-top: 65px;
 }
 
 #content .container {
@@ -278,9 +251,7 @@ small {
 }
 
 #primary {
-    width: 640px;
     min-height: 400px;
-    float: left;
 }
 
 #site-breadcrumbs {
@@ -300,7 +271,8 @@ small {
 }
 
 #site-breadcrumbs h1,
-#site-breadcrumbs h2 {
+#site-breadcrumbs h2,
+#site-breadcrumbs a {
     display: inline;
     font-size: 14px;
     font-weight: normal;
@@ -311,7 +283,6 @@ small {
     margin-bottom: 15px;
     background-color: #f7f7f9;
     border: 1px solid #e1e1e8;
-    font-size: 14px;
 }
 
 #category-description h2 {
@@ -352,7 +323,7 @@ small {
 }
 
 .post-content a {
-    color: #2C63A9;
+    color: #225599;
 }
 
 .post-content p {
@@ -436,14 +407,20 @@ small {
 
 .related-posts h2 {
     display: inline;
-    font-size: 16px;
+    font-size: 14px;
     font-weight: normal;
 }
 
 .related-posts h2 a {
-    border: 1px solid #ddd;
-    background-color: #fafafa;
-    padding: 3px;
+    background-color: #eff6fa;
+    padding: 3px 10px;
+    border-radius: 25px;
+    text-decoration: none;
+}
+
+.related-posts h2 a:hover {
+    background: #225599;
+    color: #fff;
 }
 
 .related-posts ul {
@@ -454,7 +431,6 @@ small {
 
 .related-posts li {
     padding: 2px 0;
-    font-size: 13px;
 }
 
 .related-posts li span {
@@ -463,7 +439,7 @@ small {
 
 .related-posts li a {
     margin-left: 10px;
-    color: #2C63A9;
+    color: #225599;
 }
 
 .related-posts li .post-view,
@@ -499,13 +475,10 @@ small {
 .comment-pagenavi a:hover {
     background: #f8f8f8;
     border-bottom-color: #5895be;
-    color: #2C63A9;
+    color: #225599;
 }
 
 #sidebar {
-    float: right;
-    padding-left: 40px;
-    width: 300px;
 }
 
 #sidebar .friend-links li,
@@ -629,18 +602,13 @@ ul.tabnav li.selected, ul.tabnav li:hover {
     color: #888;
     padding: 5px 0;
     margin-top: 15px;
-    text-align: center;
-}
-
-#footer p {
-    font-size: 13px;
 }
 
 .backtop {
     margin-left: 15px;
 }
 
-.backtop i {
+#footer i {
     margin-left: 5px;
 }
 
@@ -805,7 +773,7 @@ li.depth-2 .comment-body {
 }
 
 .comment-date {
-    margin-left: 15px;
+    margin-left: 2px;
 }
 
 .comment-text p {

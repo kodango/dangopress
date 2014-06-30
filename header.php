@@ -19,7 +19,7 @@
 <body <?php body_class(); ?>>
 <div id="header">
     <div class="container">
-        <div class="caption logo">
+        <div class="site-logo left-part">
             <?php if (is_home()): ?>
             <h1><a href="<?php bloginfo('url'); ?>" title="<?php bloginfo('name'); ?>" rel="home"><?php bloginfo('name'); ?></a></h1>
             <?php else: ?>
@@ -27,17 +27,10 @@
             <?php endif; ?>
         </div>
 
-        <?php wp_nav_menu(array('theme_location' => 'primary', 'container_class' => 'header-menu')); ?>
-
-        <div class="search-box" style="display:none">
-            <form method="get" id="search-form" class="search-form" action="<?php bloginfo('url'); ?>/">
-                <input type="text" name="s" class="search-input" size="15">
-                <button type="submit" alt="search" class="search-submit"><i class="icon-search"></i></button>
-            </form>
-        </div>
+        <?php wp_nav_menu(array('theme_location' => 'primary', 'container_class' => 'header-menu right-part')); ?>
     </div>
 </div>
 
 <div id="content">
 <div class="container">
-    <div id="primary"><?php dangopress_breadcrumb(); ?>
+    <div id="primary" class="left-part"><?php dangopress_breadcrumb(); ?>

@@ -8,7 +8,7 @@
  */
 ?>
 
-<div id="sidebar">
+<div id="sidebar" class="right-part">
 
 <?php dynamic_sidebar('sidebar'); ?>
 
