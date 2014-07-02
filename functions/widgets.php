@@ -9,7 +9,7 @@
 
 function dangopress_get_recent_posts($post_num = 10, $chars = 30)
 {
-    $recents = wp_get_recent_posts("numberposts=$post_num&offset=0");
+    $recents = wp_get_recent_posts("numberposts=$post_num&offset=0&post_status=publish");
     $output = '';
 
     foreach ($recents as $post) {
@@ -32,7 +32,7 @@ function dangopress_get_recent_posts($post_num = 10, $chars = 30)
  */
 function dangopress_get_rand_posts($post_num = 10, $chars = 30)
 {
-    $rands = get_posts("numberposts=$post_num&orderby=rand");
+    $rands = get_posts("numberposts=$post_num&orderby=rand&post_status=publish");
     $output = '';
 
     foreach ($rands as $post) {
@@ -139,6 +139,9 @@ class Dangopress_PostsTabber_Widget extends WP_Widget {
      */
     function widget($args, $instance)
     {
+        if (($instance['show_in_home'] && !is_home()))
+            return;
+
         // Get the widget content from cache first
         $cache = wp_cache_get('widget_dangopress_poststabber', 'widget'); 
 
@@ -172,17 +175,17 @@ class Dangopress_PostsTabber_Widget extends WP_Widget {
 
         // Show posts tabber title
         $output .= '<div class="tabber-title"><ul class="tabnav four clearfix">';
-        $output .= '<li class="selected">' . $before_title . '随机' . "$after_title</li>";
-        $output .= '<li class="">' . $before_title . '置顶' . "$after_title</li>";
+        $output .= '<li class="selected">' . $before_title . '置顶' . "$after_title</li>";
         $output .= '<li class="">' . $before_title . '热评' . "$after_title</li>";
+        $output .= '<li class="">' . $before_title . '随机' . "$after_title</li>";
         $output .= '<li class="">' . $before_title . '最新' . "$after_title</li>";
         $output .= '</ul></div>';
 
         // Show posts list in each tab
         $output .= '<div class="tabber-content">';
-        $output .= '<ul class="">' . dangopress_get_rand_posts($number, $chars) . '</ul>';
-        $output .= '<ul class="hide">' . dangopress_get_sticky_posts($number, $chars) . '</ul>';
+        $output .= '<ul class="">' . dangopress_get_sticky_posts($number, $chars) . '</ul>';
         $output .= '<ul class="hide">' . dangopress_get_most_commented($number, $chars) . '</ul>';
+        $output .= '<ul class="hide">' . dangopress_get_rand_posts($number, $chars) . '</ul>';
         $output .= '<ul class="hide">' . dangopress_get_recent_posts($number, $chars) . '</ul>';
         $output .= '</div>';
 
@@ -210,6 +213,7 @@ class Dangopress_PostsTabber_Widget extends WP_Widget {
         $instance = $old_instance;
         $instance['number'] = absint($new_instance['number']);
         $instance['chars'] = absint($new_instance['chars']);
+        $instance['show_in_home'] = $new_instance['show_in_home'] ? 1 : 0;
 
         $this->flush_widget_cache();
 
@@ -228,6 +232,10 @@ class Dangopress_PostsTabber_Widget extends WP_Widget {
         <input class="widefat" id="<?php echo $this->get_field_id('number'); ?>" name="<?php echo $this->get_field_name('number'); ?>" type="text" value="<?php echo $number; ?>" /></p>
         <p><label for="<?php echo $this->get_field_id('chars'); ?>">标题显示字数限制: </label>
         <input class="widefat" id="<?php echo $this->get_field_id('chars'); ?>" name="<?php echo $this->get_field_name('chars'); ?>" type="text" value="<?php echo $chars; ?>" /></p>
+        <p>
+        <input class="checkbox" type="checkbox" <?php checked($instance['show_in_home'], true); ?> id="<?php echo $this->get_field_id('show_in_home'); ?>" name="<?php echo $this->get_field_name('show_in_home'); ?>" /> 
+        <label for="<?php echo $this->get_field_id('show_in_home'); ?>">仅在首页显示</label>
+        </p>
 <?php
     }
 }
