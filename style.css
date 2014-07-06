@@ -827,38 +827,30 @@ span.at-author {
     color: #444;
 }
 
-.post-content .archives-list {
-    border-left: 1px dotted #ededed;
-    list-style: none;
-    margin: 0 0 15px 15px;
-    padding: 0 20px;
+.year-archives {
+    padding-bottom: 20px;
 }
 
-.post-content .archives-list li {
-    clear: both;
-    list-style: none;
-    margin-bottom: 10px;
+.archive-item a {
+    color: #444;
+    display: block;
+    padding: 5px;
 }
 
-.post-content .archives-list li div {
-    display: inline-block;
+.archive-item a:hover {
+    background: #f9f9f9;
 }
 
-.post-content .archive-date {
+.archive-item span {
     color: #888;
 }
 
-.post-content .post-link {
-     margin-left: 20px;
+.archive-item .post-time {
+    padding-right: 10px;
 }
 
-.post-content .comments-num {
-    font-size: 12px;
-    margin-left: 10px;
-}
-
-.post-content .comments-num a {
-    color: #888;
+.archive-item .comment-num {
+    padding-left: 10px;
 }
 
 pre .pln { color: #333; }

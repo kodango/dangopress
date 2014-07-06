@@ -1,67 +1,62 @@
 <?php
 /*
  * Template Name: Archives
+ *
+ * @package dangopress
  */
 
 get_header();
 
-query_posts('posts_per_page=-1&ignore_sticky_posts=1');
+# Create a new query
+$new_query = new WP_Query('posts_per_page=-1&ignore_sticky_posts=1');
 
-$prev_post_ts = null;
-$prev_post_year = null;
+# Remember the last year and last month when iterate the year/month
+$last_year = 0;
+$last_mon = 0;
+
+# Archives output html
+$output = '';
+
+while ($new_query->have_posts() ): $new_query->the_post();
+    # Get the current post year and month
+    $curr_year = get_the_time('Y');
+    $curr_mon = get_the_time('n');
+
+    # Add closing tags
+    if ($last_mon > 0 && $last_mon != $curr_mon)
+        $output .= '</div></div>';
+
+    # Stores the year
+    if ($last_year != $curr_year) {
+        $last_year = $curr_year;
+    }
+
+    # Stores the month
+    if ($last_mon != $curr_mon) {
+        $last_mon = $curr_mon;
+
+        $output .= "<div class='year-archives' id='arti-$curr_year-$curr_mon'>";
+        $output .= "<h3 class='archive-title'>$curr_year-$curr_mon</h3>";
+        $output .= "<div class='month-archives archives-$curr_mon' id='arti-$curr_year-$curr_mon'>";
+    }
+
+    $output .= '<div class="archive-item"><a href="' . get_permalink() . '">';
+    $output .= '<span class="post-time">' . get_the_time('n-d') . '</span>' . get_the_title();
+    $output .= '<span class="comment-num">(' . get_comments_number('0', '1', '%') . ')</span>';
+    $output .= '</a></div>';
+endwhile;
+
+# Add closing tags
+$output .= '</div></div>';
+
+# Reset the post to current post
+wp_reset_postdata();
 ?>
 
 <div <?php post_class(); ?>>
     <div class="clearfix post-content">
-
-    <?php while (have_posts()): the_post();
-        $post_ts = strtotime($post->post_date);
-        $post_year = date('Y', $post_ts);
-
-        if (($prev_post_year != $post_year)) {
-            if (!is_null($prev_post_year)) { /* Close off the UL */?>
-
-            </ul>
-
-        <?php
-            }
-        ?>
-
-            <h3 class="archive-year">
-                <a href="<?php echo get_year_link($post_year); ?>"><?php echo $post_year . ' 年'; ?></a>
-            </h3>
-            <ul class="archives-list">
-
-        <?php
-        } ?>
-
-               <li class="archive-item clearfix">
-                   <div class="alignleft">
-                       <span class="archive-date"><?php the_time('m-d'); ?></span>
-                   </div>
-                   <div class="aligncenter">
-                       <span class="post-link"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></span>
-                   </div>
-                   <div class="alignright">
-                       <span class="comments-num"><?php comments_popup_link('0 个评论', '1 个评论', '% 个评论', '', '评论关闭'); ?></span>
-                   </div>
-               </li>
-
-        <?php
-
-        /* For subsequent iterations */
-        $prev_post_ts = $post_ts;
-        $prev_post_year = $post_year;
-    endwhile;
-
-    /* If we've processed at least *one* post, close the ordered list */
-    if (!is_null( $prev_post_ts)) { ?>
-
-            </ul>
-
-    <?php
-    } ?>
-    </div>
-</div>
+        <div id="archives-content"><?php echo $output; ?></div>
+    </div> <!-- end post-content -->
+ </div> <!-- end post -->
 
 <?php get_footer(); ?>
