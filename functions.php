@@ -829,4 +829,23 @@ function dangopress_add_quicktags()
 }
 add_action('admin_print_footer_scripts', 'dangopress_add_quicktags');
 
+/*
+ * Disable google fonts
+ */
+function dangopress_disable_google_fonts($translations, $text, $context, $domain )
+{
+    $google_fonts_contexts = array(
+        'Open Sans font: on or off',
+        'Lato font: on or off',
+        'Source Sans Pro font: on or off',
+        'Bitter font: on or off');
+
+    if ($text == 'on' && in_array($context, $google_fonts_contexts)) {
+        $translations = 'off';
+    }
+
+    return $translations;
+}
+add_filter('gettext_with_context', 'dangopress_disable_google_fonts', 888, 4);
+
 ?>
