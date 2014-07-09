@@ -163,10 +163,10 @@ function dangopress_setup_load()
     $url_prefix = dangopress_get_url_prefix();
 
     // Main css
-    wp_enqueue_style('main-css', $url_prefix . '/styles/main.min.css', array(), '0.4.5');
+    wp_enqueue_style('main', $url_prefix . '/styles/main.min.css', array(), '0.4.5');
 
     // Font awesome css
-    wp_enqueue_style('font-awesome-css', $url_prefix . '/styles/font-awesome.min.css', array(), '3.2.1');
+    wp_enqueue_style('font-awesome', $url_prefix . '/styles/font-awesome.min.css', array(), '3.2.1');
 
     // Replace jQuery, use Baidu Public Library CDN
     if (!is_admin()) {
