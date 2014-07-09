@@ -163,25 +163,25 @@ function dangopress_setup_load()
     $url_prefix = dangopress_get_url_prefix();
 
     // Main css
-    wp_enqueue_style('style', get_stylesheet_uri());
+    wp_enqueue_style('main-css', $url_prefix . '/styles/main.min.css', array(), '0.4.5');
 
     // Font awesome css
-    wp_enqueue_style('font-awesome', $url_prefix . '/styles/font-awesome.min.css', array(), '3.2.1');
+    wp_enqueue_style('font-awesome-css', $url_prefix . '/styles/font-awesome.min.css', array(), '3.2.1');
 
     // Replace jQuery, use Baidu Public Library CDN
     if (!is_admin()) {
         wp_deregister_script('jquery');
-        wp_register_script('jquery', "http://libs.baidu.com/jquery/2.0.3/jquery.min.js",
-                           array(), '2.0.3', true);
+        wp_register_script('jquery', $url_prefix . '/scripts/jquery-2.1.1.min.js',
+                           array(), '2.1.1', true);
     }
 
     // Register prettify.js
     wp_enqueue_script('prettify-js', $url_prefix . '/scripts/prettify.min.js',
-                       array(), '20130504', true);
+                       array(), '0.4.5', true);
 
     // Theme script
-    wp_enqueue_script('kodango', $url_prefix . '/scripts/kodango.min.js',
-                      array('jquery'), '1.0', true);
+    wp_enqueue_script('kodango-js', $url_prefix . '/scripts/kodango.min.js',
+                      array('jquery'), '0.4.5', true);
 }
 add_action('wp_enqueue_scripts', 'dangopress_setup_load');
 
