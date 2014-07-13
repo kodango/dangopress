@@ -848,4 +848,18 @@ function dangopress_disable_google_fonts($translations, $text, $context, $domain
 }
 add_filter('gettext_with_context', 'dangopress_disable_google_fonts', 888, 4);
 
+/*
+ * Embed gists with a URL in post article
+ */
+function dangopress_embed_gist($matches, $attr, $url, $rawattr)
+{
+    $embed = sprintf(
+        '<script src="https://gist.github.com/%1$s.js%2$s"></script>',
+        esc_attr($matches[1]),
+        esc_attr($matches[2])
+    );
+
+    return apply_filters('dangopress_embed_gist', $embed, $matches, $attr, $url, $rawattr);
+}
+wp_embed_register_handler('gist', '#https?://gist\.github\.com(?:/[a-z0-9-]+)?/([a-z0-9]+)(\?file=.*)?#i', 'dangopress_embed_gist');
 ?>
