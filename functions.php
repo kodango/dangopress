@@ -861,5 +861,10 @@ function dangopress_embed_gist($matches, $attr, $url, $rawattr)
 
     return apply_filters('dangopress_embed_gist', $embed, $matches, $attr, $url, $rawattr);
 }
-wp_embed_register_handler('gist', '#https?://gist\.github\.com(?:/[a-z0-9-]+)?/([a-z0-9]+)(\?file=.*)?#i', 'dangopress_embed_gist');
+
+wp_embed_register_handler(
+    'gist',
+    '#https?://gist\.github\.com(?:/[a-z0-9-]+)?/([a-z0-9]+)(\?file=.*)?#i',
+    'dangopress_embed_gist'
+);
 ?>
