@@ -15,7 +15,7 @@
 <div id="footer">
 <div class="container">
    <p class="left-part">
-       <span>Copyright &copy; 2012-2014 <?php bloginfo('name'); ?>.</span>
+       <span>Copyright &copy; 2012-2016 <?php bloginfo('name'); ?>.</span>
        <span class="designed-by">本主题由 <a href="http://kodango.com">kodango</a> 设计.</span>
    </p>
    <p class="right-part">
