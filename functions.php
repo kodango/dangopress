@@ -53,9 +53,26 @@ remove_action('wp_head', 'rel_canonical');
 remove_action('wp_head', 'wp_shortlink_wp_head', 10, 0);
 
 /*
+ * Disable emojicons introduced with WP 4.2
+ */
+remove_action('wp_head', 'print_emoji_detection_script', 7);
+remove_action('wp_print_styles', 'print_emoji_styles');
+//add_filter('emoji_svg_url', '__return_false');
+
+/*
  * Disable xml rpc
  */
 add_filter('xmlrpc_enabled', '__return_false');
+
+/*
+ * Hide admin bar
+ */
+add_filter('show_admin_bar', '__return_false');
+
+/*
+ * Remove the responsive image support in 4.4
+ */
+add_filter('max_srcset_image_width', create_function('', 'return 1;'));
 
 /*
  * Disable Automatic Formatting
@@ -64,6 +81,36 @@ remove_filter('the_content', 'wptexturize');
 remove_filter('the_excerpt', 'wptexturize');
 remove_filter('the_title', 'wptexturize');
 remove_filter('comment_text', 'wptexturize');
+
+/*
+ * Disable wp-json API
+ */
+
+// Filters for WP-API version 1.x
+add_filter('json_enabled', '__return_false');
+add_filter('json_jsonp_enabled', '__return_false');
+
+// Filters for WP-API version 2.x
+add_filter('rest_enabled', '__return_false');
+add_filter('rest_jsonp_enabled', '__return_false');
+
+// Remove REST API info from head and headers
+remove_action('xmlrpc_rsd_apis', 'rest_output_rsd');
+remove_action('wp_head', 'rest_output_link_wp_head', 10);
+remove_action('template_redirect', 'rest_output_link_header', 11);
+remove_action('wp_head', 'wp_oembed_add_discovery_links');
+
+/*
+ * Disable Embed function
+ */
+remove_action('rest_api_init', 'wp_oembed_register_route');
+remove_filter('rest_pre_serve_request', '_oembed_rest_pre_serve_request', 10, 4);
+
+remove_filter('oembed_dataparse', 'wp_filter_oembed_result', 10 );
+remove_filter('oembed_response_data',   'get_oembed_response_data_rich',  10, 4);
+
+remove_action('wp_head', 'wp_oembed_add_discovery_links');
+remove_action('wp_head', 'wp_oembed_add_host_js');
 
 /*
  * Customize wordpress title
@@ -765,4 +812,31 @@ wp_embed_register_handler(
     '#https?://gist\.github\.com(?:/[a-z0-9-]+)?/([a-z0-9]+)(\?file=.*)?#i',
     'dangopress_embed_gist'
 );
+
+/*
+ * Use V2EX avatar service
+ */
+function dangopress_get_v2ex_avatar($avatar) {
+    return str_replace(
+        array(
+            "secure.gravatar.com/avatar",
+            "0.gravatar.com/avatar",
+            "1.gravatar.com/avatar",
+            "2.gravatar.com/avatar"
+        ), "cdn.v2ex.com/gravatar", $avatar);
+}
+add_filter('get_avatar', 'dangopress_get_v2ex_avatar');
+
+/*
+ * Disable dns prefetch
+ */
+function dangopress_disable_dns_prefetch($hints, $relation_type) {
+    if ('dns-prefetch' === $relation_type) {
+        return array_diff(wp_dependencies_unique_hosts(), $hints);
+    }
+
+    return $hints;
+}
+add_filter('wp_resource_hints', 'remove_dns_prefetch', 10, 2);
+
 ?>
