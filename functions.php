@@ -551,81 +551,166 @@ function dangopress_email_nodify($comment_id)
 add_action('comment_post', 'dangopress_email_nodify');
 
 /*
- * Show breadcrumb by yoast breadcrumb plugin
+ * Show breadcrumb by Dimox
+ * URL: http://dimox.net/wordpress-breadcrumbs-without-a-plugin/
+ * Version: 2017.21.01
+ * License: MIT
  */
 function dangopress_breadcrumb()
 {
-    //if (!function_exists('yoast_breadcrumb') || is_home() || is_page())
-    if (!function_exists('yoast_breadcrumb') || is_home())
+    /* === OPTIONS === */
+    $text['home']     = '首页'; // text for the 'Home' link
+    $text['category'] = '%s'; // text for a category page
+    $text['search']   = '"%s" 的搜索结果'; // text for a search results page
+    $text['tag']      = '包含标签 "%s" 的文章'; // text for a tag page
+    $text['404']      = '页面未到到'; // text for the 404 page
+    $text['page']     = 'Page %s'; // text 'Page N'
+    $text['cpage']    = 'Comment Page %s'; // text 'Comment Page N'
+
+    $prefix         = '<i class="icon-windows"></i>'; // Prefix the breadcrumb
+    $wrap_before    = '<div class="breadcrumbs" id="site-breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">'; // the opening wrapper tag
+    $wrap_after     = '</div><!-- .breadcrumbs -->'; // the closing wrapper tag
+    $sep            = '<i class="icon-caret-right"></i>'; // separator between crumbs
+    $sep_before     = '<span class="sep">'; // tag before separator
+    $sep_after      = '</span>'; // tag after separator
+    $show_home_link = 0; // 1 - show the 'Home' link, 0 - don't show
+    $show_current   = 1; // 1 - show current page title, 0 - don't show
+    $before         = '<h1 class="current-crumb">'; // tag before the current crumb
+    $after          = '</h1>'; // tag after the current crumb
+    /* === END OF OPTIONS === */
+
+    global $post;
+    $home_url       = home_url('/');
+
+    $link_before    = '<span itemprop="itemListElement" itemscope itemtype="http://schema.org/ListItem">';
+    $link_after     = '</span>';
+    $link_attr      = ' itemprop="item"';
+    $link_in_before = '<span itemprop="name">';
+    $link_in_after  = '</span>';
+    $link           = $link_before . '<a href="%1$s"' . $link_attr . '>' . $link_in_before . '%2$s' . $link_in_after . '</a>' . $link_after;
+
+    $frontpage_id   = get_option('page_on_front');
+    $parent_id      = ($post) ? $post->post_parent : '';
+    $sep            = ' ' . $sep_before . $sep . $sep_after . ' ';
+    $home_link      = $link_before . '<a rel="nofollow" href="' . $home_url . '"' . $link_attr . ' class="home">' . $link_in_before . $text['home'] . $link_in_after . '</a>' . $link_after;
+
+    if (is_home() || is_front_page()) {
         return;
+    } else {
+        echo $wrap_before . $prefix;
+        if ($show_home_link) echo $home_link;
 
-    yoast_breadcrumb('<div id="site-breadcrumbs">', '</div>');
-}
-
-/*
- * Number the breadcrumb links
- */
-function dangopress_number_breadcrumbs($links)
-{
-    $my_links = array();
-
-    $count = count($links);
-    $index = 1;
-
-    foreach ($links as $key => $value) {
-        $value['my_index'] = $index++;
-        $value['my_total_count'] = $count;
-
-        $my_links[] = $value;
+        if ( is_category() ) {
+            $cat = get_category(get_query_var('cat'), false);
+            if ($cat->parent != 0) {
+                $cats = get_category_parents($cat->parent, TRUE, $sep);
+                $cats = preg_replace("#^(.+)$sep$#", "$1", $cats);
+                $cats = preg_replace('#<a([^>]+)>([^<]+)<\/a>#', $link_before . '<a$1' . $link_attr .'>' . $link_in_before . '$2' . $link_in_after .'</a>' . $link_after, $cats);
+                if ($show_home_link) echo $sep;
+                echo $cats;
+            }
+            if ( get_query_var('paged') ) {
+                $cat = $cat->cat_ID;
+                echo $sep . sprintf($link, get_category_link($cat), get_cat_name($cat)) . $sep . $before . sprintf($text['page'], get_query_var('paged')) . $after;
+            } else {
+                if ($show_current) echo $sep . $before . sprintf($text['category'], single_cat_title('', false)) . $after;
+            }
+        } elseif ( is_search() ) {
+            if (have_posts()) {
+                if ($show_home_link && $show_current) echo $sep;
+                if ($show_current) echo $before . sprintf($text['search'], get_search_query()) . $after;
+            } else {
+                if ($show_home_link) echo $sep;
+                echo $before . sprintf($text['search'], get_search_query()) . $after;
+            }
+        } elseif ( is_day() ) {
+            if ($show_home_link) echo $sep;
+            echo sprintf($link, get_year_link(get_the_time('Y')), get_the_time('Y')) . $sep;
+            echo sprintf($link, get_month_link(get_the_time('Y'), get_the_time('m')), get_the_time('F'));
+            if ($show_current) echo $sep . $before . get_the_time('d') . $after;
+        } elseif ( is_month() ) {
+            if ($show_home_link) echo $sep;
+            echo sprintf($link, get_year_link(get_the_time('Y')), get_the_time('Y'));
+            if ($show_current) echo $sep . $before . get_the_time('F') . $after;
+        } elseif ( is_year() ) {
+            if ($show_home_link && $show_current) echo $sep;
+            if ($show_current) echo $before . get_the_time('Y') . $after;
+        } elseif ( is_single() && !is_attachment() ) {
+            if ($show_home_link) echo $sep;
+            if ( get_post_type() != 'post' ) {
+                $post_type = get_post_type_object(get_post_type());
+                $slug = $post_type->rewrite;
+                printf($link, $home_url . $slug['slug'] . '/', $post_type->labels->singular_name);
+                if ($show_current) echo $sep . $before . get_the_title() . $after;
+            } else {
+                $cat = get_the_category(); $cat = $cat[0];
+                $cats = get_category_parents($cat, TRUE, $sep);
+                if (!$show_current || get_query_var('cpage')) $cats = preg_replace("#^(.+)$sep$#", "$1", $cats);
+                $cats = preg_replace('#<a([^>]+)>([^<]+)<\/a>#', $link_before . '<a$1' . $link_attr .'>' . $link_in_before . '$2' . $link_in_after .'</a>' . $link_after, $cats);
+                echo $cats;
+                if ( get_query_var('cpage') ) {
+                    echo $sep . sprintf($link, get_permalink(), get_the_title()) . $sep . $before . sprintf($text['cpage'], get_query_var('cpage')) . $after;
+                } else {
+                    if ($show_current) echo $before . get_the_title() . $after;
+                }
+            }
+        // custom post type
+        } elseif ( !is_single() && !is_page() && get_post_type() != 'post' && !is_404() ) {
+            $post_type = get_post_type_object(get_post_type());
+            if ( get_query_var('paged') ) {
+                echo $sep . sprintf($link, get_post_type_archive_link($post_type->name), $post_type->label) . $sep . $before . sprintf($text['page'], get_query_var('paged')) . $after;
+            } else {
+                if ($show_current) echo $sep . $before . $post_type->label . $after;
+            }
+        } elseif ( is_attachment() ) {
+            if ($show_home_link) echo $sep;
+            $parent = get_post($parent_id);
+            $cat = get_the_category($parent->ID); $cat = $cat[0];
+            if ($cat) {
+                $cats = get_category_parents($cat, TRUE, $sep);
+                $cats = preg_replace('#<a([^>]+)>([^<]+)<\/a>#', $link_before . '<a$1' . $link_attr .'>' . $link_in_before . '$2' . $link_in_after .'</a>' . $link_after, $cats);
+                echo $cats;
+            }
+            printf($link, get_permalink($parent), $parent->post_title);
+            if ($show_current) echo $sep . $before . get_the_title() . $after;
+        } elseif ( is_page() && !$parent_id ) {
+            if ($show_current) echo $sep . $before . get_the_title() . $after;
+        } elseif ( is_page() && $parent_id ) {
+            if ($show_home_link) echo $sep;
+            if ($parent_id != $frontpage_id) {
+                $breadcrumbs = array();
+                while ($parent_id) {
+                    $page = get_page($parent_id);
+                    if ($parent_id != $frontpage_id) {
+                        $breadcrumbs[] = sprintf($link, get_permalink($page->ID), get_the_title($page->ID));
+                    }
+                    $parent_id = $page->post_parent;
+                }
+                $breadcrumbs = array_reverse($breadcrumbs);
+                for ($i = 0; $i < count($breadcrumbs); $i++) {
+                    echo $breadcrumbs[$i];
+                    if ($i != count($breadcrumbs)-1) echo $sep;
+                }
+            }
+            if ($show_current) echo $sep . $before . get_the_title() . $after;
+        } elseif ( is_tag() ) {
+            if ( get_query_var('paged') ) {
+                $tag_id = get_queried_object_id();
+                $tag = get_tag($tag_id);
+                echo $sep . sprintf($link, get_tag_link($tag_id), $tag->name) . $sep . $before . sprintf($text['page'], get_query_var('paged')) . $after;
+            } else {
+                if ($show_current) echo $sep . $before . sprintf($text['tag'], single_tag_title('', false)) . $after;
+            }
+        } elseif ( is_404() ) {
+            if ($show_home_link && $show_current) echo $sep;
+            if ($show_current) echo $before . $text['404'] . $after;
+        } elseif ( has_post_format() && !is_singular() ) {
+            if ($show_home_link) echo $sep;
+            echo get_post_format_string( get_post_format() );
+        }
+        echo $wrap_after;
     }
-
-    return $my_links;
 }
-add_filter('wpseo_breadcrumb_links', 'dangopress_number_breadcrumbs', 10, 1);
-
-/*
- * Customize breadcrumb links
- */
-function dangopress_customize_breadcrumb($link_output, $link)
-{
-    $index = $link['my_index'];
-    $total_count = $link['my_total_count'];
-
-    /*
-    if ($index == 1) {
-        // no follow the home link
-        $link_output = dangopress_nofollow_link($link_output);
-    } else if ((is_archive() || is_search()) && $index == $total_count) {
-        // surround <h1> for the last element in archive or search page
-        //$link_output = '<h1>' . $link_output . '</h1>';
-        $link_output = preg_replace(array('/<span /', '/<\/span>/'), array('<h1 ', '</h1>'), $link_output);
-    } else if ((is_single()) && $index == ($total_count-1)) {
-        // surround <h2> for the post category in single post page
-        //$link_output = '<h2>' . $link_output . '</h2>';
-        $link_output = preg_replace(array('/<span /', '/<\/span>/'), array('<h2 ', '</h2>'), $link_output);
-    } else if (is_single() && $index == $total_count) {
-        // remove post title from the breadcrumbs
-        $link_output = str_replace($link['text'], '当前位置', $link_output);
-        //$link_output = preg_replace(array('/<span /', '/<\/span>/'), array('<h1 ', '</h1>'), $link_output);
-    }
- */
-
-    if ($index == 1) {
-        // no follow the home link
-        $link_output = dangopress_nofollow_link($link_output);
-    } else if ($index == $total_count) {
-        // surround <h1> for the last element
-        //$link_output = '<h1>' . $link_output . '</h1>';
-        $link_output = preg_replace(array('/<span /', '/<\/span>/'), array('<h1 ', '</h1>'), $link_output);
-    } else if ($index == ($total_count-1) && isset($link['term'])) {
-        // surround <h2> for the post category
-        //$link_output = '<h2>' . $link_output . '</h2>';
-        $link_output = preg_replace(array('/<span /', '/<\/span>/'), array('<h2 ', '</h2>'), $link_output);
-    }
-
-    return $link_output;
-}
-add_filter('wpseo_breadcrumb_single_link', 'dangopress_customize_breadcrumb', 10, 2);
 
 /*
  * Place baidu share icons
