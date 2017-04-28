@@ -18,7 +18,7 @@
 
 <body <?php body_class(); ?>>
 <div id="header">
-    <div class="container">
+    <div class="container clearfix">
         <div class="site-logo left-part">
             <?php if (is_home()): ?>
             <h1><a href="<?php bloginfo('url'); ?>" title="<?php bloginfo('name'); ?>" rel="home"><?php bloginfo('name'); ?></a></h1>
