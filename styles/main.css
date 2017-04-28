@@ -221,55 +221,6 @@ small {
     display: block;
 }
 
-#content {
-	margin-top: 70px;
-}
-
-/* for 1000px or less */
-@media screen and (max-width: 1000px) {
-	.container {
-		width: 95%;
-	}
-
-	.right-part {
-		padding-left: 10px;
-	}
-}
-
-/* for 960px or less */
-@media screen and (max-width: 960px) {
-	.left-part, .right-part {
-		width: auto;
-		float: none;
-	}
-
-	#content {
-	    margin-top: 120px;
-	}
-
-	.right-part {
-		padding-left: 0;
-	}
-
-    #sidebar {
-		display: none;
-    }
-
-    #footer {
-    	text-align: center;
-    }
-}
-
-
-/* for 600px or less */
-@media screen and (max-width: 600px) {
-	#site-breadcrumbs span,
-	.related-posts .post-view,
-	.comment-date {
-		display: none;
-	}
-}
-
 /*
  * Main.css header
  */
@@ -315,6 +266,9 @@ small {
 /*
  * Main.css content
  */
+#content {
+ 	margin-top: 70px;
+ }
 
 #content .container {
 	background: #fff;
@@ -1021,6 +975,69 @@ pre .pln {
 	width: auto;
 	margin: 0
 }
+
+
+/* for 1000px or less */
+@media screen and (max-width: 1000px) {
+	.container {
+		width: 95%;
+	}
+
+	.right-part {
+		padding-left: 10px;
+	}
+}
+
+/* for 960px or less */
+@media screen and (max-width: 960px) {
+	.left-part {
+		width: 50%;
+	}
+
+	.right-part {
+		width: auto;
+	}
+
+    #primary {
+		width: auto;
+	}
+
+    #sidebar {
+		display: none;
+    }
+
+    #footer {
+    	text-align: center;
+    }
+}
+
+/* for 600px or less */
+@media screen and (max-width: 600px) {
+	.left-part, .right-part {
+		width: auto;
+		float: none;
+	}
+
+    .header-menu .menu li a:active, .header-menu .menu li a:hover, .header-menu .menu li.current-menu-item a {
+		border: none;
+		margin-top: 0px;
+	}
+
+	.right-part {
+		padding-left: 0;
+	}
+
+	#content {
+	    margin-top: 100px;
+	}
+
+	#site-breadcrumbs span,
+	.related-posts .post-view,
+	.comment-date {
+		display: none;
+	}
+}
+
 
 @font-face {
 	font-family:FontAwesome;src:url(./fontawesome-webfont.eot?v=3.2.1);src:url(./fontawesome-webfont.eot?#iefix&v=3.2.1) format('embedded-opentype'),url(./fontawesome-webfont.woff?v=3.2.1) format('woff'),url(./fontawesome-webfont.ttf?v=3.2.1) format('truetype'),url(./fontawesome-webfont.svg#fontawesomeregular?v=3.2.1) format('svg');font-weight:400;font-style:normal
