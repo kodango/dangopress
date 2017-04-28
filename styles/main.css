@@ -991,14 +991,11 @@ pre .pln {
 /* for 960px or less */
 @media screen and (max-width: 960px) {
 	.left-part {
-		width: 50%;
+		width: 30%;
 	}
 
-	.right-part {
-		width: auto;
-	}
-
-    #primary {
+	#primary, .right-part,
+    #footer .left-part, #footer .right-part {
 		width: auto;
 	}
 
