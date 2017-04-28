@@ -9,12 +9,6 @@ get_header();?>
 
 <?php if (have_posts()): while (have_posts()): the_post(); ?>
 <div <?php post_class(); ?>>
-    <?php if (!function_exists('yoast_breadcrumb')): ?>
-    <div class="post-header">
-        <h1 class="post-title"><?php the_title(); ?></h1>
-    </div>
-    <?php endif; ?>
-
     <div class="post-content clearfix">
         <?php the_content(); ?>
     </div>
