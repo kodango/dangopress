@@ -401,7 +401,7 @@ function dangopress_comments_callback($comment, $args, $depth) {
             <div class="comment-meta">
                 <span class="comment-author<?php echo user_can($comment->user_id, 'administrator') ? ' postauthor': ''?>"><?php comment_author_link(); ?></span>
                 <span class="comment-date">发表于 <?php echo dangopress_human_time_diff($comment->comment_date_gmt); ?></span>
-                <span><i class="icon-retweet"></i>
+                <span class="comment-reply">
                 <?php
                     comment_reply_link(array_merge($args, array(
                         'reply_text' => '回复',
@@ -410,7 +410,7 @@ function dangopress_comments_callback($comment, $args, $depth) {
                     )));
 
                     if ($depth == 1) { // Show the floor number
-                         printf(' %1$s 楼', ++$commentcount);
+                         printf(' #%1$s', ++$commentcount);
                     }
                 ?>
 
@@ -562,7 +562,7 @@ function dangopress_breadcrumb()
     $text['home']     = '首页'; // text for the 'Home' link
     $text['category'] = '%s'; // text for a category page
     $text['search']   = '"%s" 的搜索结果'; // text for a search results page
-    $text['tag']      = '包含标签 "%s" 的文章'; // text for a tag page
+    $text['tag']      = '含标签 "%s" 的文章'; // text for a tag page
     $text['404']      = '页面未到到'; // text for the 404 page
     $text['page']     = 'Page %s'; // text 'Page N'
     $text['cpage']    = 'Comment Page %s'; // text 'Comment Page N'

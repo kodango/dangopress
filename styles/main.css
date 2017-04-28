@@ -1,315 +1,405 @@
-a,abbr,acronym,address,applet,article,aside,audio,b,big,blockquote,body,canvas,caption,center,cite,code,dd,del,details,dfn,div,dl,dt,em,embed,fieldset,figcaption,figure,footer,form,h1,h2,h3,h4,h5,h6,header,hgroup,html,i,iframe,img,ins,kbd,label,legend,li,mark,menu,nav,object,ol,output,p,pre,q,ruby,s,samp,section,small,span,strike,strong,sub,summary,sup,table,tbody,td,tfoot,th,thead,time,tr,tt,u,ul,var,video {
+/*
+	HTML5 Reset :: style.css
+	----------------------------------------------------------
+	We have learned much from/been inspired by/taken code where offered from:
+	Eric Meyer					:: http://meyerweb.com
+	HTML5 Doctor				:: http://html5doctor.com
+	and the HTML5 Boilerplate	:: http://html5boilerplate.com
+-------------------------------------------------------------------------------*/
+
+/* Let's default this puppy out
+-------------------------------------------------------------------------------*/
+
+html, body, body div, span, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, abbr, address, cite, code, del, dfn, em, img, ins, kbd, q, samp, small, strong, sub, sup, var, b, i, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, figure, footer, header, menu, nav, section, time, mark, audio, video, details, summary {
 	margin: 0;
 	padding: 0;
 	border: 0;
 	font-size: 100%;
-	font: inherit;
-	vertical-align: baseline
+	font-weight: normal;
+	vertical-align: baseline;
+	background: transparent;
 }
 
-article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section {
-	display: block
+main, article, aside, figure, footer, header, nav, section, details, summary {display: block;}
+
+/* Handle box-sizing while better addressing child elements:
+   http://css-tricks.com/inheriting-box-sizing-probably-slightly-better-best-practice/ */
+html {
+	box-sizing: border-box;
 }
+
+*,
+*:before,
+*:after {
+	box-sizing: inherit;
+}
+
+/* consider resetting the default cursor: https://gist.github.com/murtaugh/5247154 */
+
+/* Responsive images and other embedded objects */
+/* if you don't have full control over `img` tags (if you have to overcome attributes), consider adding height: auto */
+img,
+object,
+embed {max-width: 100%;}
+
+/* force a vertical scrollbar to prevent a jumpy page */
+html {overflow-y: scroll;}
+
+/* we use a lot of ULs that aren't bulleted.
+	you'll have to restore the bullets within content,
+	which is fine because they're probably customized anyway */
+ul {list-style: none;}
+
+blockquote, q {quotes: none;}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {content: ''; content: none;}
+
+a {margin: 0; padding: 0; font-size: 100%; vertical-align: baseline; background: transparent;}
+
+del {text-decoration: line-through;}
+
+/* tables still need cellspacing="0" in the markup */
+table {border-collapse: separate; border-spacing: 0;}
+th {font-weight: bold; vertical-align: bottom;}
+td {font-weight: normal; vertical-align: top;}
+
+input, select {vertical-align: middle;}
+
+pre {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
+
+input[type="radio"] {vertical-align: text-bottom;}
+input[type="checkbox"] {vertical-align: bottom;}
+small {font-size: 85%;}
+strong {font-weight: bold;}
+
+td, td img {vertical-align: top;}
+
+/* Make sure sup and sub don't mess with your line-heights http://gist.github.com/413930 */
+sub, sup {font-size: 75%; line-height: 0; position: relative;}
+sup {top: -0.5em;}
+sub {bottom: -0.25em;}
+
+/* standardize any monospaced elements */
+pre, code, kbd, samp {font-family: monospace, sans-serif;}
+
+/* hand cursor on clickable elements */
+.clickable,
+label,
+input[type=button],
+input[type=submit],
+input[type=file],
+button {cursor: pointer;}
+
+/* Webkit browsers add a 2px margin outside the chrome of form elements */
+button, input, select, textarea {margin: 0;}
+
+/* let's clear some floats */
+.clearfix:after { content: " "; display: block; clear: both; }
+
+/*
+ * Main.css base part
+ */
+html { font-size: 62.5%; }
 
 body {
-	line-height: 1;
-	color: #000;
-	background-color: #FFF
-}
-
-body,button,input,select,textarea {
-	font: 13px/22px 'Helvetica Neue',Helvetica,Arial,Sans-serif
-}
-
-body {
-	background: #ededed
-}
-
-ol,ul {
-	list-style: none
-}
-
-img {
-	border: 0
+    font: 1.3rem/1.7 'Helvetica Neue',Helvetica,Arial,Sans-serif;
+    color: #000;
+    background-color: #ededed;
 }
 
 a {
-	outline: 0;
-	color: #444;
-	text-decoration: none
+    color: #444;
+    text-decoration: none;
 }
 
 a:hover {
-	color: #259;
-	text-decoration: none
-}
-
-table {
-	width: 100%;
-	border-collapse: collapse;
-	border-spacing: 0
-}
-
-caption,td,th {
-	vertical-align: top;
-	text-align: left;
-	font-weight: 400
+    color: #259;
 }
 
 input,textarea {
-	border: 1px solid #ededed;
-	font-size: 12px;
-	line-height: normal
+    border: 1px solid #ededed;
+    margin: 10px 0;
+    padding: 6px 8px;
 }
 
-input:focus,textarea:focus {
-	outline: 0;
-	border-color: #ddd
-}
-
-input {
-	background: #fff;
-	margin: 10px 0;
-	padding: 6px 8px
+input:focus, textarea:focus {
+    outline: 0;
+    border-color: #ddd;
 }
 
 input[type=submit] {
-	color: #444;
-	cursor: pointer;
-	padding: 6px 10px;
-	margin: 10px 0 20px;
-	font-weight: 700;
-	border: 1px solid #ddd;
-	background: #efefef;
-	background: -moz-linear-gradient(top,#fff 0,#efefef 100%);
-	background: -webkit-gradient(linear,left top,left bottom,color-stop(0,#fff),color-stop(100%,#efefef));
-	background: -webkit-linear-gradient(top,#fff 0,#efefef 100%)
+    color: #444;
+    cursor: pointer;
+    padding: 5px 10px;
+    font-weight: bold;
+    background: #efefef;
+    background: -webkit-gradient(linear,left top,left bottom,color-stop(0,#fff),color-stop(100%,#efefef));
+    background: -webkit-linear-gradient(top,#fff 0,#efefef 100%)
 }
 
 input[type=submit]:hover {
-	background: #fff
+    background: #fff;
+    border-color: #ddd;
 }
 
 blockquote {
-	display: block;
-	padding: 0 20px;
-	vertical-align: baseline;
-	font-size: 12px;
-	margin: 15px 0
+    padding: 0 20px;
+    margin: 15px 0;
+    font-size: 1rem;
+    border-left: 1px solid #efefef;
+}
+
+pre,code,kbd {
+    font-size: 1rem;
+    border: 1px solid #efefef;
+    background-color: #fafafa;
 }
 
 pre {
-	background-color: #f7f7f9;
-	font-family: "Lucida Sans Typewriter",Monaco,"Courier New",monospace;
-	font-size: 12px;
-	border: 1px solid #e1e1e8;
-	padding: 8px;
-	word-break: break-word;
-	margin: 15px 0
+    margin: 15px 0;
+    padding: 6px 8px;
+    word-break: break-word;
 }
 
 pre code {
-	border: 0;
-	margin: 0;
-	padding: 0;
-	background-color: transparent
+    border: 0;
+    margin: 0;
+    padding: 0;
+    background-color: transparent;
 }
 
 code,kbd {
-	background-color: #fafafa;
-	border: 1px solid #ddd;
-	margin: 0 5px;
-	padding: 3px;
-	font-family: "Lucida Sans Typewriter",Monaco,"Courier New",monospace;
-	font-size: 12px
+    margin: 0 5px;
+    padding: 3px;
 }
 
 strong {
-	font-weight: 700
+    font-weight: 700;
 }
 
 small {
-	color: #888
-}
-
-.clearfix:after,.container:after {
-	content: ".";
-	display: block;
-	clear: both;
-	visibility: hidden;
-	height: 0
-}
-
-.aligncenter {
-	display: block;
-	margin: 0 auto
+    color: #888;
 }
 
 .alignright {
-	float: right
+    float: right
 }
 
 .alignleft {
-	float: left
+    float: left
 }
 
 .hide {
-	display: none
+    display: none
 }
 
+/*
+ * Main.css layout
+ */
 .container {
-	width: 1000px;
-	margin: 0 auto;
-	padding: 1px 25px
+    width: 1000px;
+    margin: 0 auto;
+    padding: 2px 25px;
 }
 
 .left-part {
-	float: left;
-	width: 680px;
-	display: block
+    float: left;
+    width: 68%;
+    display: block;
 }
 
 .right-part {
-	float: right;
-	padding-left: 20px;
-	width: 280px;
-	display: block
+    float: left;
+    padding-left: 20px;
+    width: 32%;
+    display: block;
 }
+
+#content {
+	margin-top: 70px;
+}
+
+/* for 1000px or less */
+@media screen and (max-width: 1000px) {
+	.container {
+		width: 95%;
+	}
+
+	.right-part {
+		padding-left: 10px;
+	}
+}
+
+/* for 960px or less */
+@media screen and (max-width: 960px) {
+	.left-part, .right-part {
+		width: auto;
+		float: none;
+	}
+
+	#content {
+	    margin-top: 120px;
+	}
+
+	.right-part {
+		padding-left: 0;
+	}
+
+    #sidebar {
+		display: none;
+    }
+
+    #footer {
+    	text-align: center;
+    }
+}
+
+
+/* for 600px or less */
+@media screen and (max-width: 600px) {
+	#site-breadcrumbs span,
+	.related-posts .post-view,
+	.comment-date {
+		display: none;
+	}
+}
+
+/*
+ * Main.css header
+ */
 
 #header {
-	position: fixed;
-	width: 100%;
-	top: 0;
-	z-index: 99999;
-	border: 0;
-	line-height: 32px;
-	background-color: #fff;
-	box-shadow: 0 0 4px rgba(0,0,0,.4)
+    position: fixed;
+    width: 100%;
+    margin:0 auto;
+    top: 0;
+    z-index: 99999;
+    background-color: #fff;
+    box-shadow: 0 0 4px rgba(0,0,0,.2);
 }
 
-.site-logo {
-	padding: 3px 0
-}
+.site-logo, .header-menu {line-height: 30px;}
 
-.site-logo a,.site-logo a:hover {
+.site-logo a {
 	color: #333;
-	font-size: 25px;
-	font-weight: 700
+	font-size: 2.5rem;
+	font-weight: 700;
+	display: block;
+	padding: 5px 2px;
 }
 
 .header-menu .menu li {
-	display: block;
 	margin-right: 20px;
-	float: left
+	float: left;
 }
 
 .header-menu .menu li a {
 	color: #666;
-	display: block;
-	height: 32px;
 	padding: 5px 2px;
-	line-height: 32px;
-	outline: medium none
+	display: block;
 }
 
-.header-menu .menu li a:active,.header-menu .menu li a:hover,.header-menu .menu li.current-menu-item a {
+.header-menu .menu li a:active, .header-menu .menu li a:hover, .header-menu .menu li.current-menu-item a {
 	font-weight: 700;
-	color: #333
+	color: #333;
+	border-top: 2px solid #333;
+	margin-top: -2px;
 }
 
-#content {
-	margin-top: 65px
-}
+/*
+ * Main.css content
+ */
 
 #content .container {
 	background: #fff;
 	padding: 25px;
-	box-shadow: 0 0 4px rgba(0,0,0,.4)
+	box-shadow: 0 0 4px rgba(0,0,0,.2);
 }
 
 #primary {
-	min-height: 400px
+	min-height: 400px;
 }
 
 #site-breadcrumbs {
 	margin-bottom: 15px;
 	padding-bottom: 5px;
-	border-bottom: 1px dashed #ededed
-}
-
-.single #site-breadcrumbs {
-	margin-bottom: 0
+	border-bottom: 1px dashed #ededed;
 }
 
 #site-breadcrumbs h1,#site-breadcrumbs span span {
-	margin: 0 5px
+	margin: 0 5px;
 }
 
 #site-breadcrumbs a,#site-breadcrumbs h1 {
 	display: inline;
-	font-size: 14px;
-	font-weight: 400
+	font-size: 1.4rem;
 }
 
 #site-breadcrumbs h1 {
-    font-weight: bold
+    font-weight: bold;
 }
 
 #category-description {
 	padding: 15px;
 	margin-bottom: 15px;
-	background-color: #f7f7f9;
-	border: 1px solid #e1e1e8
+	background-color: #fafafa;
+	border: 1px solid #ededed;
 }
 
 #category-description h2 {
-	font-size: 14px;
-	margin-bottom: 10px
+	font-size: 1.4rem;
+	margin-bottom: 15px;
 }
 
 #category-description .sub-categories {
-	margin-top: 15px
+	margin-top: 10px;
 }
 
-.page,.post {
+.page, .post {
 	padding-bottom: 40px
 }
 
 .post-title {
 	margin: 15px 0 10px;
-	font-size: 18px;
-	font-weight: 700
+	font-size: 1.8rem;
+	font-weight: 700;
 }
 
 .home .post-title {
-	margin: 0 0 10px
+	margin: 0 0 10px;
 }
 
 .post-meta {
-	font-size: 12px;
+	font-size: 1.2rem;
 	margin-bottom: 15px;
-	border-bottom: 1px dashed #ededed
+	border-bottom: 1px dashed #ededed;
 }
 
 .post-meta>span {
-	margin-right: 10px
+	margin-right: 10px;
 }
 
 .post-meta i {
-	margin-right: 5px
+	margin-right: 5px;
 }
 
 .post-content a {
-	color: #259
+	color: #259;
 }
 
 .post-content p {
 	margin: 15px 0;
-	color: #444
+	color: #444;
 }
 
 .post-content table {
-	margin: 15px 0
+	margin: 15px 0;
 }
 
 .post-content th {
@@ -317,58 +407,58 @@ small {
 	padding: 5px 10px;
 	vertical-align: top;
 	text-align: left;
-	font-weight: 700
+	font-weight: 700;
 }
 
 .post-content td {
 	border-bottom: 1px solid #ddd;
-	font-size: 12px;
+	font-size: 1.2rem;
 	padding: 5px 10px;
 	vertical-align: top;
 	text-align: left
 }
 
 .post-image {
-	margin: 15px 0
+	margin: 15px 0;
 }
 
 .post-content img {
-	max-width: 100%!important;
-	height: auto!important
+	max-width: 100% !important;
+	height: auto !important
 }
 
 .post-content h3 {
-	font-size: 16px;
+	font-size: 1.6rem;
 	padding: 5px 0;
 	margin-bottom: 15px;
-	border-bottom: 1px solid #ddd
+	border-bottom: 1px solid #ddd;
 }
 
 .post-content h4 {
-	font-size: 14px;
-	margin: 15px 0
+	font-size: 1.4rem;
+	margin: 15px 0;
 }
 
 .post-content ul {
 	list-style: square outside;
 	padding-left: 25px;
-	margin: 15px 0
+	margin: 15px 0;
 }
 
 .post-content ol {
 	list-style: decimal outside;
 	padding-left: 25px;
-	margin: 15px 0
+	margin: 15px 0;
 }
 
 .post-content ol li,.post-content ul li {
-	margin-bottom: 5px
+	margin-bottom: 5px;
 }
 
 .post-copyright p {
 	font-weight: 700;
 	font-style: italic;
-	margin-top: 25px
+	margin-top: 25px;
 }
 
 .related-posts {
@@ -377,21 +467,21 @@ small {
 }
 
 .related-posts .caption {
-	font-size: 16px;
-	font-weight: 700
+	font-size: 1.6rem;
+	font-weight: 700;
 }
 
 .related-posts h2 {
 	display: inline;
-	font-size: 14px;
-	font-weight: 400
+	font-size: 1.4rem;
+	font-weight: 400;
 }
 
 .related-posts h2 a {
 	background-color: #eff6fa;
 	padding: 3px 10px;
 	border-radius: 25px;
-	text-decoration: none
+	text-decoration: none;
 }
 
 .related-posts h2 a:hover {
@@ -400,69 +490,69 @@ small {
 }
 
 .related-posts ul {
-	margin: 15px 0
+	margin: 15px 0;
 }
 
 .related-posts li {
-	padding: 2px 0
+	padding: 2px 0;
 }
 
 .related-posts li span {
-	color: #888
+	color: #888;
 }
 
 .related-posts li a {
 	margin-left: 10px;
-	color: #259
+	color: #259;
 }
 
 .related-posts li .post-comment,.related-posts li .post-view {
-	float: right
+	float: right;
 }
 
 .post-footer {
 	border-bottom: 1px solid #ededed;
 	border-top: 1px solid #ededed;
-	padding: 15px 0
+	padding: 15px 0;
 }
 
 #post-pagination a {
-	margin-left: 8px
+	margin-left: 8px;
 }
 
 #post-pagenavi {
 	padding: 15px 0 0;
-	border-top: 1px solid #ededed
+	border-top: 1px solid #ededed;
 }
 
 .comment-pagenavi a,.page-numbers {
 	display: inline-block;
 	margin: 0 5px 2px 0;
 	padding: 0 8px;
-	border: 1px solid #ddd
+	border: 1px solid #ddd;
 }
 
 .comment-pagenavi a:hover,.page-numbers.current,.page-numbers:hover {
 	background: #f8f8f8;
 	border-bottom-color: #5895be;
-	color: #259
+	color: #259;
 }
 
 #sidebar .friend-links li,#sidebar .widget-links li {
 	width: 50%;
-	float: left
+	float: left;
 }
 
 .widget {
 	margin-bottom: 20px;
-	word-wrap: break-word
+	word-wrap: break-word;
 }
 
 .widget h3 {
 	color: #444;
-	font-size: 14px;
+	font-size: 1.4rem;
 	margin-bottom: 15px;
-	font-weight: 700
+	font-weight: 700;
 }
 
 .widget ul {
@@ -543,7 +633,7 @@ ul.tabnav li.selected,ul.tabnav li:hover {
 
 .recent-comments .rc_info {
 	margin: 0 0 5px 45px;
-	font-size: 13px
+	font-size: 1.3rem;
 }
 
 .recent-comments .rc_time {
@@ -625,7 +715,7 @@ ul.tabnav li.selected,ul.tabnav li:hover {
 
 #commentform label[for=comment_mail_notify] {
 	display: inline-block;
-	font-size: 12px
+	font-size: 1.2rem;
 }
 
 #comments input[type=email],#comments input[type=password],#comments input[type=tel],#comments input[type=text],#comments input[type=url] {
@@ -636,7 +726,7 @@ ul.tabnav li.selected,ul.tabnav li:hover {
 #cancel-comment-reply-link {
 	float: right;
 	padding: 5px 0;
-	font-size: 12px
+	font-size: 1.2rem;
 }
 
 #cancel-comment-reply-link:hover {
@@ -660,6 +750,10 @@ ul.tabnav li.selected,ul.tabnav li:hover {
 
 #wp-temp-form-div+.commentlist>.comment:first-child {
 	border-top: 0
+}
+
+.commentlist {
+    list-style: none;
 }
 
 #comments .children {
@@ -722,7 +816,7 @@ li.depth-2 .comment-body {
 
 .comment-meta span {
 	color: #888;
-	font-size: 13px
+	font-size: 1.3rem
 }
 
 .comment-meta i {
@@ -735,6 +829,10 @@ li.depth-2 .comment-body {
 
 .comment-date {
 	margin-left: 2px
+}
+
+.comment-reply {
+	float: right;
 }
 
 .comment-text p {
@@ -778,7 +876,7 @@ span.at-author {
 
 #toggle-author {
 	margin-right: 5px;
-	font-size: 13px;
+	font-size: 1.3rem;
 	color: #888
 }
 
