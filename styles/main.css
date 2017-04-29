@@ -460,7 +460,7 @@ small {
 	color: #259;
 }
 
-.related-posts li .post-comment,.related-posts li .post-view {
+.related-posts li span {
 	float: right;
 }
 
@@ -1029,7 +1029,7 @@ pre .pln {
 	}
 
 	#site-breadcrumbs span,
-	.related-posts .post-view,
+	.related-posts span,
 	.comment-date {
 		display: none;
 	}

@@ -18,9 +18,8 @@ Author: mitcho (Michael Yoshitaka Erlewine)
         while (have_posts()) {
             the_post();
 
-            echo '<li><span class="post-time">'. get_the_time('Y年m月d日') . '</span>';
-            echo '<a href="' . get_permalink() . '" rel="bookmark">' . get_the_title() . '</a>';
-            echo '<span class="post-view">';
+            echo '<li><a href="' . get_permalink() . '" rel="bookmark">' . get_the_title() . '</a>';
+            echo '<span>';
             the_user_views();
             echo '</span></li>';
         }
@@ -28,10 +27,8 @@ Author: mitcho (Michael Yoshitaka Erlewine)
         while (have_posts()) {
             the_post();
 
-            echo '<li><span class="post-time">'. get_the_time('Y年m月d日') . '</span>';
-            echo '<a href="' . get_permalink() . '" rel="bookmark">' . get_the_title() . '</a>';
-            echo '<span class="post-comment">' . get_comments_number() . ' 次评论</span>';
-            echo '</li>';
+            echo '<li><a href="' . get_permalink() . '" rel="bookmark">' . get_the_title() . '</a>';
+            echo '<span>' . get_comments_number() . ' 次评论</span></li>';
         }
     }
 ?>
