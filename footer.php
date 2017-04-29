@@ -13,30 +13,15 @@
 </div> <!-- end content -->
 
 <div id="footer">
-<div class="container">
+<div class="container clearfix">
    <p class="left-part">
-       <span>Copyright &copy; 2012-2016 <?php bloginfo('name'); ?>.</span>
-       <span class="designed-by">本主题由 <a href="http://kodango.com">kodango</a> 设计.</span>
+       <?php dangopress_show_copyright(); ?>
    </p>
    <p class="right-part">
+       <?php dangopress_show_sitemap(); ?>
        <span>
-       <?php
-           $options = get_option('dangopress_options');
-           $sitemap = $options['sitemap_xml'];
-
-           if (!empty($sitemap)) {
-               $link = '<a href="' . get_bloginfo('url') . '/' . $sitemap . '">站点地图<i class="icon-sitemap"></i></a>';
-
-               if (!is_home()) {
-                   $link = dangopress_nofollow_link($link);
-               }
-
-               echo $link;
-           }
-       ?>
+           <a href="#backtop" title="回到顶部" class="backtop">回到顶部<i class="icon-circle-arrow-up"></i></a>
        </span>
-
-       <span><a href="#backtop" title="回到顶部" class="backtop">回到顶部<i class="icon-circle-arrow-up"></i></a></span>
    </p>
    <?php wp_footer(); ?>
 </div>

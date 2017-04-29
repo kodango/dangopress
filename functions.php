@@ -924,4 +924,54 @@ function dangopress_disable_dns_prefetch($hints, $relation_type) {
 }
 add_filter('wp_resource_hints', 'remove_dns_prefetch', 10, 2);
 
+/*
+ * Show dynamic copyright information
+ */
+function dangopress_show_copyright() {
+    global $wpdb;
+
+    $copyright_dates = $wpdb->get_results("
+        SELECT
+        YEAR(min(post_date_gmt)) AS firstdate,
+        YEAR(max(post_date_gmt)) AS lastdate
+        FROM
+        $wpdb->posts
+        WHERE
+        post_status = 'publish'
+    ");
+
+    if ($copyright_dates) {
+        $copyright = "Copyright &copy; " . $copyright_dates[0]->firstdate;
+
+        if ($copyright_dates[0]->firstdate != $copyright_dates[0]->lastdate) {
+            $copyright .= '-' . $copyright_dates[0]->lastdate;
+        }
+    } else {
+        $copyright = "Copyright &copy; " . date('Y');
+    }
+
+    $copyright .= ' ' . get_bloginfo('name') . '.';
+    $copyright .= ' <span class="theme-declare"><a href="http://kodango.com/dangopress-theme">dangopress Theme</a> powered by <a href="http://wordpress.org/">WordPress</a></span>';
+
+    $copyright = '<span class="copyright">' . $copyright . '</span>';
+    echo $copyright;
+}
+
+/*
+ * Show sitexmap link
+ */
+function dangopress_show_sitemap() {
+   $options = get_option('dangopress_options');
+   $sitemap = $options['sitemap_xml'];
+
+   if (!empty($sitemap)) {
+       $link = '<span class="sitemap"><a href="' . get_bloginfo('url') . '/' . $sitemap . '">站点地图<i class="icon-sitemap"></i></a></span>';
+
+       if (!is_home()) {
+           $link = dangopress_nofollow_link($link);
+       }
+
+       echo $link;
+    }
+}
 ?>
