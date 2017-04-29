@@ -59,7 +59,7 @@ if (post_password_required() || (!have_comments() && !comments_open() && !pings_
         if (!is_user_logged_in() && !empty($comment_author)) {
             $welcome_login = '<p id="welcome-login">' . get_avatar($comment_author_email, 24, '', "$comment_author's avatar");
             $welcome_login .= '<span><strong>' . $comment_author . '</strong>, 欢迎回来.</span>';
-            $welcome_login .=  ' <span id="toggle-author"><u>更改</u> <i class="icon-signout"></i></span></p>';
+            $welcome_login .=  ' <span id="toggle-author"><u>更改</u> <i class="icon-power-off"></i></span></p>';
 
             $comments_args['comment_field'] = '</div>' . $comments_args['comment_field'];
             $comments_args['comment_notes_before'] = $welcome_login . '<div id="author-info" class="hide">';
@@ -68,7 +68,7 @@ if (post_password_required() || (!have_comments() && !comments_open() && !pings_
         // show comment form
         comment_form($comments_args);
     ?>
-    
+
     <?php if ( have_comments() ): ?>
 
         <ol class="commentlist">
@@ -78,10 +78,10 @@ if (post_password_required() || (!have_comments() && !comments_open() && !pings_
         <?php if (get_option('page_comments')): ?>
         <div class="comment-pagenavi clearfix">
             <div class="alignright">
-                <?php 
+                <?php
                     // Add rel="nofollow" to comment page link
-                    $prev_link = get_previous_comments_link('<i class="icon-circle-arrow-left"></i> 旧评论');
-                    $next_link = get_next_comments_link('新评论 <i class="icon-circle-arrow-right"></i>');
+                    $prev_link = get_previous_comments_link('<i class="icon-arrow-circle-left"></i> 旧评论');
+                    $next_link = get_next_comments_link('新评论 <i class="icon-arrow-circle-right"></i>');
 
                     if (!empty($prev_link)) {
                         echo str_replace('<a', '<a rel="nofollow"', $prev_link);
@@ -105,7 +105,7 @@ if (post_password_required() || (!have_comments() && !comments_open() && !pings_
             <li id="comment-<?php comment_ID( ); ?>" class="trackback">
                 <?php comment_author_link(); ?>
                 <small><?php comment_time();?></small>
-            </li>  
+            </li>
         <?php endforeach; ?>
 
         </ol>

@@ -20,7 +20,7 @@
    <p class="right-part">
        <?php dangopress_show_sitemap(); ?>
        <span>
-           <a href="#backtop" title="回到顶部" class="backtop">回到顶部<i class="icon-circle-arrow-up"></i></a>
+           <a href="#backtop" title="回到顶部" class="backtop">回到顶部<i class="icon-arrow-circle-up"></i></a>
        </span>
    </p>
    <?php wp_footer(); ?>

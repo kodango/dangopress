@@ -24,12 +24,12 @@ get_header(); ?>
         </div>
         <div class="post-meta clearfix">
             <span class="post-time"><i class="icon-calendar"></i><?php echo date('F j, Y', get_the_time('U')); ?></span>
-            <span class="post-cat"><i class="icon-folder-close"></i><?php the_category(' '); ?></span>
+            <span class="post-cat"><i class="icon-folder"></i><?php the_category(' '); ?></span>
             <?php if (function_exists('the_user_views')): ?>
-                <span class="post-view"><i class="icon-sun"></i><?php the_user_views(); ?></span>
+                <span class="post-view"><i class="icon-lightbulb-o"></i><?php the_user_views(); ?></span>
             <?php endif; ?>
             <span class="post-comment">
-                <i class="icon-comments"></i><?php comments_popup_link('抢沙发', '1 个评论', '% 个评论', 'comments-link'); ?>
+                <i class="icon-comment"></i><?php comments_popup_link('抢沙发', '1 个评论', '% 个评论', 'comments-link'); ?>
            </span>
         </div>
         <div class="post-content clearfix">
@@ -46,7 +46,7 @@ get_header(); ?>
                 <?php
                     $rand_posts = get_posts('numberposts=15&orderby=rand');
                     foreach( $rand_posts as $post ) :
-                ?>   
+                ?>
                 <li><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></li>
                 <?php endforeach; ?>
             </ul>

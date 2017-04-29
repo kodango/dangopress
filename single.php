@@ -15,7 +15,7 @@ get_header();?>
 
     <div class="post-copyright">
         <p>
-            <i class="icon-info-sign"></i>
+            <i class="icon-info-circle"></i>
             转载请注明转自: <a href="<?php bloginfo('url'); ?>"><?php bloginfo('name'); ?></a>
             , 本文固定链接:
             <a rel="shortlink" href="<?php echo wp_get_shortlink(); ?>"><?php the_title(); ?></a>

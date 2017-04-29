@@ -41,7 +41,6 @@ function dangopress_theme_options()
 
 ?>
 
-<div id="icon-options-general" class="icon32"></div>
 <h2>dangopress 主题设置</h2><br/>
 
 <?php

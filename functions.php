@@ -209,11 +209,8 @@ function dangopress_setup_load()
     // URL prefix
     $url_prefix = dangopress_get_url_prefix();
 
-    // Main css
-    wp_enqueue_style('main', $url_prefix . '/styles/main.min.css', array(), '0.4.5');
-
-    // Font awesome css, merge into main css
-    //wp_enqueue_style('font-awesome', $url_prefix . '/styles/font-awesome.min.css', array(), '3.2.1');
+    // Theme css
+    wp_enqueue_style('theme-css', $url_prefix . '/styles/theme.min.css', array(), '0.4.6');
 
     // Replace jQuery, use Baidu Public Library CDN
     if (!is_admin()) {
@@ -224,11 +221,11 @@ function dangopress_setup_load()
 
     // Register prettify.js
     wp_enqueue_script('prettify-js', $url_prefix . '/scripts/prettify.min.js',
-                       array(), '0.4.5', true);
+                       array(), '0.4.6', true);
 
     // Theme script
     wp_enqueue_script('kodango-js', $url_prefix . '/scripts/kodango.min.js',
-                      array('jquery'), '0.4.5', true);
+                      array('jquery'), '0.4.6', true);
 }
 add_action('wp_enqueue_scripts', 'dangopress_setup_load');
 
@@ -347,8 +344,8 @@ function dangopress_paginate_links()
         'format' => '%#%',
         'current' => max(1, get_query_var('paged')),
         'total' => $total,
-        'prev_text' => '<i class="icon-circle-arrow-left"></i>',
-        'next_text' => '<i class="icon-circle-arrow-right"></i>',
+        'prev_text' => '<i class="icon-arrow-circle-left"></i>',
+        'next_text' => '<i class="icon-arrow-circle-right"></i>',
     ));
 
     echo '<div id="post-pagenavi">' . $output . '</div>';

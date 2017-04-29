@@ -1,7 +1,4 @@
-/*
-	HTML5 Reset :: style.css
-	----------------------------------------------------------
-	We have learned much from/been inspired by/taken code where offered from:
+/* HTML5 Reset :: style.css ---------------------------------------------------------- We have learned much from/been inspired by/taken code where offered from:
 	Eric Meyer					:: http://meyerweb.com
 	HTML5 Doctor				:: http://html5doctor.com
 	and the HTML5 Boilerplate	:: http://html5boilerplate.com
@@ -220,7 +217,7 @@ small {
 
 .right-part {
     float: left;
-    padding-left: 20px;
+    padding-left: 30px;
     width: 32%;
     display: block;
 }
@@ -1054,7 +1051,7 @@ pre .pln {
 
 /* for 480px or less */
 @media screen and (max-width: 480px) {
-	#site-breadcrumbs span,
+	.single #site-breadcrumbs span,
     .post-comment,
 	.related-posts span,
 	.comment-date,
