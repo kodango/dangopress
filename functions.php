@@ -202,6 +202,24 @@ function dangopress_get_url_prefix()
 }
 
 /*
+ * Async load javascript
+ */
+ function dangopress_async_scripts($tag, $handle, $src) {
+     $async_scripts = array(
+         'prettify-js',
+         'theme-js'
+     );
+
+     if (in_array($handle, $async_scripts)) {
+         return str_replace(' src', ' async="async" src', $tag);
+     } else {
+         return $tag;
+     }
+ }
+
+ add_filter('script_loader_tag', 'dangopress_async_scripts', 10, 2);
+
+/*
  * Load css and javascript
  */
 function dangopress_setup_load()
