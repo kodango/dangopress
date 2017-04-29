@@ -224,21 +224,10 @@ function dangopress_setup_load()
                        array(), '0.4.6', true);
 
     // Theme script
-    wp_enqueue_script('kodango-js', $url_prefix . '/scripts/kodango.min.js',
+    wp_enqueue_script('theme-js', $url_prefix . '/scripts/theme.min.js',
                       array('jquery'), '0.4.6', true);
 }
 add_action('wp_enqueue_scripts', 'dangopress_setup_load');
-
-/*
- * Enqueue comemnt-reply.js in the footer
- */
-function dangopress_enqueue_comment_reply()
-{
-    // Thread comments
-	if (is_singular() && comments_open()) // && get_option('thread_comments'))
-        wp_enqueue_script('comment-reply');
-}
-add_action('comment_form_before', 'dangopress_enqueue_comment_reply');
 
 /*
  * Wrap the post image in div container
