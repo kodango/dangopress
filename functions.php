@@ -166,7 +166,7 @@ function dangopress_setup_theme()
 
     // Register sidebars for use in this theme
     register_sidebar(array(
-        'name' => 'Sidebar',
+        'name' => 'Main Sidebar',
         'id' => 'sidebar',
         'description' => '该区域的小工具会显示在右方的侧栏中',
         'before_widget' => '<div class="widget %2$s">',
