@@ -578,7 +578,7 @@ function dangopress_breadcrumb()
     $sep            = '<i class="icon-caret-right"></i>'; // separator between crumbs
     $sep_before     = '<span class="sep">'; // tag before separator
     $sep_after      = '</span>'; // tag after separator
-    $show_home_link = 0; // 1 - show the 'Home' link, 0 - don't show
+    $show_home_link = 1; // 1 - show the 'Home' link, 0 - don't show
     $show_current   = 1; // 1 - show current page title, 0 - don't show
     $before         = '<h1 class="current-crumb">'; // tag before the current crumb
     $after          = '</h1>'; // tag after the current crumb
@@ -762,6 +762,30 @@ document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static
 
 <?php
 }
+
+/*
+ * Insert Google Adsense scripts
+ */
+function dangopress_insert_adsense_scripts()
+{
+    $options = get_option('dangopress_options');
+    $publisher_id = $options["adsense_publisher_id"];
+
+    if (empty($publisher_id))
+        return;
+
+?>
+
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<script>
+    (adsbygoogle = window.adsbygoogle || []).push({
+        google_ad_client: "<?php echo $publisher_id; ?>",
+        enable_page_level_ads: true
+    });
+</script>
+<?php
+}
+add_action('wp_head', 'dangopress_insert_adsense_scripts');
 
 /*
  * Insert analytics code snippets into head
