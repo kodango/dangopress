@@ -28,7 +28,7 @@ get_header();?>
 <div class="post-footer clearfix">
 <div id="post-pagination" class="alignleft">
     <div class="post-prev">
-        <span class="icon-chevron-left"></span>
+        <span class="icon-chevron-circle-left"></span>
         <?php
             $prev_post = get_previous_post();
 
@@ -41,7 +41,7 @@ get_header();?>
         ?>
     </div>
     <div class="post-next">
-        <span class="icon-chevron-right"></span>
+        <span class="icon-chevron-circle-right"></span>
         <?php
             $next_post = get_next_post();
 
