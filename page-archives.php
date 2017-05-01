@@ -22,17 +22,12 @@ while ($new_query->have_posts() ): $new_query->the_post();
     $curr_year = get_the_time('Y');
     $curr_mon = get_the_time('n');
 
-    # Add closing tags
-    if ($last_mon > 0 && $last_mon != $curr_mon)
+    # Add closing tags if found another month
+    if ($last_mon > 0 && ($last_mon != $curr_mon && $last_year != $curr_year))
         $output .= '</div></div>';
 
-    # Stores the year
-    if ($last_year != $curr_year) {
-        $last_year = $curr_year;
-    }
-
     # Stores the month
-    if ($last_mon != $curr_mon) {
+    if ($last_mon != $curr_mon || $last_year != $curr_year) {
         $last_mon = $curr_mon;
 
         $output .= "<div class='year-archives' id='arti-$curr_year-$curr_mon'>";
@@ -44,6 +39,12 @@ while ($new_query->have_posts() ): $new_query->the_post();
     $output .= '<span class="post-time">' . get_the_time('n-d') . '</span>' . get_the_title();
     $output .= '<span class="comment-num">(' . get_comments_number('0', '1', '%') . ')</span>';
     $output .= '</a></div>';
+
+    # Stores the year
+    if ($last_year != $curr_year) {
+        $last_year = $curr_year;
+    }
+
 endwhile;
 
 # Add closing tags
