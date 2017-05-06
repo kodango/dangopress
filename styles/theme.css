@@ -344,6 +344,10 @@ small {
 	margin-right: 5px;
 }
 
+.post-content {
+	color: #444;
+}
+
 .post-content a {
 	color: #259;
 }
