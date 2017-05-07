@@ -579,7 +579,7 @@ function dangopress_breadcrumb()
     $text['category'] = '%s'; // text for a category page
     $text['search']   = '"%s" 的搜索结果'; // text for a search results page
     $text['tag']      = '含标签 "%s" 的文章'; // text for a tag page
-    $text['404']      = '页面未到到'; // text for the 404 page
+    $text['404']      = '页面未找到'; // text for the 404 page
     $text['page']     = 'Page %s'; // text 'Page N'
     $text['cpage']    = 'Comment Page %s'; // text 'Comment Page N'
 
