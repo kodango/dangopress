@@ -101,7 +101,7 @@ button {cursor: pointer;}
 button, input, select, textarea {margin: 0;}
 
 /* let's clear some floats */
-.clearfix:after { content: " "; display: block; clear: both; }
+.clearfix:after, .container:after { content: " "; display: block; clear: both; }
 
 /*
  * Main.css base part
