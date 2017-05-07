@@ -227,23 +227,34 @@ function dangopress_setup_load()
 {
     // URL prefix
     $url_prefix = dangopress_get_url_prefix();
+    // Theme options
+    $options = get_option('dangopress_options');
+
+    // Whether to load compressed scripts/styles or not
+    if ($options['using_compressed_files']) {
+        $js_suffix = '.min.js';
+        $css_suffix = '.min.css';
+    } else {
+        $js_suffix = '.js';
+        $css_suffix = '.css';
+    }
 
     // Theme css
-    wp_enqueue_style('theme-css', $url_prefix . '/styles/theme.min.css', array(), '0.4.6');
+    wp_enqueue_style('theme-main', $url_prefix . '/styles/theme' . $css_suffix, array(), '0.4.6');
 
     // Replace jQuery, use Baidu Public Library CDN
     if (!is_admin()) {
         wp_deregister_script('jquery');
-        wp_register_script('jquery', $url_prefix . '/scripts/jquery-2.1.1.min.js',
+        wp_register_script('jquery', $url_prefix . '/scripts/jquery-2.1.1' . $js_suffix,
                            array(), '2.1.1', true);
     }
 
     // Register prettify.js
-    wp_enqueue_script('prettify-js', $url_prefix . '/scripts/prettify.min.js',
+    wp_enqueue_script('prettify-js', $url_prefix . '/scripts/prettify' . $js_suffix,
                        array(), '0.4.6', true);
 
     // Theme script
-    wp_enqueue_script('theme-js', $url_prefix . '/scripts/theme.min.js',
+    wp_enqueue_script('theme-js', $url_prefix . '/scripts/theme' . $js_suffix,
                       array('jquery'), '0.4.6', true);
 }
 add_action('wp_enqueue_scripts', 'dangopress_setup_load');
