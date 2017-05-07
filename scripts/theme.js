@@ -300,5 +300,5 @@ jQuery(function($) {
     /*
      * Dynamically fill the google adsense ads
      */
-    $(".adsbygoogle").each(function () { (adsbygoogle = window.adsbygoogle || []).push({}); });
+    $(".adsbygoogle:visible").each(function () { (adsbygoogle = window.adsbygoogle || []).push({}); });
 });
