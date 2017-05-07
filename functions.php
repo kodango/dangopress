@@ -826,6 +826,15 @@ function dangopress_insert_analytics_snippets()
 <?php
     }
 
+    if (!empty($options['bing_webmaster_user'])) {
+?>
+
+<!-- Bing Webmaster authentication -->
+<meta name="msvalidate.01" content="<?php echo $options['bing_webmaster_user']; ?>" />
+
+<?php
+    }
+
     if (!empty($options['bdtj_siteid'])) {
 ?>
 
