@@ -26,8 +26,13 @@
             <a href="<?php bloginfo('url'); ?>" title="<?php bloginfo('name'); ?>" rel="home"><?php bloginfo('name'); ?></a>
             <?php endif; ?>
         </div>
-
-        <?php wp_nav_menu(array('theme_location' => 'primary', 'container_class' => 'header-menu right-part')); ?>
+        <div class="header-menu right-part">
+          <div class="toggle-button">
+            <div id="toggle-menu"><i class="icon-list"></i></div>
+            <div id="toggle-search"><i class="icon-search"></i></div>
+          </div>
+          <?php wp_nav_menu(array('theme_location' => 'primary', 'container_class' => 'clearfix')); ?>
+        </div>
     </div>
 </div>
 
