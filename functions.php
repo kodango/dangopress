@@ -49,7 +49,6 @@ remove_action('wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);
 remove_action('wp_head', 'locale_stylesheet');
 remove_action('wp_head', 'noindex', 1);
 remove_action('wp_head', 'wp_generator');
-remove_action('wp_head', 'rel_canonical');
 remove_action('wp_head', 'wp_shortlink_wp_head', 10, 0);
 
 /*
@@ -202,7 +201,6 @@ function dangopress_get_url_prefix()
          return $tag;
      }
  }
-
  add_filter('script_loader_tag', 'dangopress_defer_scripts', 10, 2);
 
 /*
@@ -988,4 +986,31 @@ function dangopress_show_sitemap() {
        echo $link;
     }
 }
+
+/*
+ * Add meta description in the head
+ * Reference: https://cnzhx.net/blog/add-wordpress-meta-description-keyword-php/
+ */
+function dangopress_add_meta_description() {
+    if (is_home() || is_front_page()) {
+        $description = get_bloginfo('description');
+    } elseif (is_singular() && !is_attachment()) {
+        global $post;
+        $description = ($post->post_excerpt != '') ? $post->post_excerpt : $post->post_content;
+    } elseif (is_category()) {
+        $description = category_description();
+    } elseif (is_tag()) {
+        $description = tag_description();
+    }
+
+    if ($description != '') {
+        $description = preg_replace('#\[[^\]]+\]#', '', $description);
+        $description = wp_html_excerpt(wp_strip_all_tags($description, true), 200);
+?>
+    <meta name="description" content="<?php echo $description; ?>" />
+<?php
+    }
+}
+add_action('wp_head', 'dangopress_add_meta_description');
+add_post_type_support('page', 'excerpt');
 ?>
