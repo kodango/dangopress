@@ -117,10 +117,15 @@ remove_action('wp_head', 'wp_oembed_add_host_js');
  */
 function dangopress_wp_title($sep)
 {
-    $search = get_query_var('s');
+    $blog_name = get_bloginfo('name');
 
-    if (is_front_page() || is_home()) {  // home or front page
-        $blog_name = get_bloginfo('name');
+    if (is_single() || is_page()) { // singular page
+        printf('%1$s %2$s %3$s', single_post_title('', false), $sep, $blog_name);
+    } else if (is_category()) { // category page
+        printf('%1$s %2$s %3$s', single_cat_title('', false), $sep, $blog_name);
+    } else if(is_tag()) { // tag page
+        printf('%1$s %2$s %3$s', single_tag_title('', false), $sep, $blog_name);
+    } else { // other page, like home page or front page
         $site_description = get_bloginfo('description');
 
         if ($site_description) {
@@ -128,26 +133,6 @@ function dangopress_wp_title($sep)
         } else {
             echo "$blog_name";
         }
-    } else if (is_single() || is_page()) { // singular page
-        single_post_title('', true);
-    } else if (is_category()) { // category page
-        printf('%1$s 类目的文章存档', single_cat_title('', false));
-    } else if (is_search()) { // search page
-        printf('%1$s 的搜索结果', strip_tags($search));
-    } else if(is_tag()) { // tag page
-        printf('%1$s 标签的文章存档', single_tag_title('', false));
-    } else if(is_date()) { // date page
-        if (is_day()) {
-            $title = get_the_time('Y年n月j日');
-        } else if(is_year()) {
-            $title = get_the_time('Y年');
-        } else {
-            $title = get_the_time('Y年n月');
-        }
-
-        printf('%1$s的文章存档', $title);
-    } else { // other page
-        bloginfo('name');
     }
 }
 
