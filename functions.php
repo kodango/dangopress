@@ -206,7 +206,7 @@ function dangopress_get_url_prefix()
 /*
  * Load css and javascript
  */
-function dangopress_setup_load()
+function dangopress_load_files()
 {
     // URL prefix
     $url_prefix = dangopress_get_url_prefix();
@@ -229,7 +229,7 @@ function dangopress_setup_load()
     wp_enqueue_script('theme-js', $url_prefix . '/scripts/theme.min.js',
                       array('jquery'), '0.4.6', true);
 }
-add_action('wp_enqueue_scripts', 'dangopress_setup_load');
+add_action('wp_enqueue_scripts', 'dangopress_load_files');
 
 /*
  * Wrap the post image in div container
@@ -988,6 +988,14 @@ function dangopress_show_sitemap() {
 }
 
 /*
+ * Enable page excerpt support
+ */
+function dangopress_enable_page_excerpt() {
+    add_post_type_support('page', 'excerpt');
+}
+add_action('init', ' dangopress_enable_page_excerpt');
+
+/*
  * Add meta description in the head
  * Reference: https://cnzhx.net/blog/add-wordpress-meta-description-keyword-php/
  */
@@ -1012,5 +1020,5 @@ function dangopress_add_meta_description() {
     }
 }
 add_action('wp_head', 'dangopress_add_meta_description');
-add_post_type_support('page', 'excerpt');
+
 ?>
