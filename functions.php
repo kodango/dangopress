@@ -48,6 +48,7 @@ remove_action('wp_head', 'start_post_rel_link', 10, 0);
 remove_action('wp_head', 'adjacent_posts_rel_link_wp_head', 10, 0);
 remove_action('wp_head', 'locale_stylesheet');
 remove_action('wp_head', 'noindex', 1);
+remove_action('wp_head', 'rel_canonical');
 remove_action('wp_head', 'wp_generator');
 remove_action('wp_head', 'wp_shortlink_wp_head', 10, 0);
 
@@ -1025,5 +1026,4 @@ function dangopress_setup_meta() {
     }
 }
 add_action('wp_head', 'dangopress_setup_meta');
-
 ?>
