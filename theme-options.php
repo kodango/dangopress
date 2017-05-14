@@ -18,7 +18,8 @@ function dangopress_get_options()
         'sitemap_xml' => '',
         'using_compressed_files' => true,
         'bing_webmaster_user' => '',
-        'home_meta_descripton' => ''
+        'home_meta_descripton' => '',
+        'fb_user_id' => ''
     );
 
     $options = wp_parse_args($options, $defaults);
@@ -75,7 +76,7 @@ function dangopress_theme_options()
     <tbody>
     <tr>
         <th>
-            <label for="cdn_prefix">文件托管地址</label> (<a href="http://kodango.com/use-oss-in-wordpress">参考</a>)
+            <label for="cdn_prefix">文件托管地址</label> (<a target="_blank" href="http://kodango.com/use-oss-in-wordpress">参考</a>)
         </th>
         <td><input name="cdn_prefix" id="cdn_prefix" type="text" value="<?php echo $options['cdn_prefix']; ?>" class="regular-text code"></td>
     </tr>
@@ -87,33 +88,39 @@ function dangopress_theme_options()
     </tr>
     <tr>
         <th>
-            <label for="bdshare_uid">百度分享 UID</label> (<a href="http://share.baidu.com/code">帮助</a>)
+            <label for="bdshare_uid">百度分享 UID</label> (<a target="_blank" href="http://share.baidu.com/code">帮助</a>)
         </th>
         <td><input name="bdshare_uid" id="bdshare_uid" type="text" value="<?php echo $options['bdshare_uid']; ?>" class="regular-text code"></td>
     </tr>
     <tr>
         <th>
-            <label for="adsense_publisher_id">Google Adsense Publisher ID</label> (<a href="https://support.google.com/code/answer/73069">帮助</a>)
+            <label for="adsense_publisher_id">Google Adsense Publisher ID</label> (<a target="_blank" href="https://support.google.com/code/answer/73069">帮助</a>)
         </th>
         <td><input name="adsense_publisher_id" id="adsense_publisher_id" type="text" value="<?php echo $options['adsense_publisher_id']; ?>" class="regular-text code"></td>
     </tr>
     <tr>
         <th>
-            <label for="google_webid">Google Analytics Web ID</label> (<a href="https://developers.google.com/analytics/devguides/collection/gajs/">帮助</a>)
+            <label for="google_webid">Google Analytics Web ID</label> (<a target="_blank" href="https://developers.google.com/analytics/devguides/collection/gajs/">帮助</a>)
         </th>
         <td><input name="google_webid" id="google_webid" type="text" value="<?php echo $options['google_webid']; ?>" class="regular-text code"></td>
     </tr>
     <tr>
         <th>
-            <label for="bing_webmaster_user">Bing Webmaster User ID</label> (<a href="https://www.bing.com/webmaster/help/getting-started-checklist-66a806de">帮助</a>)
+            <label for="bing_webmaster_user">Bing Webmaster User ID</label> (<a target="_blank" href="https://www.bing.com/webmaster/help/getting-started-checklist-66a806de">帮助</a>)
         </th>
         <td><input name="bing_webmaster_user" id="bing_webmaster_user" type="text" value="<?php echo $options['bing_webmaster_user']; ?>" class="regular-text code"></td>
     </tr>
     <tr>
         <th>
-            <label for="bdtj_siteid">百度统计 Site ID</label> (<a href="http://tongji.baidu.com/open/api/more?p=ref_setAccount">帮助</a>)
+            <label for="bdtj_siteid">百度统计 Site ID</label> (<a target="_blank" href="http://tongji.baidu.com/open/api/more?p=ref_setAccount">帮助</a>)
         </th>
         <td><input name="bdtj_siteid" id="bdtj_siteid" type="text" value="<?php echo $options['bdtj_siteid']; ?>" class="regular-text code"></td>
+    </tr>
+    <tr>
+        <th>
+            <label for="fb_user_id">Fackbook User ID</label> (<a target="_blank" href="http://findmyfbid.in">查找</a>)
+        </th>
+        <td><input name="fb_user_id" id="fb_user_id" type="text" value="<?php echo $options['fb_user_id']; ?>" class="regular-text code"></td>
     </tr>
     <tr>
         <th>

@@ -1011,12 +1011,12 @@ function dangopress_show_sitemap() {
 add_post_type_support('page', 'excerpt');
 
 /*
- * Setup meta information in the head
+ * Add meta description in the head
  * Reference:
  * https://cnzhx.net/blog/add-wordpress-meta-description-keyword-php/
  * https://www.davidtiong.com/how-to-add-noindex-follow-to-pages-in-wordpress-stop-duplicate-content/
  */
-function dangopress_setup_meta() {
+function dangopress_get_description() {
     if (is_home() || is_front_page()) {
         $options = get_option('dangopress_options');
         $description = $options['home_meta_descripton'];
@@ -1032,16 +1032,80 @@ function dangopress_setup_meta() {
     if ($description != '') {
         $description = preg_replace('#\[[^\]]+\]#', '', $description);
         $description = wp_html_excerpt(wp_strip_all_tags($description, true), 200);
-?>
-    <meta name="description" content="<?php echo $description; ?>" />
-<?php
     }
 
-    /* Output the meta content onto your date archives, tag archives, author archives, and onto the subsequent pages of your individual category pages */
+    return $description;
+}
+
+function dangopress_add_meta_description() {
+    $description = dangopress_get_description();
+
+    if ($description == '')
+        return;
+
+    echo '<meta name="description" content="' . $description . '" />';
+}
+add_action('wp_head', 'dangopress_add_meta_description');
+
+/*
+ * Add noindx,follow onto your date archives, tag archives, author archives,
+ * and onto the subsequent pages of your individual category pages
+ */
+function dangopress_add_meta_robots() {
     global $paged;
+
     if ($paged > 1 || is_author() || is_tag() || is_date() || is_attachment() || is_page_template("page-archives.php")) {
-      echo '<meta name="robots" content="noindex,follow" />';
+        echo '<meta name="robots" content="noindex,follow" />';
     }
 }
-add_action('wp_head', 'dangopress_setup_meta');
+add_action('wp_head', 'dangopress_add_meta_robots');
+
+/*
+ * Add Facebook Open Graph Meta information
+ * Reference: http://www.wpbeginner.com/wp-themes/how-to-add-facebook-open-graph-meta-data-in-wordpress-themes/
+ */
+function dangopress_add_open_graph_meta() {
+    $options = get_option('dangopress_options');
+
+    if (!$options['fb_user_id'])
+        return;
+
+    // Only add open graph to below pages
+    if (!(is_home() || is_front_page() || is_singular()))
+        return;
+
+    $site_description = get_bloginfo('description');
+    $blog_name = get_bloginfo('name');
+    $meta_description = dangopress_get_description();
+
+    echo '<meta property="fb:admins" content="' . $options['fb_user_id'] . '"/>';
+    echo '<meta property="og:site_name" content="' . get_bloginfo('name'). '"/>';
+
+    if ($meta_description) {
+        echo '<meta property="og:description" content="' . $meta_description . '"/>';
+    }
+
+    if (is_home() || is_front_page()) { // If it is the home page
+        if ($site_description)
+            echo '<meta property="og:title" content="' . $blog_name . ' - ' . $site_description . '"/>';
+        else
+            echo '<meta property="og:title" content="' . $blog_name . '"/>';
+
+        echo '<meta property="og:type" content="blog"/>';
+        echo '<meta property="og:url" content="' . get_bloginfo('url') . '"/>';
+    } elseif (is_singular()) { // Or if it is not a post or a page
+        global $post;
+
+        echo '<meta property="og:title" content="' . get_the_title() . '"/>';
+        echo '<meta property="og:type" content="article"/>';
+        echo '<meta property="og:url" content="' . get_permalink() . '"/>';
+
+    	if (has_post_thumbnail($post->ID)) { // If the post has featured image, use it
+    		$image_attributes = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'medium');
+            $image_url = strtok($image_attributes[0], '?');
+    		echo '<meta property="og:image" content="' . esc_attr($image_url) . '"/>';
+    	}
+    }
+}
+add_action('wp_head', 'dangopress_add_open_graph_meta', 5);
 ?>
