@@ -112,6 +112,19 @@ remove_filter('oembed_response_data',   'get_oembed_response_data_rich',  10, 4)
 remove_action('wp_head', 'wp_oembed_add_discovery_links');
 remove_action('wp_head', 'wp_oembed_add_host_js');
 
+// Define a debug log function (DEBUG use only)
+if (!function_exists('write_log')) {
+    function write_log($log) {
+        if (true === WP_DEBUG) {
+            if (is_array($log) || is_object($log)) {
+                error_log(print_r($log, true));
+            } else {
+                error_log($log);
+            }
+        }
+    }
+}
+
 /*
  * Customize wordpress title
  */
@@ -331,7 +344,7 @@ add_action('wp_head', 'dangopress_add_meta_robots');
 
     global $post;
 	if (has_post_thumbnail($post->ID)) { // If the post has featured image, use it
-		$image_attributes = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'medium');
+		$image_attributes = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'large');
         $image_url = strtok($image_attributes[0], '?');
 		echo '<meta property="og:image" content="' . esc_attr($image_url) . '"/>';
 	}
