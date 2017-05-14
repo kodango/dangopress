@@ -15,7 +15,9 @@ function dangopress_get_options()
         'bdtj_siteid' => '',
         'google_webid' => '',
         'adsense_publisher_id' => '',
-        'sitemap_xml' => ''
+        'sitemap_xml' => '',
+        'using_compressed_files' => true,
+        'bing_webmaster_user' => ''
     );
 
     $options = wp_parse_args($options, $defaults);
@@ -51,6 +53,7 @@ function dangopress_theme_options()
                 $options[$key] = $value;
         }
 
+        $options['using_compressed_files'] = $_POST['using_compressed_files'] ? true : false;
         update_option('dangopress_options', $options);
         $options = get_option('dangopress_options');
     ?>
@@ -94,6 +97,12 @@ function dangopress_theme_options()
     </tr>
     <tr>
         <th>
+            <label for="bing_webmaster_user">Bing Webmaster User ID</label> (<a href="https://www.bing.com/webmaster/help/getting-started-checklist-66a806de">帮助</a>)
+        </th>
+        <td><input name="bing_webmaster_user" id="bing_webmaster_user" type="text" value="<?php echo $options['bing_webmaster_user']; ?>" class="regular-text code"></td>
+    </tr>
+    <tr>
+        <th>
             <label for="bdtj_siteid">百度统计 Site ID</label> (<a href="http://tongji.baidu.com/open/api/more?p=ref_setAccount">帮助</a>)
         </th>
         <td><input name="bdtj_siteid" id="bdtj_siteid" type="text" value="<?php echo $options['bdtj_siteid']; ?>" class="regular-text code"></td>
@@ -103,6 +112,12 @@ function dangopress_theme_options()
             <label for="sitemap_xml">站点地图文件名（如: sitemap.xml）</label>
         </th>
         <td><input name="sitemap_xml" id="sitemap_xml" type="text" value="<?php echo $options['sitemap_xml']; ?>" class="regular-text code"></td>
+    </tr>
+    <tr>
+        <th>
+            <label for="using_compressed_files">使用压缩的 JS/CSS 文件</label>
+        </th>
+        <td><input type="checkbox" name="using_compressed_files" id="using_compressed_files" value="1"<?php checked('1', $options['using_compressed_files']); ?>></td>
     </tr>
     </tbody>
 </table>

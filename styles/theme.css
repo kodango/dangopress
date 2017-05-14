@@ -101,7 +101,7 @@ button {cursor: pointer;}
 button, input, select, textarea {margin: 0;}
 
 /* let's clear some floats */
-.clearfix:after { content: " "; display: block; clear: both; }
+.clearfix:after, .container:after { content: " "; display: block; clear: both; }
 
 /*
  * Main.css base part
@@ -246,6 +246,10 @@ small {
 	padding: 5px 2px;
 }
 
+.toggle-button {
+    display: none;
+}
+
 .header-menu .menu li {
 	margin-right: 20px;
 	float: left;
@@ -342,6 +346,10 @@ small {
 
 .post-meta i {
 	margin-right: 5px;
+}
+
+.post-content {
+	color: #444;
 }
 
 .post-content a {

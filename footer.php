@@ -13,7 +13,7 @@
 </div> <!-- end content -->
 
 <div id="footer">
-<div class="container clearfix">
+<div class="container">
    <p class="left-part">
        <?php dangopress_show_copyright(); ?>
    </p>

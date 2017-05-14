@@ -17,7 +17,7 @@
 
 <body <?php body_class(); ?>>
 <div id="header">
-    <div class="container clearfix">
+    <div class="container">
         <div class="site-logo left-part">
             <?php if (is_home()): ?>
             <h1><a href="<?php bloginfo('url'); ?>" title="<?php bloginfo('name'); ?>" rel="home"><?php bloginfo('name'); ?></a></h1>
@@ -25,8 +25,13 @@
             <a href="<?php bloginfo('url'); ?>" title="<?php bloginfo('name'); ?>" rel="home"><?php bloginfo('name'); ?></a>
             <?php endif; ?>
         </div>
-
-        <?php wp_nav_menu(array('theme_location' => 'primary', 'container_class' => 'header-menu right-part')); ?>
+        <div class="header-menu right-part">
+          <div class="toggle-button">
+            <div id="toggle-menu"><i class="icon-list"></i></div>
+            <div id="toggle-search"><i class="icon-search"></i></div>
+          </div>
+          <?php wp_nav_menu(array('theme_location' => 'primary', 'container_class' => 'nav-menu', 'menu_class' => "menu clearfix")); ?>
+        </div>
     </div>
 </div>
 
