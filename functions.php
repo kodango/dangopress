@@ -564,8 +564,8 @@ function dangopress_breadcrumb()
     $text['search']   = '"%s" 的搜索结果'; // text for a search results page
     $text['tag']      = '含标签 "%s" 的文章'; // text for a tag page
     $text['404']      = '页面未找到'; // text for the 404 page
-    $text['page']     = 'Page %s'; // text 'Page N'
-    $text['cpage']    = 'Comment Page %s'; // text 'Comment Page N'
+    $text['page']     = '第 %s 页'; // text 'Page N'
+    $text['cpage']    = '第 %s 页'; // text 'Comment Page N'
 
     $prefix         = '<i class="icon-windows"></i>'; // Prefix the breadcrumb
     $wrap_before    = '<div class="breadcrumbs" id="site-breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">'; // the opening wrapper tag
@@ -1008,10 +1008,7 @@ function dangopress_show_sitemap() {
 /*
  * Enable page excerpt support
  */
-function dangopress_enable_page_excerpt() {
-    add_post_type_support('page', 'excerpt');
-}
-add_action('init', ' dangopress_enable_page_excerpt');
+add_post_type_support('page', 'excerpt');
 
 /*
  * Setup meta information in the head
@@ -1021,7 +1018,8 @@ add_action('init', ' dangopress_enable_page_excerpt');
  */
 function dangopress_setup_meta() {
     if (is_home() || is_front_page()) {
-        $description = get_bloginfo('description');
+        $options = get_option('dangopress_options');
+        $description = $options['home_meta_descripton'];
     } elseif (is_singular() && !is_attachment()) {
         global $post;
         $description = ($post->post_excerpt != '') ? $post->post_excerpt : $post->post_content;

@@ -17,7 +17,8 @@ function dangopress_get_options()
         'adsense_publisher_id' => '',
         'sitemap_xml' => '',
         'using_compressed_files' => true,
-        'bing_webmaster_user' => ''
+        'bing_webmaster_user' => '',
+        'home_meta_descripton' => ''
     );
 
     $options = wp_parse_args($options, $defaults);
@@ -31,7 +32,7 @@ function dangopress_get_options()
  */
 function dangopress_add_admin_menu()
 {
-    add_theme_page('主题设置', '主题选项', 'edit_themes', basename(__FILE__),
+    add_theme_page('主题设置', '主题选项', 'edit_theme_options', basename(__FILE__),
             'dangopress_theme_options');
 }
 
@@ -77,6 +78,13 @@ function dangopress_theme_options()
             <label for="cdn_prefix">文件托管地址</label> (<a href="http://kodango.com/use-oss-in-wordpress">参考</a>)
         </th>
         <td><input name="cdn_prefix" id="cdn_prefix" type="text" value="<?php echo $options['cdn_prefix']; ?>" class="regular-text code"></td>
+    </tr>
+    <tr>
+        <th>
+            <label for="home_meta_descripton">首页 Meta Description</label>
+        </th>
+        <td><textarea name="home_meta_descripton" id="home_meta_descripton" rows="5" class="regular-text code"><?php echo $options['home_meta_descripton']; ?></textarea></td>
+    </tr>
     <tr>
         <th>
             <label for="bdshare_uid">百度分享 UID</label> (<a href="http://share.baidu.com/code">帮助</a>)
