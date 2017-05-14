@@ -2,6 +2,7 @@
 * 修复: 一些代码 bug 和样式问题
 * 改进：主题选项增加是否使用压缩 JS/CSS 文件；
 * 增加：Bing webmaster 支持；
+* 增加: Facebook Open Graph\Twitter Card 支持;
 
 === version 0.4.7 ===
 * 增加: 增加面包屑导航;

@@ -19,7 +19,8 @@ function dangopress_get_options()
         'using_compressed_files' => true,
         'bing_webmaster_user' => '',
         'home_meta_descripton' => '',
-        'fb_user_id' => ''
+        'fb_user_id' => '',
+        'enable_social_meta' => true
     );
 
     $options = wp_parse_args($options, $defaults);
@@ -56,6 +57,7 @@ function dangopress_theme_options()
         }
 
         $options['using_compressed_files'] = $_POST['using_compressed_files'] ? true : false;
+        $options['enable_social_meta'] = $_POST['enable_social_meta'] ? true : false;
         update_option('dangopress_options', $options);
         $options = get_option('dangopress_options');
     ?>
@@ -118,12 +120,6 @@ function dangopress_theme_options()
     </tr>
     <tr>
         <th>
-            <label for="fb_user_id">Fackbook User ID</label> (<a target="_blank" href="http://findmyfbid.in">查找</a>)
-        </th>
-        <td><input name="fb_user_id" id="fb_user_id" type="text" value="<?php echo $options['fb_user_id']; ?>" class="regular-text code"></td>
-    </tr>
-    <tr>
-        <th>
             <label for="sitemap_xml">站点地图文件名（如: sitemap.xml）</label>
         </th>
         <td><input name="sitemap_xml" id="sitemap_xml" type="text" value="<?php echo $options['sitemap_xml']; ?>" class="regular-text code"></td>
@@ -133,6 +129,18 @@ function dangopress_theme_options()
             <label for="using_compressed_files">使用压缩的 JS/CSS 文件</label>
         </th>
         <td><input type="checkbox" name="using_compressed_files" id="using_compressed_files" value="1"<?php checked('1', $options['using_compressed_files']); ?>></td>
+    </tr>
+    <tr>
+        <th>
+            <label for="enable_social_meta">开启 Social Meta 功能（仅限文章页）</label>
+        </th>
+        <td><input type="checkbox" name="enable_social_meta" id="enable_social_meta" value="1"<?php checked('1', $options['enable_social_meta']); ?>></td>
+    </tr>
+    <tr>
+        <th>
+            <label for="fb_user_id">Fackbook User ID</label> (<a target="_blank" href="http://findmyfbid.in">查找</a>)
+        </th>
+        <td><input name="fb_user_id" id="fb_user_id" type="text" value="<?php echo $options['fb_user_id']; ?>" class="regular-text code"></td>
     </tr>
     </tbody>
 </table>
