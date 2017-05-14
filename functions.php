@@ -460,7 +460,7 @@ function dangopress_paginate_links()
         'next_text' => '<i class="icon-arrow-circle-right"></i>',
     ));
 
-    echo '<div id="post-pagenavi">' . $output . '</div>';
+    echo '<div id="pagenavi">' . $output . '</div>';
 }
 
 /*
@@ -677,7 +677,7 @@ function dangopress_breadcrumb()
     $text['cpage']    = '第 %s 页'; // text 'Comment Page N'
 
     $prefix         = '<i class="icon-windows"></i>'; // Prefix the breadcrumb
-    $wrap_before    = '<div class="breadcrumbs" id="site-breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">'; // the opening wrapper tag
+    $wrap_before    = '<div id="breadcrumbs" itemscope itemtype="http://schema.org/BreadcrumbList">'; // the opening wrapper tag
     $wrap_after     = '</div><!-- .breadcrumbs -->'; // the closing wrapper tag
     $sep            = '<i class="icon-caret-right"></i>'; // separator between crumbs
     $sep_before     = '<span class="sep">'; // tag before separator
@@ -968,7 +968,7 @@ function dangopress_category_description()
     }
 ?>
 
-    <div id="category-description" class="">
+    <div id="category-panel" class="">
         <h2><?php echo $cat_name; ?> 类目</h2>
         <?php echo $description; ?>
         <?php echo $sub_cats; ?>

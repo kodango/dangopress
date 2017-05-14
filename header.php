@@ -7,34 +7,36 @@
  */ ?>
 
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" prefix="og: http://ogp.me/ns#" dir="ltr">
+<html xmlns="http://www.w3.org/1999/xhtml" prefix="og: http://ogp.me/ns#" dir="ltr" lang="zh-CN">
 <head profile="http://gmpg.org/xfn/11" >
 <title><?php dangopress_wp_title('-'); ?></title>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <?php wp_head(); ?>
 </head>
 
 <body <?php body_class(); ?>>
-<div id="header">
+<header>
     <div class="container">
-        <div class="site-logo left-part">
+        <hgroup class="logo left">
             <?php if (is_home()): ?>
             <h1><a href="<?php bloginfo('url'); ?>" title="<?php bloginfo('name'); ?>" rel="home"><?php bloginfo('name'); ?></a></h1>
             <?php else: ?>
             <a href="<?php bloginfo('url'); ?>" title="<?php bloginfo('name'); ?>" rel="home"><?php bloginfo('name'); ?></a>
             <?php endif; ?>
-        </div>
-        <div class="header-menu right-part">
-          <div class="toggle-button">
-            <div id="toggle-menu"><i class="icon-list"></i></div>
-            <div id="toggle-search"><i class="icon-search"></i></div>
-          </div>
-          <?php wp_nav_menu(array('theme_location' => 'primary', 'container_class' => 'nav-menu', 'menu_class' => "menu clearfix")); ?>
-        </div>
+        </hgroup>
+        <?php
+            wp_nav_menu(array(
+                'theme_location' => 'primary',
+                'container' => 'nav',
+                'container_class' => 'menubar right',
+                'menu_class' => "menu clearfix"
+            ));
+        ?>
     </div>
-</div>
+</header>
 
-<div id="content">
-<div class="container">
-    <div id="primary" class="left-part"><?php dangopress_breadcrumb(); ?>
+<section id="content">
+    <div class="container">
+        <div id="primary" class="left">
+            <?php dangopress_breadcrumb(); ?>

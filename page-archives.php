@@ -23,7 +23,7 @@ while ($new_query->have_posts() ): $new_query->the_post();
     $curr_mon = get_the_time('n');
 
     # Add closing tags if found another month
-    if ($last_mon > 0 && ($last_mon != $curr_mon && $last_year != $curr_year))
+    if ($last_mon > 0 && ($last_mon != $curr_mon || $last_year != $curr_year))
         $output .= '</div></div>';
 
     # Stores the month
@@ -36,8 +36,8 @@ while ($new_query->have_posts() ): $new_query->the_post();
     }
 
     $output .= '<div class="archive-item"><a href="' . get_permalink() . '">';
-    $output .= '<span class="post-time">' . get_the_time('n-d') . '</span>' . get_the_title();
-    $output .= '<span class="comment-num">(' . get_comments_number('0', '1', '%') . ')</span>';
+    $output .= '<span class="entry-time">' . get_the_time('n-d') . '</span>' . get_the_title();
+    $output .= '<span class="entry-comments">(' . get_comments_number('0', '1', '%') . ')</span>';
     $output .= '</a></div>';
 
     # Stores the year
@@ -54,10 +54,10 @@ $output .= '</div></div>';
 wp_reset_postdata();
 ?>
 
-<div <?php post_class(); ?>>
-    <div class="clearfix post-content">
+<article <?php post_class(); ?>>
+    <div class="entry-content">
         <div id="archives-content"><?php echo $output; ?></div>
     </div> <!-- end post-content -->
- </div> <!-- end post -->
+ </article> <!-- end post -->
 
 <?php get_footer(); ?>

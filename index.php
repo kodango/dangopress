@@ -14,34 +14,31 @@
 
 get_header(); ?>
 
-<?php if (is_category()) dangopress_category_description(); ?>
+<?php
+if (is_category()) dangopress_category_description();
+if (have_posts()): while (have_posts()): the_post();
+?>
 
-<div id="articlelist">
-    <?php if ( have_posts( )) : while ( have_posts() ) : the_post(); ?>
-    <div <?php post_class(); ?>>
-        <div class="post-header">
-            <h2 class="post-title"><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h2>
-        </div>
-        <div class="post-meta clearfix">
-            <span class="post-time"><i class="icon-calendar"></i><?php echo date('F j, Y', get_the_time('U')); ?></span>
-            <span class="post-cat"><i class="icon-folder"></i><?php the_category(' '); ?></span>
+    <article <?php post_class(); ?>>
+        <h2 class="entry-title"><a href="<?php the_permalink(); ?>" title="<?php the_title(); ?>"><?php the_title(); ?></a></h2>
+        <div class="entry-meta">
+            <span class="date"><i class="icon-calendar"></i><?php echo date('Y-m-d', get_the_time('U')); ?></span>
+            <span class="category"><i class="icon-folder"></i><?php the_category(' '); ?></span>
             <?php if (function_exists('the_user_views')): ?>
-                <span class="post-view"><i class="icon-eye"></i><?php the_user_views(); ?></span>
+                <span class="views"><i class="icon-eye"></i><?php the_user_views(); ?></span>
             <?php endif; ?>
-            <span class="post-comment">
+            <span class="entry-comment">
                 <i class="icon-comment"></i><?php comments_popup_link('抢沙发', '1 个评论', '% 个评论', 'comments-link'); ?>
            </span>
         </div>
-        <div class="post-content clearfix">
-            <?php the_content('查看全文'); ?>
-        </div>
-    </div>
-    <?php endwhile; else: ?>
-    <div class="post">
-        <div class="post-header">
-            <h2 class="post-title">没有找到相关的文章, 也许你对以下文章感兴趣</h2>
-        </div>
-        <div class="post-content clearfix">
+        <div class="entry-content"><?php the_content('查看全文'); ?></div>
+    </article>
+
+<?php endwhile; else: ?>
+
+    <article>
+        <h2 class="entry-title">没有找到相关的文章, 也许你对以下文章感兴趣</h2>
+        <div class="entry-content">
             <ul>
                 <?php
                     $rand_posts = get_posts('numberposts=15&orderby=rand');
@@ -51,9 +48,9 @@ get_header(); ?>
                 <?php endforeach; ?>
             </ul>
         </div>
-    </div>
-     <?php endif; ?>
-</div>
-<?php dangopress_paginate_links(); ?>
+    </article>
 
-<?php get_footer(); ?>
+<?php endif;
+dangopress_paginate_links();
+get_footer();
+?>
