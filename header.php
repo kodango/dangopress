@@ -25,14 +25,21 @@
             <a href="<?php bloginfo('url'); ?>" title="<?php bloginfo('name'); ?>" rel="home"><?php bloginfo('name'); ?></a>
             <?php endif; ?>
         </hgroup>
+        <nav class="menubar right" role="navigation" itemscope itemtype="https://schema.org/SiteNavigationElement">
         <?php
-            wp_nav_menu(array(
+            $nav_menu = wp_nav_menu(array(
                 'theme_location' => 'primary',
-                'container' => 'nav',
-                'container_class' => 'menubar right',
-                'menu_class' => "menu clearfix"
+                'container' => '',
+                'menu_class' => "menu clearfix",
+                "before" => '<span itemscope="itemscope" itemtype="http://www.schema.org/SiteNavigationElement">',
+                "after" => '</span>',
+                "link_before" => '<span itemprop="name">',
+                "link_after" => '</span>',
+                "echo" => false
             ));
+            echo preg_replace('/<a /', '<a itemprop="url" ', $nav_menu);
         ?>
+        </nav>
     </div>
 </header>
 
