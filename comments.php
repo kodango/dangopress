@@ -69,7 +69,7 @@ if (post_password_required() || (!have_comments() && !comments_open() && !pings_
         comment_form($comments_args);
     ?>
 
-    <?php if ( have_comments() ): ?>
+    <?php if (have_comments()): ?>
 
         <ol class="commentlist">
             <?php wp_list_comments(array('callback' => 'dangopress_comments_callback', 'type' => 'comment', 'max_depth' => 30)); ?>
@@ -102,7 +102,7 @@ if (post_password_required() || (!have_comments() && !comments_open() && !pings_
         <ol class="trackback-list">
 
         <?php foreach ($trackbacks as $comment) : ?>
-            <li id="comment-<?php comment_ID( ); ?>" class="trackback">
+            <li id="comment-<?php comment_ID(); ?>" class="trackback">
                 <?php comment_author_link(); ?>
                 <small><?php comment_time();?></small>
             </li>

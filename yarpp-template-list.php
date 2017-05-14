@@ -12,13 +12,13 @@ Author: mitcho (Michael Yoshitaka Erlewine)
         <i class="icon-tags"></i> 与<h2><?php the_tags(' ', ' ', ' '); ?></h2>相关的文章
     </div>
 <?php
-    echo '<ul>';
+    echo '<ul itemscope itemtype="http://schema.org/WebPage">';
 
     if (function_exists('the_user_views')) {
         while (have_posts()) {
             the_post();
 
-            echo '<li><a href="' . get_permalink() . '" rel="bookmark">' . get_the_title() . '</a>';
+            echo '<li><a itemprop="relatedLink" href="' . get_permalink() . '" rel="bookmark">' . get_the_title() . '</a>';
             echo '<span>';
             the_user_views();
             echo '</span></li>';
@@ -27,7 +27,7 @@ Author: mitcho (Michael Yoshitaka Erlewine)
         while (have_posts()) {
             the_post();
 
-            echo '<li><a href="' . get_permalink() . '" rel="bookmark">' . get_the_title() . '</a>';
+            echo '<li><a itemprop="relatedLink" href="' . get_permalink() . '" rel="bookmark">' . get_the_title() . '</a>';
             echo '<span>' . get_comments_number() . ' 次评论</span></li>';
         }
     }
