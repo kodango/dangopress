@@ -7,7 +7,7 @@
  */ ?>
 
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml" prefix="og: http://ogp.me/ns#" dir="ltr" lang="zh-CN">
+<html xmlns="http://www.w3.org/1999/xhtml" prefix="og: http://ogp.me/ns#" <?php language_attributes(); ?>>
 <head profile="http://gmpg.org/xfn/11">
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -19,9 +19,9 @@
     <div class="container">
         <hgroup class="logo left">
             <?php if (is_home()): ?>
-            <h1><a href="<?php bloginfo('url'); ?>" title="<?php bloginfo('name'); ?>" rel="home"><?php bloginfo('name'); ?></a></h1>
+            <h1><a href="<?php echo esc_url(home_url()); ?>" title="<?php bloginfo('name'); ?>" rel="home"><?php bloginfo('name'); ?></a></h1>
             <?php else: ?>
-            <a href="<?php bloginfo('url'); ?>" title="<?php bloginfo('name'); ?>" rel="home"><?php bloginfo('name'); ?></a>
+            <a href="<?php echo esc_url(home_url()); ?>" title="<?php bloginfo('name'); ?>" rel="home"><?php bloginfo('name'); ?></a>
             <?php endif; ?>
         </hgroup>
         <nav class="menubar right" role="navigation" itemscope itemtype="https://schema.org/SiteNavigationElement">

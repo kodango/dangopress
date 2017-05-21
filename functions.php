@@ -404,7 +404,7 @@ add_filter('the_content_more_link', 'dangopress_nofollow_link', 0);
  */
 function dangopress_disable_self_ping(&$links)
 {
-    $home = get_option('home');
+    $home = home_url();
 
     foreach ($links as $l => $link)
         if (0 === strpos($link, $home))
@@ -630,7 +630,7 @@ function dangopress_email_nodify($comment_id)
     $message .= '<p style="color:#000">您可以点击以下链接（或者复制链接到地址栏访问）查看回复的完整内容:</p>';
     $message .= '<blockquote style="background:#fafafa;border-left:1px solid #ddd;padding:10px;margin:15px 0;">';
     $message .= get_comment_link($comment) . '</blockquote>';
-    $message .= '<p style="color:#000">欢迎再次光临 <a href="' . get_bloginfo('url') . '">' . get_bloginfo('name') . '</a></p>';
+    $message .= '<p style="color:#000">欢迎再次光临 <a href="' . home_url() . '">' . get_bloginfo('name') . '</a></p>';
     $message .= '<p style="color:#888;">友情提醒: 此邮件由系统自动发送，请勿回复。</p></div>';
 
     wp_mail($to, $subject, $message, $headers);
@@ -1082,7 +1082,7 @@ function dangopress_show_sitemap() {
    $sitemap = $options['sitemap_xml'];
 
    if (!empty($sitemap)) {
-       $link = '<span class="sitemap"><a href="' . get_bloginfo('url') . '/' . $sitemap . '">站点地图<i class="icon-sitemap"></i></a></span>';
+       $link = '<span class="sitemap"><a href="' . home_url() . '/' . $sitemap . '">站点地图<i class="icon-sitemap"></i></a></span>';
 
        if (!is_home()) {
            $link = dangopress_nofollow_link($link);
