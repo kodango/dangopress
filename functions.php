@@ -128,26 +128,30 @@ if (!function_exists('write_log')) {
 /*
  * Customize wordpress title
  */
-function dangopress_wp_title($sep)
+function dangopress_title()
 {
     $blog_name = get_bloginfo('name');
+    $sep = '-';
 
     if (is_single() || is_page()) { // singular page
-        printf('%1$s %2$s %3$s', single_post_title('', false), $sep, $blog_name);
+        $title = sprintf('%1$s %2$s %3$s', single_post_title('', false), $sep, $blog_name);
     } else if (is_category()) { // category page
-        printf('%1$s %2$s %3$s', single_cat_title('', false), $sep, $blog_name);
+        $title = sprintf('%1$s %2$s %3$s', single_cat_title('', false), $sep, $blog_name);
     } else if(is_tag()) { // tag page
-        printf('%1$s %2$s %3$s', single_tag_title('', false), $sep, $blog_name);
+        $title = sprintf('%1$s %2$s %3$s', single_tag_title('', false), $sep, $blog_name);
     } else { // other page, like home page or front page
         $site_description = get_bloginfo('description');
 
         if ($site_description) {
-            echo "$blog_name $sep $site_description";
+            $title = "$blog_name $sep $site_description";
         } else {
-            echo "$blog_name";
+            $title = "$blog_name";
         }
     }
+
+    return $title;
 }
+add_filter('pre_get_document_title', dangopress_title);
 
 /**
  * Sets up theme defaults and registers support for various WordPress features.
@@ -158,6 +162,7 @@ function dangopress_setup_theme()
     add_theme_support('automatic-feed-links');
     add_theme_support('custom-background');
     add_theme_support('post-thumbnails');
+    add_theme_support('title-tag');
 
     // Register wordpress menu
     register_nav_menus(array('primary' => 'Primary Navigation'));

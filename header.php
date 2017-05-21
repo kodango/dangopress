@@ -9,7 +9,6 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml" prefix="og: http://ogp.me/ns#" dir="ltr" lang="zh-CN">
 <head profile="http://gmpg.org/xfn/11">
-<title><?php dangopress_wp_title('-'); ?></title>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <?php wp_head(); ?>
