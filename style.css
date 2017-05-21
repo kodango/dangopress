@@ -1,7 +1,9 @@
 /*
  * Theme Name: dangopress
- * Version: 0.4.5
+ * Text Domain: dangopress
+ * Version: 0.4.9
  * Description: a simple responsive blog theme
+ * Theme URI: http://kodango.com/dangopress-theme
  *
  * Author: kodango
  * Author URI: http://kodango.com
@@ -9,5 +11,14 @@
  * License: GNU General Public License version 3.0
  * License URI: http://www.gnu.org/licenses/gpl-3.0.html
  *
- * Tags: white, simple, two-columns, responsive
+ * Tags: blog, two-columns, right-sidebar, custom-menu, microformats, theme-options
  */
+
+ /*
+  * WordPress Generated Classes
+  */
+.wp-caption,.wp-caption-text,
+.screen-reader-text,.gallery-caption,
+.bypostauthor,.sticky, .aligncenter {
+    font-size: inherit;
+}

@@ -484,11 +484,11 @@ class Dangopress_Links_Widget extends WP_Widget {
         }
 ?>
         <p>
-            <label for="<?php echo $this->get_field_id('title'); ?>"><?php _e('Title:') ?></label>
+            <label for="<?php echo $this->get_field_id('title'); ?>"><?php echo "标题:"; ?></label>
             <input type="text" class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" value="<?php echo $title; ?>" />
         </p>
         <p>
-            <label for="<?php echo $this->get_field_id('nav_menu'); ?>"><?php _e('Select Menu:'); ?></label>
+            <label for="<?php echo $this->get_field_id('nav_menu'); ?>"><?php echo "选择菜单:"; ?></label>
             <select id="<?php echo $this->get_field_id('nav_menu'); ?>" name="<?php echo $this->get_field_name('nav_menu'); ?>">
         <?php
             foreach ( $menus as $menu ) {
