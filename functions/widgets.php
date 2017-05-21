@@ -16,10 +16,10 @@ function dangopress_get_recent_posts($post_num = 10, $chars = 30)
         $permalink = get_permalink($post['ID']);
         $title = $post['post_title'];
         $title_attr = esc_attr(strip_tags($title));
-        $human_time = dangopress_human_time_diff($post['post_date_gmt']);
+        $human_time = show_human_time_diff($post['post_date_gmt']);
 
         $link = '<a href="' . $permalink. '" rel="bookmark" title="详细阅读《' . $title_attr . '》">';
-        $link .= wp_trim_words($title, $chars) . '</a>'; 
+        $link .= wp_trim_words($title, $chars) . '</a>';
 
         $output .= '<li>' . $link . '<small>发表于 ' . $human_time . '</small></li>';
     }
@@ -39,10 +39,10 @@ function dangopress_get_rand_posts($post_num = 10, $chars = 30)
         $permalink = get_permalink($post->ID);
         $title = $post->post_title;
         $title_attr = esc_attr(strip_tags($title));
-        $human_time = dangopress_human_time_diff($post->post_date_gmt);
+        $human_time = show_human_time_diff($post->post_date_gmt);
 
         $link = '<a href="' . $permalink. '" rel="bookmark" title="随机阅读《' . $title_attr . '》">';
-        $link .= wp_trim_words($title, $chars) . '</a>'; 
+        $link .= wp_trim_words($title, $chars) . '</a>';
 
         $output .= '<li>' . $link . '<small>发表于 ' . $human_time . '</small></li>';
     }
@@ -53,7 +53,7 @@ function dangopress_get_rand_posts($post_num = 10, $chars = 30)
 /*
  * Get a list of sticky posts
  */
-function dangopress_get_sticky_posts($post_num = 10, $chars = 30)
+function dangopress_get_sticky_posts($posts_num = 10, $chars = 30)
 {
     $args = array(
         'numberposts' => $posts_num,
@@ -68,10 +68,10 @@ function dangopress_get_sticky_posts($post_num = 10, $chars = 30)
         $permalink = get_permalink($post->ID);
         $title = $post->post_title;
         $title_attr = esc_attr(strip_tags($title));
-        $human_time = dangopress_human_time_diff($post->post_modified_gmt);
+        $human_time = show_human_time_diff($post->post_modified_gmt);
 
         $link = '<a href="' . $permalink. '" rel="bookmark" title="推荐阅读《' . $title_attr . '》">';
-        $link .= wp_trim_words($title, $chars) . '</a>'; 
+        $link .= wp_trim_words($title, $chars) . '</a>';
 
         $output .= '<li>' . $link . '<small>最经更新于 ' . $human_time . '</small></li>';
     }
@@ -94,7 +94,7 @@ function dangopress_get_most_commented($posts_num = 10, $chars = 30, $days = 180
 
     $posts = $wpdb->get_results($sql);
     $output = "";
-    
+
     foreach ($posts as $post) {
         $permalink = get_permalink($post->ID);
         $title = $post->post_title;
@@ -102,7 +102,7 @@ function dangopress_get_most_commented($posts_num = 10, $chars = 30, $days = 180
         $comment_num = $post->comment_count;
 
         $link = '<a href="' . $permalink. '" rel="bookmark" title="详细阅读《' . $title_attr . '》">';
-        $link .= wp_trim_words($title, $chars) . '</a>'; 
+        $link .= wp_trim_words($title, $chars) . '</a>';
 
         $output .= '<li>' . $link . '<small>共 ' . $comment_num . ' 条评论</small></li>';
     }
@@ -143,7 +143,7 @@ class Dangopress_PostsTabber_Widget extends WP_Widget {
             return;
 
         // Get the widget content from cache first
-        $cache = wp_cache_get('widget_dangopress_poststabber', 'widget'); 
+        $cache = wp_cache_get('widget_dangopress_poststabber', 'widget');
 
         if (!is_array($cache))
             $cache = array();
@@ -233,7 +233,7 @@ class Dangopress_PostsTabber_Widget extends WP_Widget {
         <p><label for="<?php echo $this->get_field_id('chars'); ?>">标题显示字数限制: </label>
         <input class="widefat" id="<?php echo $this->get_field_id('chars'); ?>" name="<?php echo $this->get_field_name('chars'); ?>" type="text" value="<?php echo $chars; ?>" /></p>
         <p>
-        <input class="checkbox" type="checkbox" <?php checked($instance['show_in_home'], true); ?> id="<?php echo $this->get_field_id('show_in_home'); ?>" name="<?php echo $this->get_field_name('show_in_home'); ?>" /> 
+        <input class="checkbox" type="checkbox" <?php checked($instance['show_in_home'], true); ?> id="<?php echo $this->get_field_id('show_in_home'); ?>" name="<?php echo $this->get_field_name('show_in_home'); ?>" />
         <label for="<?php echo $this->get_field_id('show_in_home'); ?>">仅在首页显示</label>
         </p>
 <?php
@@ -299,7 +299,7 @@ class Dangopress_RecentComments_Widget extends WP_Widget {
             return;
 
         // Get the widget content from cache first
-        $cache = wp_cache_get('widget_dangopress_recentcomments', 'widget'); 
+        $cache = wp_cache_get('widget_dangopress_recentcomments', 'widget');
 
         if (!is_array($cache))
             $cache = array();
@@ -352,7 +352,7 @@ class Dangopress_RecentComments_Widget extends WP_Widget {
                 WHERE A1.ID = A2.user_id AND A2.meta_key = '" . $table_prefix . "capabilities'
                 AND A2.meta_value LIKE '%administrator%'
             ) ORDER BY comment_date_gmt DESC LIMIT $number";
-     
+
         $comments = $wpdb->get_results($sql);
 
         if ($comments) {
@@ -361,7 +361,7 @@ class Dangopress_RecentComments_Widget extends WP_Widget {
 
             foreach ($comments as $comment) {
                 $avatar = get_avatar($comment, 32, '', "$comment->comment_author's avatar");
-                $time_diff = dangopress_human_time_diff($comment->comment_date_gmt);
+                $time_diff = show_human_time_diff($comment->comment_date_gmt);
                 $comment_link = get_comment_link($comment);
 
                 $output .= '<li class="clearfix rc_item">' . $avatar;
@@ -399,7 +399,7 @@ class Dangopress_RecentComments_Widget extends WP_Widget {
         <p><label for="<?php echo $this->get_field_id('chars'); ?>">评论显示字数限制: </label>
         <input class="widefat" id="<?php echo $this->get_field_id('chars'); ?>" name="<?php echo $this->get_field_name('chars'); ?>" type="text" value="<?php echo $chars; ?>" /></p>
         <p>
-        <input class="checkbox" type="checkbox" <?php checked($instance['show_in_home'], true); ?> id="<?php echo $this->get_field_id('show_in_home'); ?>" name="<?php echo $this->get_field_name('show_in_home'); ?>" /> 
+        <input class="checkbox" type="checkbox" <?php checked($instance['show_in_home'], true); ?> id="<?php echo $this->get_field_id('show_in_home'); ?>" name="<?php echo $this->get_field_name('show_in_home'); ?>" />
         <label for="<?php echo $this->get_field_id('show_in_home'); ?>">仅在首页显示</label>
         </p>
 <?php
@@ -431,21 +431,21 @@ class Dangopress_Links_Widget extends WP_Widget {
      * Display the links widget
      */
     function widget($args, $instance) {
-        // Get menu           
+        // Get menu
         $nav_menu = !empty( $instance['nav_menu'] ) ? wp_get_nav_menu_object($instance['nav_menu']) : false;
-    
+
         // Only show the widget in the home page if show_in_home options is set
         if (($instance['show_in_home'] && !is_home()) || !$nav_menu)
             return;
-    
+
         $title = empty($instance['title']) ? '' : $instance['title'];
         $title = apply_filters('widget_title', $title, $instance, $this->id_base);
-    
-        echo $args['before_widget'];   
+
+        echo $args['before_widget'];
 
         if (!empty($title))
             echo $args['before_title'] . $title . $args['after_title'];
-    
+
         wp_nav_menu(array(
             'container' => false,
             'fallback_cb' => '',
@@ -453,7 +453,7 @@ class Dangopress_Links_Widget extends WP_Widget {
             'menu_class' => 'clearfix menu'
         ));
 
-        echo $args['after_widget'];    
+        echo $args['after_widget'];
     }
 
     /*
@@ -473,10 +473,10 @@ class Dangopress_Links_Widget extends WP_Widget {
     {
         $title = isset($instance['title']) ? $instance['title'] : '';
         $nav_menu = isset($instance['nav_menu']) ? $instance['nav_menu'] : '';
-    
+
         // Get menus
         $menus = get_terms('nav_menu', array( 'hide_empty' => false));
-    
+
         // If no menus exists, direct the user to go and create some.
         if (!$menus) {
             printf('<p>请先<a href="%s">创建自定义菜单</a>, 菜单由链接组成</p>', admin_url('nav-menus.php'));
@@ -500,7 +500,7 @@ class Dangopress_Links_Widget extends WP_Widget {
             </select>
         </p>
         <p>
-        <input class="checkbox" type="checkbox" <?php checked($instance['show_in_home'], true); ?> id="<?php echo $this->get_field_id('show_in_home'); ?>" name="<?php echo $this->get_field_name('show_in_home'); ?>" /> 
+        <input class="checkbox" type="checkbox" <?php checked($instance['show_in_home'], true); ?> id="<?php echo $this->get_field_id('show_in_home'); ?>" name="<?php echo $this->get_field_name('show_in_home'); ?>" />
         <label for="<?php echo $this->get_field_id('show_in_home'); ?>">仅在首页显示</label>
         </p>
 <?php
@@ -585,7 +585,7 @@ class Dangopress_MostViewedPosts_Widget extends WP_Widget {
         global $wpdb;
 
         // Get the widget content from cache first
-        $cache = wp_cache_get('widget_dangopress_most_viewed_posts', 'widget'); 
+        $cache = wp_cache_get('widget_dangopress_most_viewed_posts', 'widget');
 
         if (!is_array($cache))
             $cache = array();
