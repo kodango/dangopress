@@ -1039,7 +1039,7 @@ function dangopress_disable_dns_prefetch($hints, $relation_type) {
 
     return $hints;
 }
-add_filter('wp_resource_hints', 'remove_dns_prefetch', 10, 2);
+add_filter('wp_resource_hints', 'dangopress_disable_dns_prefetch', 10, 2);
 
 /*
  * Show dynamic copyright information
