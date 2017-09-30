@@ -446,7 +446,7 @@ function dangopress_esc_html($content)
         '/(<pre>[\n\s]*<code>)(.*?)(<\/code>[\n\s]*<\/pre>)/sim',
     );
 
-    return preg_replace_callback($patterns, dangopress_esc_callback, $content);
+    return preg_replace_callback($patterns, "dangopress_esc_callback", $content);
 }
 
 add_filter('the_content', 'dangopress_esc_html', 2);
