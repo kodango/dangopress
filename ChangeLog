@@ -1,3 +1,6 @@
+=== version 0.4.10 ===
+* 修复: 修复一些代码 bug
+
 === version 0.4.9 ===
 * 修复: 一些代码 bug 和样式问题
 * 增加: Facebook Open Graph\Twitter Card 支持;
