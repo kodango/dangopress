@@ -153,5 +153,5 @@ function dangopress_theme_options()
 <?php
 }
 
-add_action('admin_menu', dangopress_add_admin_menu);
+add_action('admin_menu', 'dangopress_add_admin_menu');
 ?>
