@@ -248,7 +248,7 @@ add_filter('pre_get_document_title', 'dangopress_custom_title');
          return $tag;
      }
  }
- add_filter('script_loader_tag', 'dangopress_defer_scripts', 10, 2);
+ add_filter('script_loader_tag', 'dangopress_defer_scripts', 10, 3);
 
 /*
  * Load css and javascript
@@ -397,7 +397,7 @@ function dangopress_nofollow_link($link)
 {
     return str_replace('<a', '<a rel="nofollow"', $link);
 }
-add_filter('the_content_more_link', 'dangopress_nofollow_link', 0);
+add_filter('the_content_more_link', 'dangopress_nofollow_link');
 
 /*
  * Disable self ping
@@ -420,8 +420,8 @@ function dangopress_remove_version($src)
     $parts = explode('?ver', $src);
     return $parts[0];
 }
-add_filter('script_loader_src', 'dangopress_remove_version', 15, 1);
-add_filter('style_loader_src', 'dangopress_remove_version', 15, 1);
+add_filter('script_loader_src', 'dangopress_remove_version', 15);
+add_filter('style_loader_src', 'dangopress_remove_version', 15);
 
 /*
  * Escape special characters in pre.prettyprint into their HTML entities
@@ -446,7 +446,7 @@ function dangopress_esc_html($content)
         '/(<pre>[\n\s]*<code>)(.*?)(<\/code>[\n\s]*<\/pre>)/sim',
     );
 
-    return preg_replace_callback($patterns, "dangopress_esc_callback", $content);
+    return preg_replace_callback($patterns, 'dangopress_esc_callback', $content);
 }
 
 add_filter('the_content', 'dangopress_esc_html', 2);
@@ -993,7 +993,7 @@ function dangopress_disable_google_fonts($translations, $text, $context, $domain
 
     return $translations;
 }
-add_filter('gettext_with_context', 'dangopress_disable_google_fonts', 888, 4);
+add_filter('gettext_with_context', 'dangopress_disable_google_fonts', 15, 4);
 
 /*
  * Embed gists with a URL in post article
