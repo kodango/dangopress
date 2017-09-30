@@ -202,7 +202,7 @@ function dangopress_prune_theme() {
     remove_action('wp_head', 'wp_oembed_add_discovery_links');
     remove_action('wp_head', 'wp_oembed_add_host_js');
 }
-add_action('init', dangopress_prune_theme);
+add_action('init', 'dangopress_prune_theme');
 
 /*
  * Customize wordpress title
