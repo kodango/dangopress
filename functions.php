@@ -94,7 +94,7 @@ function dangopress_setup_theme()
     // Enable page excerpt support
     add_post_type_support('page', 'excerpt');
 
-    // Register wordpress menu
+    // Register WordPress menu
     register_nav_menus(array('primary' => 'Primary Navigation'));
 
     // Register sidebars for use in this theme
@@ -205,7 +205,7 @@ function dangopress_prune_theme() {
 add_action('init', 'dangopress_prune_theme');
 
 /*
- * Customize wordpress title
+ * Customize WordPress title
  */
 function dangopress_custom_title()
 {
@@ -955,7 +955,7 @@ function dangopress_category_description()
 }
 
 /*
- * Add additional button in the wordpress editor
+ * Add additional button in the WordPress editor
  */
 function dangopress_add_quicktags()
 {
