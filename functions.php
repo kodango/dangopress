@@ -10,6 +10,9 @@
   */
 $content_width = 640;
 
+// Theme version
+$dangopress_version = '0.4.11';
+
 if (is_admin()) {
     require_once('theme-options.php');
 }
@@ -238,7 +241,7 @@ add_filter('pre_get_document_title', 'dangopress_custom_title');
  function dangopress_defer_scripts($tag, $handle, $src) {
      $defer_scripts = array(
          'prettify-js',
-         'dangopress-js',
+         'dangopress-script',
          'jquery'
      );
 
@@ -255,6 +258,8 @@ add_filter('pre_get_document_title', 'dangopress_custom_title');
  */
 function dangopress_enqueue_scripts()
 {
+    global $dangopress_version;
+
     // URL prefix
     $url_prefix = get_url_prefix();
     // Theme options
@@ -262,30 +267,29 @@ function dangopress_enqueue_scripts()
 
     // Whether to load compressed scripts/styles or not
     if ($options['using_compressed_files']) {
-        $js_suffix = '.min.js';
-        $css_suffix = '.min.css';
+        $ext_prefix = '.min';
     } else {
-        $js_suffix = '.js';
-        $css_suffix = '.css';
+        $ext_prefix = '';
     }
 
     // Theme css
-    wp_enqueue_style('dangopress-css', $url_prefix . '/styles/theme' . $css_suffix, array(), '0.4.6');
+    wp_enqueue_style('dangopress-style', "$url_prefix/styles/theme$ext_prefix.css",
+                     array(), $dangopress_version);
 
     // Replace jQuery, use Baidu Public Library CDN
     if (!is_admin()) {
         wp_deregister_script('jquery');
-        wp_register_script('jquery', $url_prefix . '/scripts/jquery-2.1.1' . $js_suffix,
+        wp_register_script('jquery', "$url_prefix/scripts/jquery-2.1.1$ext_prefix.js",
                            array(), '2.1.1', true);
     }
 
     // Register prettify.js
-    wp_enqueue_script('prettify-js', $url_prefix . '/scripts/prettify' . $js_suffix,
-                       array(), '0.4.6', true);
+    wp_enqueue_script('prettify-js', "$url_prefix/scripts/prettify$ext_prefix.js",
+                       array(), $dangopress_version, true);
 
     // Theme script
-    wp_enqueue_script('dangopress-js', $url_prefix . '/scripts/theme' . $js_suffix,
-                      array('jquery'), '0.4.6', true);
+    wp_enqueue_script('dangopress-script', "$url_prefix/scripts/theme$ext_prefix.js",
+                      array('jquery'), $dangopress_version, true);
 }
 add_action('wp_enqueue_scripts', 'dangopress_enqueue_scripts');
 
