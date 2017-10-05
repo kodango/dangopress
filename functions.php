@@ -238,7 +238,7 @@ add_filter('pre_get_document_title', 'dangopress_custom_title');
  function dangopress_defer_scripts($tag, $handle, $src) {
      $defer_scripts = array(
          'prettify-js',
-         'theme-js',
+         'dangopress-js',
          'jquery'
      );
 
@@ -270,7 +270,7 @@ function dangopress_enqueue_scripts()
     }
 
     // Theme css
-    wp_enqueue_style('theme-main', $url_prefix . '/styles/theme' . $css_suffix, array(), '0.4.6');
+    wp_enqueue_style('dangopress-css', $url_prefix . '/styles/theme' . $css_suffix, array(), '0.4.6');
 
     // Replace jQuery, use Baidu Public Library CDN
     if (!is_admin()) {
@@ -284,7 +284,7 @@ function dangopress_enqueue_scripts()
                        array(), '0.4.6', true);
 
     // Theme script
-    wp_enqueue_script('theme-js', $url_prefix . '/scripts/theme' . $js_suffix,
+    wp_enqueue_script('dangopress-js', $url_prefix . '/scripts/theme' . $js_suffix,
                       array('jquery'), '0.4.6', true);
 }
 add_action('wp_enqueue_scripts', 'dangopress_enqueue_scripts');
