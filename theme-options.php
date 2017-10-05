@@ -9,6 +9,7 @@
 function dangopress_get_options()
 {
     $options = get_option('dangopress_options');
+
     $defaults = array(
         'cdn_prefix' => '',
         'bdshare_uid' => '',
@@ -49,7 +50,7 @@ function dangopress_theme_options()
 <h2>dangopress 主题设置</h2><br/>
 
 <?php
-    if ($_POST['update_themeoptions'] == 'true') {
+    if (isset($_POST['update_themeoptions']) && $_POST['update_themeoptions'] == 'true') {
         foreach ($_POST as $key => $value) {
             if (isset($value) && isset($options[$key]))
                 $options[$key] = $value;
