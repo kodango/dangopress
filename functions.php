@@ -847,6 +847,10 @@ document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static
  */
 function dangopress_insert_adsense_scripts()
 {
+    /* Do not track administrator */
+    if (current_user_can('manage_options'))
+        return;
+
     $options = get_option('dangopress_options');
     $publisher_id = $options["adsense_publisher_id"];
 
