@@ -340,12 +340,11 @@ function dangopress_add_meta_robots() {
 add_action('wp_head', 'dangopress_add_meta_robots');
 
 /*
- * Add Social Media Meta information
+ * Add Social Meta
  * Reference:
- * http://www.wpbeginner.com/wp-themes/how-to-add-facebook-open-graph-meta-data-in-wordpress-themes/
  * https://moz.com/blog/meta-data-templates-123
  */
- function dangopress_add_social_media_meta() {
+ function dangopress_add_social_meta() {
     $options = get_option('dangopress_options');
 
     if (!$options['enable_social_meta'])
@@ -354,9 +353,6 @@ add_action('wp_head', 'dangopress_add_meta_robots');
     // Only add open graph to below pages
     if (!is_singular())
         return;
-
-    if ($options['fb_user_id'])
-        echo '<meta property="fb:admins" content="' . $options['fb_user_id'] . '"/>';
 
     echo '<meta property="og:site_name" content="' . get_bloginfo('name'). '"/>';
     echo '<meta property="og:type" content="article"/>';
@@ -375,9 +371,8 @@ add_action('wp_head', 'dangopress_add_meta_robots');
         $image_url = strtok($image_attributes[0], '?');
 		echo '<meta property="og:image" content="' . esc_attr($image_url) . '"/>';
 	}
-
 }
-add_action('wp_head', 'dangopress_add_social_media_meta');
+add_action('wp_head', 'dangopress_add_social_meta');
 
 /*
  * Wrap the post image in div container
