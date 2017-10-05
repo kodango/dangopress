@@ -12,7 +12,7 @@ if (post_password_required() || (!have_comments() && !comments_open() && !pings_
 
 <?php
     $comment_count = get_comments_number();
-    $comments_by_type = &separate_comments($comments);
+    $comments_by_type = separate_comments($comments);
 
     $trackbacks = $comments_by_type['pings'];
     $tb_count = count($trackbacks);
