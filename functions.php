@@ -5,9 +5,7 @@
  * @package dangopress
  */
 
- /**
-  * Set the content width based on the theme's design and stylesheet.
-  */
+// Set the content width based on the theme's design and stylesheet.
 $content_width = 640;
 
 // Theme version
@@ -264,31 +262,26 @@ function dangopress_enqueue_scripts()
     $url_prefix = get_url_prefix();
     // Theme options
     $options = get_option('dangopress_options');
-
     // Whether to load compressed scripts/styles or not
-    if ($options['using_compressed_files']) {
-        $ext_prefix = '.min';
-    } else {
-        $ext_prefix = '';
-    }
+    $ext_prefix = $options['using_compressed_files'] ? '.min' : '';
 
-    // Theme css
-    wp_enqueue_style('dangopress-style', "$url_prefix/styles/theme$ext_prefix.css",
+    // Add theme.css
+    wp_enqueue_style('dangopress-style', "$url_prefix/static/theme$ext_prefix.css",
                      array(), $dangopress_version);
 
-    // Replace jQuery, use Baidu Public Library CDN
+    // Replace jQuery with the lastest version in front pages
     if (!is_admin()) {
         wp_deregister_script('jquery');
-        wp_register_script('jquery', "$url_prefix/scripts/jquery-2.1.1$ext_prefix.js",
-                           array(), '2.1.1', true);
+        wp_register_script('jquery', "$url_prefix/static/jquery$ext_prefix.js",
+                           array(), '3.2.1', true);
     }
 
-    // Register prettify.js
-    wp_enqueue_script('prettify-js', "$url_prefix/scripts/prettify$ext_prefix.js",
+    // Add Prettyify.js
+    wp_enqueue_script('prettify-js', "$url_prefix/static/prettify$ext_prefix.js",
                        array(), $dangopress_version, true);
 
-    // Theme script
-    wp_enqueue_script('dangopress-script', "$url_prefix/scripts/theme$ext_prefix.js",
+    // Add theme.js
+    wp_enqueue_script('dangopress-script', "$url_prefix/static/theme$ext_prefix.js",
                       array('jquery'), $dangopress_version, true);
 }
 add_action('wp_enqueue_scripts', 'dangopress_enqueue_scripts');
