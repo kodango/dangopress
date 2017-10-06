@@ -6,7 +6,6 @@
 /*
  * Get a list of recent posts
  */
-
 function dangopress_get_recent_posts($post_num = 10, $chars = 30)
 {
     $recents = wp_get_recent_posts("numberposts=$post_num&offset=0&post_status=publish");

@@ -5,31 +5,31 @@
  * @package dangopress
  */
 
+/*
+ * Global variables
+ */
+
 // Set the content width based on the theme's design and stylesheet.
-$content_width = 640;
+if (!isset($content_width)) {
+    $content_width = 640;
+}
 
 // Theme version
-$dangopress_version = '0.4.11';
-
-if (is_admin()) {
-    require_once('theme-options.php');
-}
+$dangopress_version = '0.5.0-beta';
 
 /*
- * Require widgets functions
+ * Include the functions
  */
+
+// Theme options
+require_once('theme-options.php');
+
+// Theme widget function
 require_once('functions/widgets.php');
 
-/*
- * Include custom function php file if exists.
- *
- * You should put your personal functions in the functions/custom.php.
- */
-define('CUSTOM_FUNCTIONS', get_template_directory() . '/functions/custom.php');
-
-if (file_exists(CUSTOM_FUNCTIONS)) {
-    require_once(CUSTOM_FUNCTIONS);
-}
+// Theme custom function
+// Note: You should put your personal functions in the functions/custom.php.
+require_once('functions/custom.php');
 
 /*
  * Utility functions used in the theme
