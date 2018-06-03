@@ -325,12 +325,12 @@ add_action('wp_head', 'dangopress_add_meta_description');
 
 /*
  * Add noindx,follow onto your date archives, tag archives, author archives,
- * and onto the subsequent pages of your individual category pages
+ * internal search result pages and onto the subsequent pages of your individual category pages
  */
 function dangopress_add_meta_robots() {
     global $paged;
 
-    if ($paged > 1 || is_author() || is_tag() || is_date() || is_attachment() || is_page_template("page-archives.php")) {
+    if ($paged > 1 || is_author() || is_tag() || is_search() || is_date() || is_attachment() || is_page_template("page-archives.php")) {
         echo '<meta name="robots" content="noindex,follow" />';
     }
 }
