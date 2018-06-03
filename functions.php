@@ -918,6 +918,42 @@ var _hmt = _hmt || [];
 add_action('wp_head', 'dangopress_insert_analytics_snippets');
 
 /*
+ * Insert Google ads code into posts
+ * From: https://www.wpdaxue.com/insert-ads-within-post-content-in-wordpress.html
+ */
+function insert_after_paragraph($insertion, $paragraph_id, $content)
+{
+	$closing_p = '</p>';
+	$paragraphs = explode($closing_p, $content);
+
+	foreach ($paragraphs as $index => $paragraph) {
+		if (trim($paragraph)) {
+			$paragraphs[$index] .= $closing_p;
+		}
+
+		if ($paragraph_id == $index + 1) {
+			$paragraphs[$index] .= $insertion;
+		}
+	}
+
+	return implode('', $paragraphs);
+}
+
+function dangopress_insert_post_ads($content)
+{
+    $options = get_option('dangopress_options');
+    $post_ads_code = $options['post_ads_code'];
+
+	if (!empty($post_ads_code) && is_single() && !is_admin()) {
+		return insert_after_paragraph($post_ads_code, 3, $content);
+	}
+
+	return $content;
+}
+
+add_filter('the_content', 'dangopress_insert_post_ads');
+
+/*
  * Show description box in category page
  */
 function dangopress_category_description()

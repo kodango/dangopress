@@ -16,6 +16,7 @@ function dangopress_get_options()
         'bdtj_siteid' => '',
         'google_webid' => '',
         'adsense_publisher_id' => '',
+        'post_ads_code' => '',
         'sitemap_xml' => '',
         'using_compressed_files' => true,
         'bing_webmaster_user' => '',
@@ -58,6 +59,8 @@ function dangopress_theme_options()
 
         $options['using_compressed_files'] = $_POST['using_compressed_files'] ? true : false;
         $options['enable_social_meta'] = $_POST['enable_social_meta'] ? true : false;
+        $options['post_ads_code'] = stripslashes($_POST['post_ads_code']);
+
         update_option('dangopress_options', $options);
         $options = get_option('dangopress_options');
     ?>
@@ -99,6 +102,12 @@ function dangopress_theme_options()
             <label for="adsense_publisher_id">Google Adsense Publisher ID</label> (<a target="_blank" href="https://support.google.com/code/answer/73069">帮助</a>)
         </th>
         <td><input name="adsense_publisher_id" id="adsense_publisher_id" type="text" value="<?php echo $options['adsense_publisher_id']; ?>" class="regular-text code"></td>
+    </tr>
+    <tr>
+        <th>
+            <label for="post_ads_code">文章内嵌广告代码</label>
+        </th>
+        <td><textarea name="post_ads_code" id="post_ads_code" type="text" rows="5" class="regular-text code"><?php echo $options['post_ads_code']; ?></textarea></td>
     </tr>
     <tr>
         <th>
