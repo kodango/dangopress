@@ -641,6 +641,84 @@ class Dangopress_MostViewedPosts_Widget extends WP_Widget {
 }
 
 /*
+ * Widget: Adsense ads code
+ */
+class Dangopress_Ads_Widget extends WP_Widget {
+    /*
+     * Instantiate the widget object
+     */
+    function __construct()
+    {
+        $widget_opts = array(
+            'classname' => 'widget-ads',              // widget classname
+            'description' => '显示广告单元'       // widget description
+        );
+
+        parent::__construct(
+            'dangopress_ads',              // widget base id
+            '自定义广告 [dangopress]',   // widget name
+            $widget_opts                     // widget options
+        );
+    }
+
+    /*
+     * Display the links widget
+     */
+    function widget($args, $instance) {
+        // Only show the widget in the home page if show_in_home options is set
+        if ($instance['show_in_home'] && !is_home())
+            return;
+
+        $title = empty($instance['title']) ? '' : $instance['title'];
+        $title = apply_filters('widget_title', $title, $instance, $this->id_base);
+
+        echo $args['before_widget'];
+
+        if (!empty($title))
+            echo $args['before_title'] . $title . $args['after_title'];
+
+        // Show ads code here
+        echo $instance['ads_code'];
+
+        echo $args['after_widget'];
+    }
+
+    /*
+     * Sanitize widget form values as they are saved
+     */
+    public function update($new_instance, $old_instance)
+    {
+        $instance = $old_instance;
+        $instance['title'] = strip_tags($new_instance['title']);
+        $instance['ads_code'] = $new_instance['ads_code'];
+        $instance['show_in_home'] = $new_instance['show_in_home'] ? 1 : 0;
+
+        return $instance;
+    }
+
+    function form($instance)
+    {
+        $title = isset($instance['title']) ? $instance['title'] : '';
+        $ads_code = isset($instance['ads_code']) ? $instance['ads_code'] : '';
+
+?>
+        <p>
+            <label for="<?php echo $this->get_field_id('title'); ?>"><?php echo "标题:"; ?></label>
+            <input type="text" class="widefat" id="<?php echo $this->get_field_id('title'); ?>" name="<?php echo $this->get_field_name('title'); ?>" value="<?php echo $title; ?>" />
+        </p>
+        <p>
+            <label for="<?php echo $this->get_field_id('ads_code'); ?>"><?php echo "内容:"; ?></label>
+            <textarea rows="8" class="widefat" id="<?php echo $this->get_field_id('ads_code'); ?>" name="<?php echo $this->get_field_name('ads_code'); ?>"><?php echo $ads_code; ?></textarea>
+        </p>
+        <p>
+        <input class="checkbox" type="checkbox" <?php checked($instance['show_in_home'], true); ?> id="<?php echo $this->get_field_id('show_in_home'); ?>" name="<?php echo $this->get_field_name('show_in_home'); ?>" />
+        <label for="<?php echo $this->get_field_id('show_in_home'); ?>">仅在首页显示</label>
+        </p>
+<?php
+    }
+}
+
+/*
  * Register all the widgets
  */
 function dangopress_widget_init()
@@ -648,6 +726,7 @@ function dangopress_widget_init()
     register_widget('Dangopress_PostsTabber_Widget');
     register_widget('Dangopress_RecentComments_Widget');
     register_widget('Dangopress_Links_Widget');
+    register_widget('Dangopress_Ads_Widget');
 
     if (function_exists('get_timespan_most_viewed'))
         register_widget('Dangopress_MostViewedPosts_Widget');
