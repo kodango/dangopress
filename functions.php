@@ -951,11 +951,11 @@ function dangopress_insert_post_ads($content)
 	$pattern = "/<p>.*?<\/p>/";
 	$paragraph_count = preg_match_all($pattern, $content);
 	
-	if ($paragraph_count <= 8) {
+	if ($paragraph_count <= 7) {
 		return $content;
 	}
 	
-	$idx = rand(4, $paragraph_count - 2);
+	$idx = rand(3, $paragraph_count - 2);
 	return insert_after_paragraph($post_ads_code, $idx, $content);
 	
 // 	if (!empty($post_ads_code) && is_single() && !is_admin()) {
