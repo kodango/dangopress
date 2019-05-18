@@ -943,10 +943,24 @@ function dangopress_insert_post_ads($content)
 {
     $options = get_option('dangopress_options');
     $post_ads_code = $options['post_ads_code'];
-
-	if (!empty($post_ads_code) && is_single() && !is_admin()) {
-		return insert_after_paragraph($post_ads_code, 3, $content);
+	
+	if (empty($post_ads_code) || !is_single()) {
+		return $content;
 	}
+	
+	$pattern = "/<p>.*?<\/p>/";
+	$paragraph_count = preg_match_all($pattern, $content);
+	
+	if ($paragraph_count <= 8) {
+		return $content;
+	}
+	
+	$idx = rand(4, $paragraph_count - 2);
+	return insert_after_paragraph($post_ads_code, $idx, $content);
+	
+// 	if (!empty($post_ads_code) && is_single() && !is_admin()) {
+// 		return insert_after_paragraph($post_ads_code, 3, $content);
+// 	}
 
 	return $content;
 }
