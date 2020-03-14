@@ -314,7 +314,7 @@ function switchTab(event) {
 
 document.addEventListener('DOMContentLoaded', function(event) {
     var sf = new SidebarFollow();
-    sf.init({ element: '#sidebar-follow', distanceToTop: 70 });
+    sf.init({ element: 'sidebar-follow', distanceToTop: 70 });
 
     /* Dynamically fill the google adsense ads */
     var ads = document.querySelectorAll('.adsbygoogle')
