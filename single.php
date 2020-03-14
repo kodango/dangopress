@@ -30,8 +30,8 @@ get_header();?>
     <?php if (function_exists('related_posts')) related_posts(); ?>
 
     <div class="entry-footer clearfix">
-        <div id="pagination" class="alignleft">
-            <div class="prev">
+        <div id="pagination">
+            <div class="prev alignleft">
                 <span class="icon-chevron-circle-left"></span>
                 <?php
                     $prev_post = get_previous_post();
@@ -44,7 +44,7 @@ get_header();?>
                     }
                 ?>
             </div>
-            <div class="next">
+            <div class="next alignright">
                 <span class="icon-chevron-circle-right"></span>
                 <?php
                     $next_post = get_next_post();
@@ -57,9 +57,6 @@ get_header();?>
                     }
                 ?>
             </div>
-        </div>
-        <div id="share" class="alignright">
-            <?php dangopress_place_bdshare(); ?>
         </div>
     </div>
 

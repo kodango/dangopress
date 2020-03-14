@@ -163,7 +163,7 @@ function dangopress_prune_theme() {
     /*
      * Remove the responsive image support in 4.4
      */
-    add_filter('max_srcset_image_width', create_function('', 'return 1;'));
+    add_filter('max_srcset_image_width', '__return_false');
 
     /*
      * Disable Automatic Formatting
@@ -494,7 +494,7 @@ function dangopress_comments_callback($comment, $args, $depth) {
 
     /* Initialize the comment count */
     if (!$commentcount) {
-        $page = get_query_var('cpage') - 1;
+        $page = intval(get_query_var('cpage')) - 1;
 
         if ($page > 0) {
             $cpp = get_option('comments_per_page');
