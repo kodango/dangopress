@@ -276,6 +276,8 @@ function dangopress_enqueue_scripts()
         //                   array(), '3.2.1', true);
     }
 
+    wp_dequeue_style('wp-block-library');
+
     // Add Prettyify.js
     wp_enqueue_script('prettify-js', "$url_prefix/static/prettify$ext_prefix.js",
                        array(), $dangopress_version, true);
