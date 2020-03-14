@@ -516,11 +516,14 @@ function dangopress_comments_callback($comment, $args, $depth) {
                 <span class="comment-date">发表于 <?php echo show_human_time_diff($comment->comment_date_gmt); ?></span>
                 <span class="comment-reply">
                 <?php
-                    comment_reply_link(array_merge($args, array(
+                    $link = get_comment_reply_link(array_merge($args, array(
                         'reply_text' => '回复',
                         'depth' => $depth,
                         'max_depth' => $args['max_depth']
                     )));
+
+                    // remove ?replytocom parameter in the comment reply link
+                    echo preg_replace('/href=\'(.*(\?|&)replytocom=(\d+)#respond)/', 'href=\'#respond', $link);
 
                     if ($depth == 1) { // Show the floor number
                          printf(' #%1$s', ++$commentcount);

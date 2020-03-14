@@ -2,10 +2,10 @@
  * Javascript for dangopress theme
  */
 
- /*
-  * Include comment-reply.js
-  * See: https://codex.wordpress.org/Function_Reference/comment_reply_link
-  */
+/*
+ * Include comment-reply.js
+ * See: https://codex.wordpress.org/Function_Reference/comment_reply_link
+ */
 var addComment = {
 	moveForm: function( commId, parentId, respondId, postId ) {
 		var div, element, style, cssHidden,
@@ -109,7 +109,6 @@ var addComment = {
  * @author: mg12 [http://www.neoease.com/]
  * @update: 2012/12/05
  */
-
 SidebarFollow = function() {
     this.config = {
         element: null, // 处理的节点
@@ -125,7 +124,6 @@ SidebarFollow = function() {
 };
 
 SidebarFollow.prototype = {
-
     init: function(config) {
         this.config = config || this.config;
         var _self = this;
@@ -230,7 +228,6 @@ jQuery(function($) {
         $('html,body').animate({ scrollTop:0 }, 'fast');
     });
 
-
     /* Sidebar tabber widget */
     $('.tabber-title li').click(function() {
         if (this.className == 'selected')
@@ -244,17 +241,6 @@ jQuery(function($) {
 
         $tabber.find('.tabber-content ul').slideUp('fast')
                .eq($tabber.find('.tabber-title li').index(this)).slideDown('fast');
-    });
-
-    /* Comment tabber */
-    $('#comments-tabber a').on('click', function() {
-         if (this.className == 'curtab')
-             return;
-
-         $(this).attr('class', 'curtab')
-               .siblings().attr('class', 'tab');
-
-         $('#comments-tabber').nextAll().toggle();
     });
 
     /* Sidebar follow */
@@ -281,6 +267,17 @@ jQuery(function($) {
         }
     });
 
+    /* Comment tabber */
+    $('#comments-tabber a').on('click', function() {
+         if (this.className == 'curtab')
+             return;
+
+         $(this).attr('class', 'curtab')
+               .siblings().attr('class', 'tab');
+
+         $('#comments-tabber').nextAll().toggle();
+    });
+
     /* Toggle comment user */
     $('#comments').on('click', '#toggle-author', function () {
         $('#author-info').slideToggle(function () {
@@ -295,6 +292,12 @@ jQuery(function($) {
                 $('#toggle-author u').html('隐藏');
             }
         });
+    });
+
+    $('.comment-reply-link').click(function () {
+        var commentId = $(this).attr('data-commentid');
+        addComment.moveForm("comment-" + commentId, commentId, "respond", $(this).attr('data-postid'));
+        return false;
     });
 
     /*
