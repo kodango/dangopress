@@ -12,7 +12,6 @@ function dangopress_get_options()
 
     $defaults = array(
         'cdn_prefix' => '',
-        'bdshare_uid' => '',
         'bdtj_siteid' => '',
         'google_webid' => '',
         'adsense_publisher_id' => '',
@@ -90,12 +89,6 @@ function dangopress_theme_options()
             <label for="home_meta_descripton">首页 Meta Description</label>
         </th>
         <td><textarea name="home_meta_descripton" id="home_meta_descripton" rows="5" class="regular-text code"><?php echo $options['home_meta_descripton']; ?></textarea></td>
-    </tr>
-    <tr>
-        <th>
-            <label for="bdshare_uid">百度分享 UID</label> (<a target="_blank" href="http://share.baidu.com/code">帮助</a>)
-        </th>
-        <td><input name="bdshare_uid" id="bdshare_uid" type="text" value="<?php echo $options['bdshare_uid']; ?>" class="regular-text code"></td>
     </tr>
     <tr>
         <th>

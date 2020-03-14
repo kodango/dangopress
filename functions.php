@@ -759,52 +759,6 @@ function dangopress_breadcrumb()
 }
 
 /*
- * Place baidu share icons
- */
-function dangopress_place_bdshare()
-{
-    $options = get_option('dangopress_options');
-
-    if (empty($options['bdshare_uid']))
-        return;
-?>
-
-<div id="bdshare" class="bdshare_t bds_tools_24 get-codes-bdshare">
-    <a class="bds_tsina"></a>
-    <a class="bds_tqq"></a>
-    <a class="bds_twi"></a>
-    <a class="bds_hi"></a>
-    <a class="bds_douban"></a>
-    <a class="bds_tieba"></a>
-    <a class="bds_youdao"></a>
-    <a class="bds_copy"></a>
-    <span class="bds_more"></span>
-</div>
-
-<?php
-
-    add_action('wp_footer', 'dangopress_load_bdshare');
-}
-
-/*
- * Load baidu share scripts
- */
-function dangopress_load_bdshare()
-{
-    $options = get_option('dangopress_options');
-    $bdshare_uid = $options['bdshare_uid'];
-?>
-
-<script type="text/javascript" id="bdshare_js" data="type=tools&amp;uid=<?php echo $bdshare_uid; ?>" ></script>
-<script type="text/javascript" id="bdshell_js"></script>
-<script type="text/javascript">
-document.getElementById("bdshell_js").src = "http://bdimg.share.baidu.com/static/js/shell_v2.js?cdnversion=" + Math.ceil(new Date()/3600000)
-</script>
-
-<?php
-}
-
-/*
  * Insert Google Adsense scripts
  */
 function dangopress_insert_adsense_scripts()
