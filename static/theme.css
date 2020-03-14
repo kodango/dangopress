@@ -1049,6 +1049,7 @@ pre .pln {
   src: url('./icomoon.woff?jpr669') format('woff');
   font-weight: normal;
   font-style: normal;
+  font-display: swap;
 }
 
 [class^="icon-"], [class*=" icon-"] {
