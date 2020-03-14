@@ -23,9 +23,9 @@ if (post_password_required() || (!have_comments() && !comments_open() && !pings_
     <meta itemprop="interactionCount" content="UserComments:<?php echo $comment_count;?>">
 
     <div id="comments-tabber" class="clearfix">
-	    <a id="reviews-tab" class="curtab" rel="nofollow"><span><?php echo $co_count; ?></span> 条评论</a>
+	    <a id="reviews-tab" class="selected comment-tab" rel="nofollow"><span><?php echo $co_count; ?></span> 条评论</a>
 	<?php if ($tb_count != 0): ?>
-        <a id="trackbacks-tab" class="tab" rel="nofollow"><span><?php echo $tb_count; ?></span> 次引用</a>
+        <a id="trackbacks-tab" class="comment-tab" rel="nofollow"><span><?php echo $tb_count; ?></span> 次引用</a>
     <?php endif; ?>
     </div>
 
@@ -37,16 +37,16 @@ if (post_password_required() || (!have_comments() && !comments_open() && !pings_
 
         // custom fields
         $fields = array(
-            'author' => '<input id="author" name="author" type="text" placeholder="昵称*" value="' . esc_attr($comment_author) . '" size="30" aria-required="true" /><label for="author">昵称*</label>',
-            'email' => '<input id="email" name="email" type="text" placeholder="邮箱*" value="' . esc_attr($comment_author_email) . '" size="30" aria-required="true" /><label for="author">邮箱*</label>',
-            'url' => '<input id="url" name="url" type="text" placeholder="网站" value="' . esc_attr($comment_author_url) . '" size="30" /><label for="author">网站*</label>',
-            'email_notify' => '<input type="checkbox" name="comment_mail_notify" id="comment_mail_notify" value="" checked="checked" /><label for="comment_mail_notify">有人回复时邮件通知我</label>',
+            'author' => '<p class="comment-form-author"><input id="author" name="author" type="text" placeholder="昵称*" value="' . esc_attr($comment_author) . '" size="30" aria-required="true" /></p>',
+            'email' => '<p class="comment-form-email"><input id="email" name="email" type="text" placeholder="邮箱*" value="' . esc_attr($comment_author_email) . '" size="30" aria-required="true" /></p>',
+            'url' => '<p class="comment-form-url"><input id="url" name="url" type="text" placeholder="网站" value="' . esc_attr($comment_author_url) . '" size="30" /></p>',
+            'email_notify' => '<p class="comment-form-notify"><input type="checkbox" name="comment_mail_notify" id="comment_mail_notify" value="" checked="checked" /> <label for="comment_mail_notify">有人回复时邮件通知我。</label></p>',
             'comment_nonce' => '<input type="hidden" name="comment_nonce" value="' . $nonce . '" />',
         );
 
         // custom comment args
         $comments_args = array(
-            'fields' => $fields,
+            //'fields' => $fields,
             'title_reply'=> '',
             'title_reply_to' => '',
             'cancel_reply_link' => '取消回复',
@@ -58,14 +58,16 @@ if (post_password_required() || (!have_comments() && !comments_open() && !pings_
 
         if (!is_user_logged_in() && !empty($comment_author)) {
             $welcome_login = '<p id="welcome-login">' . get_avatar($comment_author_email, 24, '', "$comment_author's avatar");
-            $welcome_login .= '<span><strong>' . $comment_author . '</strong>, 欢迎回来.</span>';
-            $welcome_login .=  ' <span id="toggle-author"><u>更改</u> <i class="icon-power-off"></i></span></p>';
+            $welcome_login .= '<span><strong>' . $comment_author . '</strong>, 欢迎回来.</span> <span id="toggle-author">更改</span>';
 
-            $comments_args['comment_field'] = '</div>' . $comments_args['comment_field'];
-            $comments_args['comment_notes_before'] = $welcome_login . '<div id="author-info" class="hide">';
+            $fields['author'] = '<p class="comment-form-author hide"><input id="author" name="author" type="text" placeholder="昵称*" value="' . esc_attr($comment_author) . '" size="30" aria-required="true" /></p>';
+            $fields['email'] = '<p class="comment-form-email hide"><input id="email" name="email" type="text" placeholder="邮箱*" value="' . esc_attr($comment_author_email) . '" size="30" aria-required="true" /></p>';
+            $fields['url'] = '<p class="comment-form-url hide"><input id="url" name="url" type="text" placeholder="网站" value="' . esc_attr($comment_author_url) . '" size="30" /></p>';
+
+            $comments_args['comment_notes_before'] = $welcome_login;
         }
 
-        // show comment form
+        $comments_args['fields'] = $fields;
         comment_form($comments_args);
     ?>
 

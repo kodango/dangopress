@@ -239,8 +239,8 @@ add_filter('pre_get_document_title', 'dangopress_custom_title');
  function dangopress_defer_scripts($tag, $handle, $src) {
      $defer_scripts = array(
          'prettify-js',
-         'dangopress-script',
-         'jquery'
+         'dangopress-script'
+         //'jquery'
      );
 
      if (in_array($handle, $defer_scripts)) {
@@ -272,8 +272,8 @@ function dangopress_enqueue_scripts()
     // Replace jQuery with the lastest version in front pages
     if (!is_admin()) {
         wp_deregister_script('jquery');
-        wp_register_script('jquery', "$url_prefix/static/jquery$ext_prefix.js",
-                           array(), '3.2.1', true);
+        //wp_register_script('jquery', "$url_prefix/static/jquery$ext_prefix.js",
+        //                   array(), '3.2.1', true);
     }
 
     // Add Prettyify.js
@@ -281,8 +281,10 @@ function dangopress_enqueue_scripts()
                        array(), $dangopress_version, true);
 
     // Add theme.js
+    //wp_enqueue_script('dangopress-script', "$url_prefix/static/theme$ext_prefix.js",
+    //                  array('jquery'), $dangopress_version, true);
     wp_enqueue_script('dangopress-script', "$url_prefix/static/theme$ext_prefix.js",
-                      array('jquery'), $dangopress_version, true);
+                      array(), $dangopress_version, true);
 }
 add_action('wp_enqueue_scripts', 'dangopress_enqueue_scripts');
 

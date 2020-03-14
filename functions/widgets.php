@@ -173,15 +173,15 @@ class Dangopress_PostsTabber_Widget extends WP_Widget {
         $output .= $before_widget;
 
         // Show posts tabber title
-        $output .= '<div class="tabber-title"><ul class="tabnav four clearfix">';
-        $output .= '<li class="selected">' . $before_title . '置顶' . "$after_title</li>";
-        $output .= '<li class="">' . $before_title . '热评' . "$after_title</li>";
-        $output .= '<li class="">' . $before_title . '随机' . "$after_title</li>";
-        $output .= '<li class="">' . $before_title . '最新' . "$after_title</li>";
+        $output .= '<div class="tabber-title"><ul class="tabnav four clearfix" data-selected="0">';
+        $output .= '<li data-position="0" class="selected">' . $before_title . '置顶' . "$after_title</li>";
+        $output .= '<li data-position="1" class="">' . $before_title . '热评' . "$after_title</li>";
+        $output .= '<li data-position="2" class="">' . $before_title . '随机' . "$after_title</li>";
+        $output .= '<li data-position="3" class="">' . $before_title . '最新' . "$after_title</li>";
         $output .= '</ul></div>';
 
         // Show posts list in each tab
-        $output .= '<div class="tabber-content">';
+        $output .= '<div class="tabber-content" data-selected="0">';
         $output .= '<ul class="">' . dangopress_get_sticky_posts($number, $chars) . '</ul>';
         $output .= '<ul class="hide">' . dangopress_get_most_commented($number, $chars) . '</ul>';
         $output .= '<ul class="hide">' . dangopress_get_rand_posts($number, $chars) . '</ul>';

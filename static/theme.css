@@ -646,30 +646,28 @@ footer i {
 	font-family: georgia
 }
 
-#comments-tabber a.tab {
+#comments-tabber a.comment-tab {
 	cursor: pointer;
 	background: #fafafa
 }
 
-#comments-tabber a.curtab,#comments-tabber a.tab:hover {
+#comments-tabber a.selected, #comments-tabber a.comment-tab:hover {
+    color: #444;
 	background: #fff
 }
 
-#comments-tabber a.curtab {
+#comments-tabber a.selected {
 	border-bottom: 1px solid #fff
 }
 
-#commentform label {
-	display: none
+.comment-form-notify, .comment-form-cookies-consent {
+    line-height: 2em;
+    height: 2em;
 }
 
-#comment_mail_notify {
-	margin: 0 5px 0 0
-}
-
-#commentform label[for=comment_mail_notify] {
-	display: inline-block;
+#commentform label[for=comment_mail_notify], #commentform label[for=wp-comment-cookies-consent] {
 	font-size: 1.2rem;
+    margin-left: 4px;
 }
 
 #comments input[type=email],#comments input[type=password],#comments input[type=tel],#comments input[type=text],#comments input[type=url] {
@@ -831,7 +829,8 @@ span.at-author {
 #toggle-author {
 	margin-right: 5px;
 	font-size: 1.3rem;
-	color: #888
+	color: #888;
+    text-decoration: underline;
 }
 
 #toggle-author:hover {
