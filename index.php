@@ -31,7 +31,7 @@ if (have_posts()): while (have_posts()): the_post();
                 <i class="icon-comment"></i><?php comments_popup_link('抢沙发', '1 个评论', '% 个评论', 'comments-link'); ?>
            </span>
         </div>
-        <div class="entry-content"><?php the_content('查看全文'); ?></div>
+        <div class="entry-content"><?php the_content('继续阅读'); ?></div>
     </article>
 
 <?php endwhile; else: ?>

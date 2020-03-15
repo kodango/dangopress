@@ -15,7 +15,7 @@ if (!isset($content_width)) {
 }
 
 // Theme version
-$dangopress_version = '0.5.0-beta';
+$dangopress_version = '0.6.0';
 
 /*
  * Include the functions
@@ -148,7 +148,6 @@ function dangopress_prune_theme() {
      */
     remove_action('wp_head', 'print_emoji_detection_script', 7);
     remove_action('wp_print_styles', 'print_emoji_styles');
-    //add_filter('emoji_svg_url', '__return_false');
 
     /*
      * Disable xml rpc
@@ -176,7 +175,6 @@ function dangopress_prune_theme() {
     /*
      * Disable wp-json API
      */
-
     // Filters for WP-API version 1.x
     add_filter('json_enabled', '__return_false');
     add_filter('json_jsonp_enabled', '__return_false');
@@ -196,10 +194,8 @@ function dangopress_prune_theme() {
      */
     remove_action('rest_api_init', 'wp_oembed_register_route');
     remove_filter('rest_pre_serve_request', '_oembed_rest_pre_serve_request', 10, 4);
-
     remove_filter('oembed_dataparse', 'wp_filter_oembed_result', 10 );
     remove_filter('oembed_response_data',   'get_oembed_response_data_rich',  10, 4);
-
     remove_action('wp_head', 'wp_oembed_add_discovery_links');
     remove_action('wp_head', 'wp_oembed_add_host_js');
 }
@@ -240,7 +236,6 @@ add_filter('pre_get_document_title', 'dangopress_custom_title');
      $defer_scripts = array(
          'prettify-js',
          'dangopress-script'
-         //'jquery'
      );
 
      if (in_array($handle, $defer_scripts)) {
@@ -272,8 +267,6 @@ function dangopress_enqueue_scripts()
     // Replace jQuery with the lastest version in front pages
     if (!is_admin()) {
         wp_deregister_script('jquery');
-        //wp_register_script('jquery', "$url_prefix/static/jquery$ext_prefix.js",
-        //                   array(), '3.2.1', true);
     }
 
     wp_dequeue_style('wp-block-library');
@@ -283,8 +276,6 @@ function dangopress_enqueue_scripts()
                        array(), $dangopress_version, true);
 
     // Add theme.js
-    //wp_enqueue_script('dangopress-script', "$url_prefix/static/theme$ext_prefix.js",
-    //                  array('jquery'), $dangopress_version, true);
     wp_enqueue_script('dangopress-script', "$url_prefix/static/theme$ext_prefix.js",
                       array(), $dangopress_version, true);
 }
@@ -297,6 +288,8 @@ add_action('wp_enqueue_scripts', 'dangopress_enqueue_scripts');
  * https://www.davidtiong.com/how-to-add-noindex-follow-to-pages-in-wordpress-stop-duplicate-content/
  */
 function dangopress_get_description() {
+    $description = '';
+
     if (is_home() || is_front_page()) {
         $options = get_option('dangopress_options');
         $description = $options['home_meta_descripton'];
@@ -341,41 +334,6 @@ function dangopress_add_meta_robots() {
 add_action('wp_head', 'dangopress_add_meta_robots');
 
 /*
- * Add Social Meta
- * Reference:
- * https://moz.com/blog/meta-data-templates-123
- */
- function dangopress_add_social_meta() {
-    $options = get_option('dangopress_options');
-
-    if (!$options['enable_social_meta'])
-        return;
-
-    // Only add open graph to below pages
-    if (!is_singular())
-        return;
-
-    echo '<meta property="og:site_name" content="' . get_bloginfo('name'). '"/>';
-    echo '<meta property="og:type" content="article"/>';
-    echo '<meta property="og:title" content="' . get_the_title() . '"/>';
-    echo '<meta property="og:url" content="' . get_permalink() . '"/>';
-    echo '<meta name="twitter:card" value="summary">';
-
-    $meta_description = dangopress_get_description();
-
-    if ($meta_description)
-        echo '<meta property="og:description" content="' . $meta_description . '"/>';
-
-    global $post;
-	if (has_post_thumbnail($post->ID)) { // If the post has featured image, use it
-		$image_attributes = wp_get_attachment_image_src(get_post_thumbnail_id($post->ID), 'large');
-        $image_url = strtok($image_attributes[0], '?');
-		echo '<meta property="og:image" content="' . esc_attr($image_url) . '"/>';
-	}
-}
-add_action('wp_head', 'dangopress_add_social_meta');
-
-/*
  * Wrap the post image in div container
  */
 if (is_admin()) {
@@ -391,7 +349,7 @@ if (is_admin()) {
  */
 function dangopress_nofollow_link($link)
 {
-    return str_replace('<a', '<a rel="nofollow"', $link);
+    return '<p class="read-more"><a rel="nofollow" href="' . get_permalink() . '">继续阅读</a></p>';
 }
 add_filter('the_content_more_link', 'dangopress_nofollow_link');
 
@@ -445,8 +403,8 @@ function dangopress_esc_html($content)
     return preg_replace_callback($patterns, 'dangopress_esc_callback', $content);
 }
 
-add_filter('the_content', 'dangopress_esc_html', 2);
-add_filter('comment_text', 'dangopress_esc_html', 2);
+add_filter('the_content', 'dangopress_esc_html', 10);
+add_filter('comment_text', 'dangopress_esc_html', 10);
 
 /*
  * Alter the main loop
@@ -869,34 +827,6 @@ function insert_after_paragraph($insertion, $paragraph_id, $content)
 
 	return implode('', $paragraphs);
 }
-
-function dangopress_insert_post_ads($content)
-{
-    $options = get_option('dangopress_options');
-    $post_ads_code = $options['post_ads_code'];
-	
-	if (empty($post_ads_code) || !is_single()) {
-		return $content;
-	}
-	
-	$pattern = "/<p>.*?<\/p>/";
-	$paragraph_count = preg_match_all($pattern, $content);
-	
-	if ($paragraph_count <= 7) {
-		return $content;
-	}
-	
-	$idx = rand(3, $paragraph_count - 2);
-	return insert_after_paragraph($post_ads_code, $idx, $content);
-	
-// 	if (!empty($post_ads_code) && is_single() && !is_admin()) {
-// 		return insert_after_paragraph($post_ads_code, 3, $content);
-// 	}
-
-	return $content;
-}
-
-add_filter('the_content', 'dangopress_insert_post_ads');
 
 /*
  * Show description box in category page

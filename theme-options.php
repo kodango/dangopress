@@ -12,15 +12,13 @@ function dangopress_get_options()
 
     $defaults = array(
         'cdn_prefix' => '',
-        'bdtj_siteid' => '',
-        'google_webid' => '',
-        'adsense_publisher_id' => '',
-        'post_ads_code' => '',
-        'sitemap_xml' => '',
         'using_compressed_files' => true,
-        'bing_webmaster_user' => '',
         'home_meta_descripton' => '',
-        'enable_social_meta' => true
+        'adsense_publisher_id' => '',
+        'google_webid' => '',
+        'bing_webmaster_user' => '',
+        'bdtj_siteid' => '',
+        'sitemap_xml' => '',
     );
 
     $options = wp_parse_args($options, $defaults);
@@ -57,9 +55,6 @@ function dangopress_theme_options()
         }
 
         $options['using_compressed_files'] = $_POST['using_compressed_files'] ? true : false;
-        $options['enable_social_meta'] = $_POST['enable_social_meta'] ? true : false;
-        $options['post_ads_code'] = stripslashes($_POST['post_ads_code']);
-
         update_option('dangopress_options', $options);
         $options = get_option('dangopress_options');
     ?>
@@ -82,7 +77,13 @@ function dangopress_theme_options()
         <th>
             <label for="cdn_prefix">文件托管地址</label> (<a target="_blank" href="http://kodango.com/use-oss-in-wordpress">参考</a>)
         </th>
-        <td><input name="cdn_prefix" id="cdn_prefix" type="text" value="<?php echo $options['cdn_prefix']; ?>" class="regular-text code"></td>
+        <td><input name="cdn_prefix" id="cdn_prefix" type="text" value="<?php echo $options['cdn_prefix']; ?>" class="regular-text code" /></td>
+    </tr>
+    <tr>
+        <th>
+            <label for="using_compressed_files">使用压缩的 JS/CSS 文件</label>
+        </th>
+        <td><input type="checkbox" name="using_compressed_files" id="using_compressed_files" value="1"<?php checked('1', $options['using_compressed_files']); ?> /></td>
     </tr>
     <tr>
         <th>
@@ -94,49 +95,31 @@ function dangopress_theme_options()
         <th>
             <label for="adsense_publisher_id">Google Adsense Publisher ID</label> (<a target="_blank" href="https://support.google.com/code/answer/73069">帮助</a>)
         </th>
-        <td><input name="adsense_publisher_id" id="adsense_publisher_id" type="text" value="<?php echo $options['adsense_publisher_id']; ?>" class="regular-text code"></td>
-    </tr>
-    <tr>
-        <th>
-            <label for="post_ads_code">文章内嵌广告代码</label>
-        </th>
-        <td><textarea name="post_ads_code" id="post_ads_code" type="text" rows="5" class="regular-text code"><?php echo $options['post_ads_code']; ?></textarea></td>
+        <td><input name="adsense_publisher_id" id="adsense_publisher_id" type="text" value="<?php echo $options['adsense_publisher_id']; ?>" class="regular-text code" /></td>
     </tr>
     <tr>
         <th>
             <label for="google_webid">Google Analytics Web ID</label> (<a target="_blank" href="https://developers.google.com/analytics/devguides/collection/gajs/">帮助</a>)
         </th>
-        <td><input name="google_webid" id="google_webid" type="text" value="<?php echo $options['google_webid']; ?>" class="regular-text code"></td>
+        <td><input name="google_webid" id="google_webid" type="text" value="<?php echo $options['google_webid']; ?>" class="regular-text code" /></td>
     </tr>
     <tr>
         <th>
             <label for="bing_webmaster_user">Bing Webmaster User ID</label> (<a target="_blank" href="https://www.bing.com/webmaster/help/getting-started-checklist-66a806de">帮助</a>)
         </th>
-        <td><input name="bing_webmaster_user" id="bing_webmaster_user" type="text" value="<?php echo $options['bing_webmaster_user']; ?>" class="regular-text code"></td>
+        <td><input name="bing_webmaster_user" id="bing_webmaster_user" type="text" value="<?php echo $options['bing_webmaster_user']; ?>" class="regular-text code" /></td>
     </tr>
     <tr>
         <th>
             <label for="bdtj_siteid">百度统计 Site ID</label> (<a target="_blank" href="http://tongji.baidu.com/open/api/more?p=ref_setAccount">帮助</a>)
         </th>
-        <td><input name="bdtj_siteid" id="bdtj_siteid" type="text" value="<?php echo $options['bdtj_siteid']; ?>" class="regular-text code"></td>
+        <td><input name="bdtj_siteid" id="bdtj_siteid" type="text" value="<?php echo $options['bdtj_siteid']; ?>" class="regular-text code" /></td>
     </tr>
     <tr>
         <th>
             <label for="sitemap_xml">站点地图文件名（如: sitemap.xml）</label>
         </th>
-        <td><input name="sitemap_xml" id="sitemap_xml" type="text" value="<?php echo $options['sitemap_xml']; ?>" class="regular-text code"></td>
-    </tr>
-    <tr>
-        <th>
-            <label for="using_compressed_files">使用压缩的 JS/CSS 文件</label>
-        </th>
-        <td><input type="checkbox" name="using_compressed_files" id="using_compressed_files" value="1"<?php checked('1', $options['using_compressed_files']); ?>></td>
-    </tr>
-    <tr>
-        <th>
-            <label for="enable_social_meta">开启 Social Meta 功能（仅限文章页）</label>
-        </th>
-        <td><input type="checkbox" name="enable_social_meta" id="enable_social_meta" value="1"<?php checked('1', $options['enable_social_meta']); ?>></td>
+        <td><input name="sitemap_xml" id="sitemap_xml" type="text" value="<?php echo $options['sitemap_xml']; ?>" class="regular-text code" /></td>
     </tr>
     </tbody>
 </table>
