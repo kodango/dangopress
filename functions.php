@@ -126,9 +126,6 @@ add_action('after_setup_theme', 'dangopress_setup_theme');
  * Prune the theme to remove un-needed functions
  */
 function dangopress_prune_theme() {
-    /*
-     * Customize filter and actions
-     */
     remove_action('wp_head', 'feed_links', 2);
     remove_action('wp_head', 'feed_links_extra', 3);
     remove_action('wp_head', 'rsd_link');
@@ -142,57 +139,27 @@ function dangopress_prune_theme() {
     remove_action('wp_head', 'rel_canonical');
     remove_action('wp_head', 'wp_generator');
     remove_action('wp_head', 'wp_shortlink_wp_head', 10, 0);
-
-    /*
-     * Disable emojicons introduced with WP 4.2
-     */
     remove_action('wp_head', 'print_emoji_detection_script', 7);
+    remove_action('wp_head', 'wp_resource_hints', 2);
     remove_action('wp_print_styles', 'print_emoji_styles');
-
-    /*
-     * Disable xml rpc
-     */
-    add_filter('xmlrpc_enabled', '__return_false');
-
-    /*
-     * Hide admin bar
-     */
-    add_filter('show_admin_bar', '__return_false');
-
-    /*
-     * Remove the responsive image support in 4.4
-     */
-    add_filter('max_srcset_image_width', '__return_false');
-
-    /*
-     * Disable Automatic Formatting
-     */
-    remove_filter('the_content', 'wptexturize');
-    remove_filter('the_excerpt', 'wptexturize');
-    remove_filter('the_title', 'wptexturize');
-    remove_filter('comment_text', 'wptexturize');
-
-    /*
-     * Disable wp-json API
-     */
-    // Filters for WP-API version 1.x
-    add_filter('json_enabled', '__return_false');
-    add_filter('json_jsonp_enabled', '__return_false');
-
-    // Filters for WP-API version 2.x
-    add_filter('rest_enabled', '__return_false');
-    add_filter('rest_jsonp_enabled', '__return_false');
-
-    // Remove REST API info from head and headers
     remove_action('xmlrpc_rsd_apis', 'rest_output_rsd');
     remove_action('wp_head', 'rest_output_link_wp_head', 10);
     remove_action('template_redirect', 'rest_output_link_header', 11);
     remove_action('wp_head', 'wp_oembed_add_discovery_links');
-
-    /*
-     * Disable Embed function
-     */
     remove_action('rest_api_init', 'wp_oembed_register_route');
+
+    add_filter('xmlrpc_enabled', '__return_false');
+    add_filter('show_admin_bar', '__return_false');
+    add_filter('max_srcset_image_width', '__return_false');
+    add_filter('json_enabled', '__return_false');
+    add_filter('json_jsonp_enabled', '__return_false');
+    add_filter('rest_enabled', '__return_false');
+    add_filter('rest_jsonp_enabled', '__return_false');
+
+    remove_filter('the_content', 'wptexturize');
+    remove_filter('the_excerpt', 'wptexturize');
+    remove_filter('the_title', 'wptexturize');
+    remove_filter('comment_text', 'wptexturize');
     remove_filter('rest_pre_serve_request', '_oembed_rest_pre_serve_request', 10, 4);
     remove_filter('oembed_dataparse', 'wp_filter_oembed_result', 10 );
     remove_filter('oembed_response_data',   'get_oembed_response_data_rich',  10, 4);
@@ -202,35 +169,7 @@ function dangopress_prune_theme() {
 add_action('init', 'dangopress_prune_theme');
 
 /*
- * Customize WordPress title
- */
-function dangopress_custom_title()
-{
-    $blog_name = get_bloginfo('name');
-    $sep = '-';
-
-    if (is_single() || is_page()) { // singular page
-        $title = sprintf('%1$s %2$s %3$s', single_post_title('', false), $sep, $blog_name);
-    } else if (is_category()) { // category page
-        $title = sprintf('%1$s %2$s %3$s', single_cat_title('', false), $sep, $blog_name);
-    } else if(is_tag()) { // tag page
-        $title = sprintf('%1$s %2$s %3$s', single_tag_title('', false), $sep, $blog_name);
-    } else { // other page, like home page or front page
-        $site_description = get_bloginfo('description');
-
-        if ($site_description) {
-            $title = "$blog_name $sep $site_description";
-        } else {
-            $title = "$blog_name";
-        }
-    }
-
-    return $title;
-}
-add_filter('pre_get_document_title', 'dangopress_custom_title');
-
-/*
- * Defer load javascript
+ * Add the defer attribute to the specified script
  */
  function dangopress_defer_scripts($tag, $handle, $src) {
      $defer_scripts = array(
@@ -249,43 +188,22 @@ add_filter('pre_get_document_title', 'dangopress_custom_title');
 /*
  * Load css and javascript
  */
-function dangopress_enqueue_scripts()
+function dangopress_load_scripts()
 {
-    global $dangopress_version;
-
-    // URL prefix
-    $url_prefix = get_url_prefix();
-    // Theme options
     $options = get_option('dangopress_options');
-    // Whether to load compressed scripts/styles or not
     $ext_prefix = $options['using_compressed_files'] ? '.min' : '';
-
-    // Add theme.css
-    wp_enqueue_style('dangopress-style', "$url_prefix/static/theme$ext_prefix.css",
-                     array(), $dangopress_version);
-
-    // Replace jQuery with the lastest version in front pages
-    if (!is_admin()) {
-        wp_deregister_script('jquery');
-    }
+    $url_prefix = get_url_prefix();
 
     wp_dequeue_style('wp-block-library');
-
-    // Add Prettyify.js
-    wp_enqueue_script('prettify-js', "$url_prefix/static/prettify$ext_prefix.js",
-                       array(), $dangopress_version, true);
-
-    // Add theme.js
-    wp_enqueue_script('dangopress-script', "$url_prefix/static/theme$ext_prefix.js",
-                      array(), $dangopress_version, true);
+    wp_enqueue_style('dangopress-style', "$url_prefix/static/theme$ext_prefix.css", array(), null);
+    wp_enqueue_script('prettify-js', "$url_prefix/static/prettify$ext_prefix.js", array(), null, true);
+    wp_enqueue_script('dangopress-script', "$url_prefix/static/theme$ext_prefix.js", array(), null, true);
 }
-add_action('wp_enqueue_scripts', 'dangopress_enqueue_scripts');
+add_action('wp_enqueue_scripts', 'dangopress_load_scripts');
+
 
 /*
- * Add meta description in the head
- * Reference:
- * https://cnzhx.net/blog/add-wordpress-meta-description-keyword-php/
- * https://www.davidtiong.com/how-to-add-noindex-follow-to-pages-in-wordpress-stop-duplicate-content/
+ * Generate the meta description.
  */
 function dangopress_get_description() {
     $description = '';
@@ -310,46 +228,79 @@ function dangopress_get_description() {
     return $description;
 }
 
-function dangopress_add_meta_description() {
+/*
+ * Add necessary code into head part.
+ */
+function dangopress_wp_head() {
     $description = dangopress_get_description();
 
-    if ($description == '')
-        return;
+    if ($description != '') {
+        echo '<meta name="description" content="' . $description . '" />';
+    }
 
-    echo '<meta name="description" content="' . $description . '" />';
-}
-add_action('wp_head', 'dangopress_add_meta_description');
-
-/*
- * Add noindx,follow onto your date archives, tag archives, author archives,
- * internal search result pages and onto the subsequent pages of your individual category pages
- */
-function dangopress_add_meta_robots() {
     global $paged;
 
     if ($paged > 1 || is_author() || is_tag() || is_search() || is_date() || is_attachment() || is_page_template("page-archives.php")) {
         echo '<meta name="robots" content="noindex,follow" />';
     }
+
+    $options = get_option('dangopress_options');
+    $publisher_id = $options["adsense_publisher_id"];
+
+    if (!empty($publisher_id)) {
+        echo '<script data-ad-client="' . $publisher_id . '" async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>';
+    }
+
+    if (!empty($options['google_webid'])) {
+?>
+
+<script async src="https://www.googletagmanager.com/gtag/js?id=<?php echo $options['google_webid']; ?>"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', '<?php echo $options['google_webid']; ?>');
+</script>
+
+<?php
+    }
 }
-add_action('wp_head', 'dangopress_add_meta_robots');
+add_action('wp_head', 'dangopress_wp_head');
 
 /*
- * Wrap the post image in div container
+ * Customize WordPress title
  */
-if (is_admin()) {
-    function dangopress_wrap_post_image($html, $id, $caption, $title, $align, $url, $size, $alt)
-    {
-        return '<div class="post-image">'.$html.'</div>';
+function dangopress_get_title()
+{
+    $blog_name = get_bloginfo('name');
+    $sep = '-';
+
+    if (is_single() || is_page()) { // singular page
+        $title = sprintf('%1$s %2$s %3$s', single_post_title('', false), $sep, $blog_name);
+    } else if (is_category()) { // category page
+        $title = sprintf('%1$s %2$s %3$s', single_cat_title('', false), $sep, $blog_name);
+    } else if(is_tag()) { // tag page
+        $title = sprintf('%1$s %2$s %3$s', single_tag_title('', false), $sep, $blog_name);
+    } else { // other page, like home page or front page
+        $site_description = get_bloginfo('description');
+
+        if ($site_description) {
+            $title = "$blog_name $sep $site_description";
+        } else {
+            $title = "$blog_name";
+        }
     }
-    add_filter('image_send_to_editor', 'dangopress_wrap_post_image', 10, 8);
+
+    return $title;
 }
+add_filter('pre_get_document_title', 'dangopress_get_title');
 
 /*
  * Add rel="nofollow" to read more link
  */
 function dangopress_nofollow_link($link)
 {
-    return '<p class="read-more"><a rel="nofollow" href="' . get_permalink() . '">继续阅读</a></p>';
+    return str_replace('<a', '<a rel="nofollow"', $link);
 }
 add_filter('the_content_more_link', 'dangopress_nofollow_link');
 
@@ -360,22 +311,38 @@ function dangopress_disable_self_ping(&$links)
 {
     $home = home_url();
 
-    foreach ($links as $l => $link)
-        if (0 === strpos($link, $home))
+    foreach ($links as $l => $link) {
+        if (0 === strpos($link, $home)) {
             unset($links[$l]);
+        }
+    }
 }
 add_action('pre_ping', 'dangopress_disable_self_ping');
 
 /*
- * Remove version number in the loading script or stylesheet
+ * Exclude the sticky posts from the main loop in the home page
  */
-function dangopress_remove_version($src)
+function dangopress_exclude_sticky_posts($query)
 {
-    $parts = explode('?ver', $src);
-    return $parts[0];
+    /* Only for main loop in home page */
+    if (!$query->is_home() || !$query->is_main_query())
+        return;
+
+    // ignore sticky posts, don't show them in the start
+    $query->set('ignore_sticky_posts', 1);
 }
-add_filter('script_loader_src', 'dangopress_remove_version', 15);
-add_filter('style_loader_src', 'dangopress_remove_version', 15);
+add_action('pre_get_posts', 'dangopress_exclude_sticky_posts');
+
+if (is_admin()) {
+    /*
+     * Wrap the post image in div container
+     */
+    function dangopress_wrap_post_image($html, $id, $caption, $title, $align, $url, $size, $alt)
+    {
+        return '<div class="post-image">'.$html.'</div>';
+    }
+    add_filter('image_send_to_editor', 'dangopress_wrap_post_image', 10, 8);
+}
 
 /*
  * Escape special characters in pre.prettyprint into their HTML entities
@@ -402,23 +369,8 @@ function dangopress_esc_html($content)
 
     return preg_replace_callback($patterns, 'dangopress_esc_callback', $content);
 }
-
 add_filter('the_content', 'dangopress_esc_html', 10);
 add_filter('comment_text', 'dangopress_esc_html', 10);
-
-/*
- * Alter the main loop
- */
-function dangopress_alter_main_loop($query)
-{
-    /* Only for main loop in home page */
-    if (!$query->is_home() || !$query->is_main_query())
-        return;
-
-    // ignore sticky posts, don't show them in the start
-    $query->set('ignore_sticky_posts', 1);
-}
-add_action('pre_get_posts', 'dangopress_alter_main_loop');
 
 /*
  * Retrieve paginated link for archive post pages
@@ -445,7 +397,6 @@ function dangopress_paginate_links()
     echo '<div id="pagenavi">' . $output . '</div>';
 }
 
-/*
 /*
  * Display comment lists
  */
@@ -520,15 +471,6 @@ function dangopress_add_at_author($comment_text, $comment)
     return $comment_text;
 }
 add_filter('comment_text', 'dangopress_add_at_author', 10, 2);
-
-/*
- * Open the link in the new tab
- */
-function dangopress_new_tab($link)
-{
-    return str_replace('<a', '<a target="_blank"', $link);
-}
-add_filter('get_comment_author_link', 'dangopress_new_tab');
 
 /*
  * Send an email when recieved a reply
@@ -718,114 +660,9 @@ function dangopress_breadcrumb()
 		echo get_post_format_string( get_post_format());
 	} elseif (is_404()) {
 		echo $before . $text['404'] . $after;
-	}
+    } 
 	
 	echo $wrap_after;
-}
-
-/*
- * Insert Google Adsense scripts
- */
-function dangopress_insert_adsense_scripts()
-{
-    /* Do not track administrator */
-    if (current_user_can('manage_options'))
-        return;
-
-    $options = get_option('dangopress_options');
-    $publisher_id = $options["adsense_publisher_id"];
-
-    if (empty($publisher_id))
-        return;
-
-?>
-
-<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
-<script>
-    (adsbygoogle = window.adsbygoogle || []).push({
-        google_ad_client: "<?php echo $publisher_id; ?>",
-        enable_page_level_ads: true
-    });
-</script>
-<?php
-}
-add_action('wp_head', 'dangopress_insert_adsense_scripts');
-
-/*
- * Insert analytics code snippets into head
- */
-function dangopress_insert_analytics_snippets()
-{
-    /* Do not track administrator */
-    if (current_user_can('manage_options'))
-        return;
-
-    $options = get_option('dangopress_options');
-
-    if (!empty($options['google_webid'])) {
-?>
-
-<!-- Google Analytics -->
-<script type="text/javascript">
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
-
-  ga('create', '<?php echo $options['google_webid']; ?>', 'auto');
-  ga('send', 'pageview');
-</script>
-
-<?php
-    }
-
-    if (!empty($options['bing_webmaster_user'])) {
-?>
-
-<!-- Bing Webmaster authentication -->
-<meta name="msvalidate.01" content="<?php echo $options['bing_webmaster_user']; ?>" />
-
-<?php
-    }
-
-    if (!empty($options['bdtj_siteid'])) {
-?>
-
-<!-- Baidu Tongji -->
-<script>
-var _hmt = _hmt || [];
-(function() {
-    var hm = document.createElement("script");
-    hm.src = "//hm.baidu.com/hm.js?<?php echo $options['bdtj_siteid']; ?>";
-    var s = document.getElementsByTagName("script")[0]; s.parentNode.insertBefore(hm, s);
-})();
-</script>
-
-<?php
-    }
-}
-add_action('wp_head', 'dangopress_insert_analytics_snippets');
-
-/*
- * Insert Google ads code into posts
- * From: https://www.wpdaxue.com/insert-ads-within-post-content-in-wordpress.html
- */
-function insert_after_paragraph($insertion, $paragraph_id, $content)
-{
-	$closing_p = '</p>';
-	$paragraphs = explode($closing_p, $content);
-
-	foreach ($paragraphs as $index => $paragraph) {
-		if (trim($paragraph)) {
-			$paragraphs[$index] .= $closing_p;
-		}
-
-		if ($paragraph_id == $index + 1) {
-			$paragraphs[$index] .= $insertion;
-		}
-	}
-
-	return implode('', $paragraphs);
 }
 
 /*
@@ -937,18 +774,6 @@ function dangopress_get_v2ex_avatar($avatar) {
 add_filter('get_avatar', 'dangopress_get_v2ex_avatar');
 
 /*
- * Disable dns prefetch
- */
-function dangopress_disable_dns_prefetch($hints, $relation_type) {
-    if ('dns-prefetch' === $relation_type) {
-        return array_diff(wp_dependencies_unique_hosts(), $hints);
-    }
-
-    return $hints;
-}
-add_filter('wp_resource_hints', 'dangopress_disable_dns_prefetch', 10, 2);
-
-/*
  * Show dynamic copyright information
  */
 function dangopress_show_copyright() {
@@ -988,14 +813,18 @@ function dangopress_show_sitemap() {
    $options = get_option('dangopress_options');
    $sitemap = $options['sitemap_xml'];
 
-   if (!empty($sitemap)) {
-       $link = '<span class="sitemap"><a href="' . home_url() . '/' . $sitemap . '">站点地图<i class="icon-sitemap"></i></a></span>';
+   if (empty($sitemap)) {
+       return;
+   }
 
-       if (!is_home()) {
-           $link = dangopress_nofollow_link($link);
-       }
+   echo '<span class="sitemap">';
 
-       echo $link;
-    }
+   if (is_home()) {
+       echo '<a href="' . home_url() . '/' . $sitemap . '">站点地图<i class="icon-sitemap"></i>';
+   } else {
+       echo '<a rel="nofollow" href="' . home_url() . '/' . $sitemap . '">站点地图<i class="icon-sitemap"></i>';
+   }
+
+   echo '</a></span>';
 }
 ?>

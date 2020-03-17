@@ -16,8 +16,6 @@ function dangopress_get_options()
         'home_meta_descripton' => '',
         'adsense_publisher_id' => '',
         'google_webid' => '',
-        'bing_webmaster_user' => '',
-        'bdtj_siteid' => '',
         'sitemap_xml' => '',
     );
 
@@ -102,18 +100,6 @@ function dangopress_theme_options()
             <label for="google_webid">Google Analytics Web ID</label> (<a target="_blank" href="https://developers.google.com/analytics/devguides/collection/gajs/">帮助</a>)
         </th>
         <td><input name="google_webid" id="google_webid" type="text" value="<?php echo $options['google_webid']; ?>" class="regular-text code" /></td>
-    </tr>
-    <tr>
-        <th>
-            <label for="bing_webmaster_user">Bing Webmaster User ID</label> (<a target="_blank" href="https://www.bing.com/webmaster/help/getting-started-checklist-66a806de">帮助</a>)
-        </th>
-        <td><input name="bing_webmaster_user" id="bing_webmaster_user" type="text" value="<?php echo $options['bing_webmaster_user']; ?>" class="regular-text code" /></td>
-    </tr>
-    <tr>
-        <th>
-            <label for="bdtj_siteid">百度统计 Site ID</label> (<a target="_blank" href="http://tongji.baidu.com/open/api/more?p=ref_setAccount">帮助</a>)
-        </th>
-        <td><input name="bdtj_siteid" id="bdtj_siteid" type="text" value="<?php echo $options['bdtj_siteid']; ?>" class="regular-text code" /></td>
     </tr>
     <tr>
         <th>
